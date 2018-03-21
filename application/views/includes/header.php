@@ -125,13 +125,13 @@
             {
             ?>
             <li class="treeview">
-              <a href="#" >
+              <a href="<?php echo base_url(); ?>requests" >
                 <i class="fa fa-thumb-tack"></i>
                 <span>Requests</span>
               </a>
             </li>
             <li class="treeview">
-              <a href="#" >
+              <a href="<?php echo base_url(); ?>beneficiaries" >
                 <i class="fa fa-upload"></i>
                 <span>Beneficiaries</span>
               </a>

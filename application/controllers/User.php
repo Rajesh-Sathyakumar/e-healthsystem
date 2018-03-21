@@ -56,7 +56,23 @@ class User extends BaseController
             $this->global['pageTitle'] = 'e-Healthcare : User Listing';
             
             $this->loadViews("users", $this->global, $data, NULL);
+
         }
+    }
+
+    function requests()
+    {
+        $this->global['pageTitle'] = 'e-Healthcare : Requests';
+        $this->loadViews("request", $this->global, NULL, NULL);
+    }
+
+    function beneficiaries()
+    {
+           
+             $this->global['pageTitle'] = 'e-Healthcare : Beneficiaries';
+            
+            $this->loadViews("beneficiaries", $this->global, NULL, NULL);
+        
     }
 
 
@@ -64,7 +80,7 @@ class User extends BaseController
     function profileupdate()
     {
            
-            
+             $this->global['pageTitle'] = 'e-Healthcare : Profile Update';
             
             $this->loadViews("profile", $this->global, NULL, NULL);
         
