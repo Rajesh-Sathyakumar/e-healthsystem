@@ -263,6 +263,17 @@ class User_model extends CI_Model
         return $query->row();
     }
 
+    function schemesListing()
+    {
+        $this->db->select('scheme_id, scheme_name, description');
+        $this->db->from('scheme');
+        $query = $this->db->get();
+
+         $result = $query->result();        
+        return $result; 
+
+    }
+
 }
 
   

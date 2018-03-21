@@ -396,8 +396,9 @@ class User extends BaseController
 
     function schemesList()
     {
-        
-        $this->loadViews("schemes", $this->global, NULL, NULL);
+
+        $data['schemeRecords'] = $this->user_model->schemesListing();    
+        $this->loadViews("schemes", $this->global, $data, NULL);
     }
 }
 
