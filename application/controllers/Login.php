@@ -105,11 +105,11 @@ public function addNewHospitalUser()
         
             $this->load->library('form_validation');
             
-            $this->form_validation->set_rules('hname','Hospital Name','trim|required|max_length[128]');
-            $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[128]');
+            $this->form_validation->set_rules('hname','Hospital Name','required|max_length[128]|trim');
+            $this->form_validation->set_rules('email','Email','required|valid_email|max_length[128]|trim');
             $this->form_validation->set_rules('password','Password','required|max_length[20]');
-            $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
-           // $this->form_validation->set_rules('role','Role','trim|required|numeric');
+            $this->form_validation->set_rules('cpassword','Confirm Password','required|matches[password]|max_length[20]|trim');
+           
             $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
             
             if($this->form_validation->run() == FALSE)
@@ -118,7 +118,7 @@ public function addNewHospitalUser()
             }
             else
             {
-                $name = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
+                $name = ucwords(strtolower($this->security->xss_clean($this->input->post('hname'))));
                 $email = $this->security->xss_clean($this->input->post('email'));
                 $password = $this->input->post('password');
                 $roleId = 3;

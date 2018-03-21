@@ -30,12 +30,13 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="../../index2.html"><b>Hospital</b>   Registration</a>
+    <b>Hospital</b>   Registration
   </div>
 
   <div class="register-box-body">
     <p class="login-box-msg">Register a User</p>
-
+<?php $this->load->helper('form'); ?>
+        
     <form action="<?php echo base_url() ?>addNewHospitalUser" method="post">
 
       <div class="form-group has-feedback">
@@ -77,6 +78,7 @@
         <!-- /.col -->
       </div>
     </form>
+    
 
    
     <a href="<?php echo base_url() ?>" class="text-center"> Already Registered</a>
@@ -86,11 +88,8 @@
 <!-- /.register-box -->
 
 <!-- jQuery 3 -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="../../plugins/iCheck/icheck.min.js"></script>
+ <script src="<?php echo base_url(); ?>assets/js/jQuery-2.1.4.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script>
   $(function () {
     $('input').iCheck({
