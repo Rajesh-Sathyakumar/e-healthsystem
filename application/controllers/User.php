@@ -376,6 +376,13 @@ class User extends BaseController
             $this->loadViews("loginHistory", $this->global, $data, NULL);
         }        
     }
+
+
+    function schemesList()
+    {
+        
+        $this->loadViews("schemes", $this->global, NULL, NULL);
+    }
 }
 
 ?>

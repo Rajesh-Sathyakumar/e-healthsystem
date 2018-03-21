@@ -103,13 +103,13 @@
               </a>
             </li>
             <li class="treeview">
-              <a href="#" >
+              <a href="<?php echo base_url(); ?>schemesList" >
                 <i class="fa fa-plus-square"></i>
                 <span>Schemes</span>
               </a>
             </li>
             <li class="treeview">
-              <a href="#" >
+              <a href="#">
                 <i class="fa fa-ticket"></i>
                 <span>Programmes</span>
               </a>

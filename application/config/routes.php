@@ -85,6 +85,7 @@ $route['resetPasswordConfirmUser/(:any)'] = "login/resetPasswordConfirmUser/$1";
 $route['resetPasswordConfirmUser/(:any)/(:any)'] = "login/resetPasswordConfirmUser/$1/$2";
 $route['createPasswordUser'] = "login/createPasswordUser";
 $route['profileupdate'] = "user/profileupdate";
+$route['schemesList'] = "user/schemesList";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
