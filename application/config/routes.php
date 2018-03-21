@@ -77,6 +77,8 @@ $route['login-history/(:num)'] = "user/loginHistoy/$1";
 $route['login-history/(:num)/(:num)'] = "user/loginHistoy/$1/$2";
 
 $route['forgotPassword'] = "login/forgotPassword";
+$route['register']    = "login/register";
+$route['addNewHospitalUser'] = "login/addNewHospitalUser";
 $route['resetPasswordUser'] = "login/resetPasswordUser";
 $route['resetPasswordConfirmUser'] = "login/resetPasswordConfirmUser";
 $route['resetPasswordConfirmUser/(:any)'] = "login/resetPasswordConfirmUser/$1";

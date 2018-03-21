@@ -59,19 +59,19 @@
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
-            <div class="col-xs-8">    
-              <!-- <div class="checkbox icheck">
-                <label>
-                  <input type="checkbox"> Remember Me
-                </label>
-              </div>  -->                       
-            </div><!-- /.col -->
+           <div class="col-xs-4">
+           </div>
+             <div class="col-xs-4">
+              <a href="<?php echo base_url() ?>register" >Register</a>
+             </div>
             <div class="col-xs-4">
               <input type="submit" class="btn btn-primary btn-block btn-flat" value="Sign In" />
             </div><!-- /.col -->
           </div>
         </form>
 
+        
+           
         <a href="<?php echo base_url() ?>forgotPassword">Forgot Password</a><br>
         
       </div><!-- /.login-box-body -->

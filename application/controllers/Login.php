@@ -99,6 +99,65 @@ class Login extends CI_Controller
     /**
      * This function used to load forgot password view
      */
+public function addNewHospitalUser()
+    {
+        
+        
+            $this->load->library('form_validation');
+            
+            $this->form_validation->set_rules('hname','Hospital Name','trim|required|max_length[128]');
+            $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[128]');
+            $this->form_validation->set_rules('password','Password','required|max_length[20]');
+            $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
+           // $this->form_validation->set_rules('role','Role','trim|required|numeric');
+            $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
+            
+            if($this->form_validation->run() == FALSE)
+            {
+               $this->register();
+            }
+            else
+            {
+                $name = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
+                $email = $this->security->xss_clean($this->input->post('email'));
+                $password = $this->input->post('password');
+                $roleId = 3;
+                $mobile = $this->security->xss_clean($this->input->post('mobile'));
+                
+                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId, 'name'=> $name,
+                                    'mobile'=>$mobile, 'createdBy'=>"Hospital", 'createdDtm'=>date('Y-m-d H:i:s'));
+                
+                $this->load->model('user_model');
+                $result = $this->user_model->addNewUser($userInfo);
+                
+                if($result > 0)
+                {
+                    $this->session->set_flashdata('success', 'New User created successfully');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'User creation failed');
+                }
+                
+                redirect('login');
+            }
+        }
+    
+
+    public function register()
+    {
+        $isLoggedIn = $this->session->userdata('isLoggedIn');
+        
+        if(!isset($isLoggedIn) || $isLoggedIn != TRUE)
+        {
+            $this->load->view('register');
+        }
+        else
+        {
+            redirect('/dashboard');
+        }
+    }
+
     public function forgotPassword()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
