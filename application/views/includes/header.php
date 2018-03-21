@@ -105,30 +105,30 @@
             </li>
             <li class="treeview">
               <a href="#" >
-                <i class="fa fa-plane"></i>
-                <span>New Task</span>
+                <i class="fa fa-plus-square"></i>
+                <span>Schemes</span>
               </a>
             </li>
             <li class="treeview">
               <a href="#" >
                 <i class="fa fa-ticket"></i>
-                <span>My Tasks</span>
+                <span>Programmes</span>
               </a>
             </li>
             <?php
-            if($role == ROLE_ADMIN || $role == ROLE_ORGANIZATION)
+            if($role == ROLE_HOSPITAL || $role == ROLE_ORGANIZATION)
             {
             ?>
             <li class="treeview">
               <a href="#" >
                 <i class="fa fa-thumb-tack"></i>
-                <span>Task Status</span>
+                <span>Requests</span>
               </a>
             </li>
             <li class="treeview">
               <a href="#" >
                 <i class="fa fa-upload"></i>
-                <span>Task Uploads</span>
+                <span>Beneficiaries</span>
               </a>
             </li>
             <?php

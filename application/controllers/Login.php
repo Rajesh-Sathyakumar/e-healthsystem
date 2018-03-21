@@ -196,10 +196,7 @@ class Login extends CI_Controller
         
         $data['email'] = $email;
         $data['activation_code'] = $activation_id;
-        echo "<pre>"
-        print_r($is_correct);
-        exit()
-        if ($is_correct == 1)
+        if ($is_correct >= 1)
         {
             $this->load->view('newPassword', $data);
         }
@@ -236,7 +233,7 @@ class Login extends CI_Controller
             // Check activation id in database
             $is_correct = $this->login_model->checkActivationDetails($email, $activation_id);
             
-            if($is_correct == 1)
+            if($is_correct >= 1)
             {                
                 $this->login_model->createPasswordUser($email, $password);
                 
