@@ -193,12 +193,12 @@ class Login extends CI_Controller
         
         // Check activation id in database
         $is_correct = $this->login_model->checkActivationDetails($email, $activation_id);
-        echo "<pre>";
-        print_r($is_correct);
-        exit();
+        
         $data['email'] = $email;
         $data['activation_code'] = $activation_id;
-        
+        echo "<pre>"
+        print_r($is_correct);
+        exit()
         if ($is_correct == 1)
         {
             $this->load->view('newPassword', $data);

@@ -88,30 +88,15 @@ if(!function_exists('setProtocol'))
                     
         $CI->load->library('email');
         
-        $config['protocol']    = 'smtp';
-
-        $config['smtp_host']    = 'ssl://smtp.gmail.com';
-
-        $config['smtp_port']    = '465';
-
-        $config['smtp_timeout'] = '7';
-
-        $config['smtp_user']    = 'swarna.ilas@gmail.com';
-
-        $config['smtp_pass']    = 'happyshalu';
-
-        $config['charset']    = 'utf-8';
-
-        $config['newline']    = "\r\n";
-
-        $config['mailtype'] = 'html'; // or html
-
-        $config['validation'] = TRUE; // bool whether to validate email or not      
-
-        $CI->email->initialize($config);
-
-
-        $CI->email->from('swarna.ilas@gmail.com', 'happyshalu');
+        $config['protocol'] = PROTOCOL;
+        $config['mailpath'] = MAIL_PATH;
+        $config['smtp_host'] = SMTP_HOST;
+        $config['smtp_port'] = SMTP_PORT;
+        $config['smtp_user'] = SMTP_USER;
+        $config['smtp_pass'] = SMTP_PASS;
+        $config['charset'] = "utf-8";
+        $config['mailtype'] = "html";
+        $config['newline'] = "\r\n";
         
         $CI->email->initialize($config);
         
