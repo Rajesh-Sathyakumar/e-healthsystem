@@ -114,6 +114,12 @@
                 <span>Programmes</span>
               </a>
             </li>
+             <li class="treeview">
+               <a href="<?php echo base_url(); ?>profileupdate">
+                <i class="fa fa-user"></i>
+                <span>Profile</span>
+              </a>
+            </li>
             <?php
             if($role == ROLE_HOSPITAL || $role == ROLE_ORGANIZATION)
             {

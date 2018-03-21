@@ -59,6 +59,18 @@ class User extends BaseController
         }
     }
 
+
+
+    function profileupdate()
+    {
+           
+            
+            
+            $this->loadViews("profile", $this->global, NULL, NULL);
+        
+    }
+
+
     /**
      * This function is used to load the add new form
      */
