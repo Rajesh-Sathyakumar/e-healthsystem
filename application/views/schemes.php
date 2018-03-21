@@ -39,7 +39,20 @@
                       <td><?php echo $record->scheme_id ?></td>
                       <td><?php echo $record->scheme_name ?></td>
                       <td><?php echo $record->description ?></td>
-                      <td>"Success"</td>
+                      <td><?php
+                        if($record->scheme_id == 1)
+                        {
+                        ?>
+                        <a class="btn btn-sm btn-primary" href="#" title="Login history" enabled="true">Request</a></td>
+                        <?php
+                      }
+                      else
+                      {
+                        ?>
+                        <a class="btn btn-sm btn-success" href="#" title="Login history" disabled="true">Approved</a></td>
+                        <?php
+                      }
+                      ?>
                     </tr>
                     <?php
                         }
