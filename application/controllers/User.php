@@ -564,6 +564,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
 
     function schemesList()
     {
+        $this->global['pageTitle'] = 'e-Healthcare : Schemes List';
 
         $data['schemeRecords'] = $this->user_model->schemesListing();    
         $this->loadViews("schemes", $this->global, $data, NULL);
