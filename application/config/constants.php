@@ -86,10 +86,22 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 
 /**** USER DEFINED CONSTANTS **********/
-
+/* ROLES */
 define('ROLE_ADMIN','1');
 define('ROLE_ORGANIZATION','2');
 define('ROLE_HOSPITAL','3');
+define('ROLE_STATE_ADMIN','4');
+
+/* STATUS AT EVERY LEVEL */
+define('APPROVED','approved');
+define('DENIED','rejected');
+define('WAITING','waitList');
+
+/* OVERALL STATUS */
+define('district_approved', "districtYes");
+define('district_denied', "districtNo");
+define('state_approved', "stateYes");
+define('state_denied', "stateNo");
 
 define('SEGMENT',2);
 

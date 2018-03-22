@@ -596,6 +596,30 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         $data['schemeRecords'] = $this->user_model->schemesListing();    
         $this->loadViews("schemes", $this->global, $data, NULL);
     }
+
+    function approve()
+    {
+        $this->global['pageTitle'] = 'e-Healthcare : Approval';
+
+        $data['approvalRecords'] = $this->user_model->approvalForState();
+
+        $this->loadViews("approval", $this->global, $data, NULL);
+    }
+
+    function showRequestProfile()
+    {
+        $this->global['pageTitle'] = 'e-Healthcare : Request Details';
+
+        $empanelment_request_id = $this->uri->segment(2);
+
+        // print_r($empanelment_request_id);
+            
+        $data['requestDetails'] = $this->user_model->detailsOfRequest($empanelment_request_id);
+
+        // print_r($data['requestDetails']);
+
+        $this->loadViews("requestDetails", $this->global, $data, NULL);
+    }
 }
 
 ?>

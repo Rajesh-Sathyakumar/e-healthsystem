@@ -174,7 +174,36 @@
             </li>
             <?php
             }
+            if($role == ROLE_STATE_ADMIN)
+            {
             ?>
+            <li class="treeview">
+              <a href="<?php echo base_url(); ?>beneficiaries" >
+                <i class="fa fa-upload"></i>
+                <span>Beneficiaries</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="#" >
+                <i class="fa fa-files-o"></i>
+                <span>Reports</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="<?php echo base_url(); ?>approve" >
+                <i class="glyphicon glyphicon-ok"></i>
+                <span>Approval</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="#" >
+                <i class="fa fa-bell-o"></i>
+                <span>Notification</span>
+              </a>
+            </li>
+            <?php
+          }
+          ?>
           </ul>
         </section>
         <!-- /.sidebar -->

@@ -275,6 +275,31 @@ class User_model extends CI_Model
 
     }
 
+    function approvalForState()
+    {
+        $this->db->select('empanelment_request_id,organisation_id,scheme_id,documents,status');
+        $this->db->from('empanelment_request');
+        $this->db->where('districtAdmin_status','approved');
+
+        $query = $this->db->get();
+
+        $result = $query->result();
+        return $result;
+    }
+
+    function detailsOfRequest($empanelment_request_id)
+    {
+
+        $this->db->select('*');
+        $this->db->from('hospital');
+        $this->db->join('empanelment_request', 'empanelment_request.hospital_id = hospital.hospital_id','right');
+        // $this->db->where('empanelment_request_id',$empanelment_request_id);
+
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
+
 }
 
   

@@ -11,83 +11,22 @@
 
 
       <div class="row">
-        <div class="col-md-3">
-
-          <!-- Profile Image -->
-          <div class="box box-primary">
-            <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url(); ?>assets/dist/img/avatar.png" alt="User profile picture">
-
-              <h3 class="profile-username text-center"><?php echo $name; ?></h3>
-
-              <p class="text-muted text-center"><?php echo $role_text; ?></p>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">About Me</h3>
-            </div>
-            <!-- /.box-header -->
-            
-            <?php
-            if($role == ROLE_STATE_ADMIN)
-            {
-              ?>
-              <div class="box-body">
-              <strong><i class="fa fa-institution"></i>Tamil Nadu</strong>
-
-              <p class="text-muted">
-                State approval admin for schemes in Tamil Nadu region
-              </p>
-            </div>
-              <?php
-            }
-            else
-            {
-              ?>
-            <div class="box-body">
-              <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-
-              <p class="text-muted">
-                B.S. in Computer Science from the University of Tennessee at Knoxville
-              </p>
-
-              <hr>
-
-              <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
-              <p class="text-muted">Malibu, California</p>
-
-              <hr>
-            </div>
-            <?php
-          }
-            ?>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
         <!-- /.col -->
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#settings" data-toggle="tab">Profile Settings</a></li>
+              <li class="active"><a href="#settings" data-toggle="tab">Submitted Form</a></li>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="settings">
                 <?php $this->load->helper('form'); ?>
                 <form class="form-horizontal" method="post" action="<?php echo base_url() ?>profilesettings">
-                  <?php
-                  if($role == ROLE_STATE_ADMIN)
-                  {
-                    ?>
                     <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="hospitalName" name="hospitalName" placeholder="Name of admin">
+                      <!-- <input type="text" class="form-control" id="hospitalName" name="hospitalName" placeholder="Name of admin"> -->
+                      <label for="inputName" class="col-sm-2 ">Hospital Name</label>                                                
                     </div>
                   </div>
                   <div class="form-group">
@@ -97,11 +36,6 @@
                       <input type="text" class="form-control" id="hospitalName" name="hospitalName" placeholder="State Name">
                     </div>
                   </div>
-                    <?php
-                  }
-                  else
-                  {
-                  ?>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Hospital Name</label>
 
@@ -398,9 +332,6 @@
                       <button type="submit" class="btn btn-danger">Submit</button>
                     </div>
                   </div>
-                  <?php
-                }
-                ?>
                 </form>
               </div>
              
