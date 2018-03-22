@@ -103,10 +103,29 @@
               </a>
             </li>
             <li class="treeview">
+              <?php
+            if($role == ROLE_HOSPITAL)
+            {
+            ?>
               <a href="<?php echo base_url(); ?>schemesList" >
                 <i class="fa fa-plus-square"></i>
                 <span>Schemes</span>
               </a>
+            <?php
+            }
+            ?>
+            <?php
+            if($role == ROLE_ADMIN)
+            {
+            ?>
+              <a href="<?php echo base_url(); ?>user/schemes" >
+                <i class="fa fa-plus-square"></i>
+                <span>Schemes</span>
+              </a>
+            <?php
+            }
+            ?>
+
             </li>
             <li class="treeview">
               <a href="#">

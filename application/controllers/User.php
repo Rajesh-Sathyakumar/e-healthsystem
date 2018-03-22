@@ -18,7 +18,11 @@ class User extends BaseController
     {
         parent::__construct();
         $this->load->model('user_model');
-        $this->isLoggedIn();   
+        $this->load->database();
+        $this->load->helper('url');
+/* ------------------ */ 
+        $this->load->library('grocery_CRUD');
+        $this->isLoggedIn();      
     }
     
     /**
@@ -74,7 +78,25 @@ class User extends BaseController
             $this->loadViews("beneficiaries", $this->global, NULL, NULL);
         
     }
-
+    public function schemes()
+{
+$crud = new grocery_CRUD();
+$crud->set_table('scheme');
+//$crud->set_theme('bootstrap');
+$crud->columns('scheme_name','description','maximum_amount','guidelines','type','fund_allocated','file_url');
+$crud->fields('scheme_name','description','maximum_amount','guidelines','type','fund_allocated','file_url');
+$crud->set_field_upload('file_url','assets/uploads/files');
+$output = $crud->render();
+ 
+$this->loadSchemes($output);        
+}
+ 
+function loadSchemes($output = null)
+ 
+{
+$this->global['pageTitle'] = 'e-Healthcare : Schemes'; 
+$this->loadViews("template_crud_user", $this->global, $output, NULL);
+}
 
 
     function profileupdate()
