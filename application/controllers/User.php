@@ -2,13 +2,7 @@
 
 require APPPATH . '/libraries/BaseController.php';
 
-/**
- * Class : User (UserController)
- * User Class to control all user related operations.
- * @author : Kishor Mali
- * @version : 1.1
- * @since : 15 November 2016
- */
+
 class User extends BaseController
 {
     /**
@@ -20,7 +14,6 @@ class User extends BaseController
         $this->load->model('user_model');
         $this->load->database();
         $this->load->helper('url');
-/* ------------------ */ 
         $this->load->library('grocery_CRUD');
         $this->isLoggedIn();      
     }
@@ -112,7 +105,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     {
          $this->load->library('form_validation');
          $this->form_validation->set_rules('hospitalName','Hospital Name','required|max_length[128]|trim');
-         $this->form_validation->set_rules('hospitalshortName','Hospital shortName','required|max_length[128]|trim');
+         $this->form_validation->set_rules('hospitalshortName','Hospital short Name','required|max_length[128]|trim');
          $this->form_validation->set_rules('Hospitaltype','Hospital Type','required|max_length[128]|trim');
          $this->form_validation->set_rules('Pincode','Pincode','required|max_length[6]|trim');
          $this->form_validation->set_rules('HospitalInchargeName','Hospital Incharge Name','required|max_length[128]|trim');
@@ -153,8 +146,8 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
          $this->form_validation->set_rules('nabh','nabh Accredition','required|max_length[128]|trim');
 
 
-          if($this->form_validation->run() == TRUE)
-            {  $info="error";
+          if($this->form_validation->run() == FALSE)
+            { 
                $this->loadViews("/profile",$this->global,NULL,NULL);
             }
             else
