@@ -75,14 +75,41 @@ class User extends BaseController
 {
 $crud = new grocery_CRUD();
 $crud->set_table('scheme');
+$crud->set_subject('Scheme');
 //$crud->set_theme('bootstrap');
+$crud->callback_before_insert(array($this,'insert_time_callback'));
+$crud->callback_before_update(array($this,'update_time_callback'));
+
 $crud->columns('scheme_name','description','maximum_amount','guidelines','type','fund_allocated','file_url');
-$crud->fields('scheme_name','description','maximum_amount','guidelines','type','fund_allocated','file_url');
+$crud->fields('scheme_name','description','maximum_amount','guidelines','creation_date','updation_date','created_by','updated_by','type','fund_allocated','file_url');
+$crud->change_field_type('creation_date','invisible');
+$crud->change_field_type('updation_date','invisible');
+$crud->change_field_type('created_by','invisible');
+$crud->change_field_type('updated_by','invisible');
 $crud->set_field_upload('file_url','assets/uploads/files');
 $output = $crud->render();
  
 $this->loadSchemes($output);        
 }
+
+function insert_time_callback($post_array) {
+
+    $post_array['creation_date'] = date('Y-m-d H:i:s');
+    $post_array['updation_date'] = date('Y-m-d H:i:s');
+    $post_array['created_by'] = $this->global ['name'];
+    $post_array['updated_by'] = $this->global ['name'];
+    return $post_array;
+    }
+
+function update_time_callback($post_array) {
+
+    //$post_array['creation_date'] = date('Y-m-d H:i:s');
+    $post_array['updation_date'] = date('Y-m-d H:i:s');
+    //$post_array['created_by'] = $name;
+    $post_array['updated_by'] = $this->global ['name'];
+    return $post_array;
+    }
+ 
  
 function loadSchemes($output = null)
  
