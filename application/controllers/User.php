@@ -130,23 +130,23 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
 
     function profilesettings()
     {
-         $this->load->library('form_validation');
-         $this->form_validation->set_rules('hospitalName','Hospital Name','required|max_length[128]|trim');
-         $this->form_validation->set_rules('hospitalshortName','Hospital short Name','required|max_length[128]|trim');
-         $this->form_validation->set_rules('Hospitaltype','Hospital Type','required|max_length[128]|trim');
-         $this->form_validation->set_rules('Pincode','Pincode','required|max_length[6]|trim');
-         $this->form_validation->set_rules('HospitalInchargeName','Hospital Incharge Name','required|max_length[128]|trim');
-         $this->form_validation->set_rules('HospitalInchargemobile','Hospital Incharge mobile','required|max_length[10]|trim');
-         $this->form_validation->set_rules('HospitalInchargePhone','Hospital Incharge Phone','required|max_length[11]|trim');
-         $this->form_validation->set_rules('HospitalInchargeEmail','Hospital Incharge Email','required|max_length[128]|trim');
-         $this->form_validation->set_rules('ownerName','Owner Name','required|max_length[128]|trim');
-         $this->form_validation->set_rules('GeneralBeds','General Beds','required|max_length[128]|trim');
-         $this->form_validation->set_rules('DayCareBeds','Day Care Beds','required|max_length[128]|trim');
-         $this->form_validation->set_rules('ICUBeds','ICU Beds','required|max_length[128]|trim');
-         $this->form_validation->set_rules('ICCUBeds','ICCU Beds','required|max_length[128]|trim');
-         $this->form_validation->set_rules('HDUBeds','HDU Beds','required|max_length[128]|trim');
-         $this->form_validation->set_rules('MajorOts','Major Ots','required|max_length[128]|trim');
-         $this->form_validation->set_rules('MinorOts','Minor Ots','required|max_length[128]|trim');
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('hospitalName','Hospital Name','required|max_length[128]|trim');
+        $this->form_validation->set_rules('hospitalshortName','Hospital short Name','required|max_length[128]|trim');
+        $this->form_validation->set_rules('hospitaltype','Hospital Type','required|max_length[128]|trim');
+        $this->form_validation->set_rules('Pincode','Pincode','required|max_length[6]|trim');
+        $this->form_validation->set_rules('HospitalInchargeName','Hospital Incharge Name','required|max_length[128]|trim');
+        $this->form_validation->set_rules('HospitalInchargemobile','Hospital Incharge mobile','required|max_length[10]|trim');
+        $this->form_validation->set_rules('HospitalInchargePhone','Hospital Incharge Phone','required|max_length[11]|trim');
+        $this->form_validation->set_rules('HospitalInchargeEmail','Hospital Incharge Email','required|max_length[128]|trim');
+        $this->form_validation->set_rules('ownerName','Owner Name','required|max_length[128]|trim');
+        $this->form_validation->set_rules('GeneralBeds','General Beds','required|max_length[128]|trim');
+        $this->form_validation->set_rules('DayCareBeds','Day Care Beds','required|max_length[128]|trim');
+        $this->form_validation->set_rules('ICUBeds','ICU Beds','required|max_length[128]|trim');
+        $this->form_validation->set_rules('ICCUBeds','ICCU Beds','required|max_length[128]|trim');
+        $this->form_validation->set_rules('HDUBeds','HDU Beds','required|max_length[128]|trim');
+        $this->form_validation->set_rules('MajorOts','Major Ots','required|max_length[128]|trim');
+        $this->form_validation->set_rules('MinorOts','Minor Ots','required|max_length[128]|trim');
         $this->form_validation->set_rules('HospitalAddress','Hospital Address','required|max_length[128]|trim');
         $this->form_validation->set_rules('Latitude','Latitude','required|max_length[128]|trim');
         $this->form_validation->set_rules('Longitude','Longitude','required|max_length[128]|trim');
@@ -168,9 +168,9 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         $this->form_validation->set_rules('generalNurses','general Nurses','required|max_length[128]|trim');
         $this->form_validation->set_rules('pharmacytype','pharmacy type','required|max_length[128]|trim'); 
         $this->form_validation->set_rules('state','state','required|max_length[128]|trim');
-         $this->form_validation->set_rules('District','District','required|max_length[128]|trim');
-         $this->form_validation->set_rules('location','location','required|max_length[128]|trim');
-         $this->form_validation->set_rules('nabh','nabh Accredition','required|max_length[128]|trim');
+        $this->form_validation->set_rules('District','District','required|max_length[128]|trim');
+        $this->form_validation->set_rules('location','location','required|max_length[128]|trim');
+        $this->form_validation->set_rules('nabh','nabh Accredition','required|max_length[128]|trim');
 
 
           if($this->form_validation->run() == FALSE)
@@ -218,7 +218,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                 $state = $this->security->xss_clean($this->input->post('state'));
                 $district = $this->security->xss_clean($this->input->post('District'));
                 $location = $this->security->xss_clean($this->input->post('location'));
-                $hospital_type = $this->security->xss_clean($this->input->post('Hospitaltype'));
+                $hospital_type = $this->security->xss_clean($this->input->post('hospitaltype'));
                 $nabh = $this->security->xss_clean($this->input->post('nabh'));
 
 
