@@ -23,7 +23,7 @@
             </div>
             <!-- /.box-body -->
           </div>
-        
+          
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">About Me</h3>
@@ -56,7 +56,8 @@
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="settings">
-                <form class="form-horizontal">
+                <?php $this->load->helper('form'); ?>
+                <form class="form-horizontal" method="post" action="<?php echo base_url() ?>profilesettings">
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Hospital Name</label>
 
@@ -75,7 +76,7 @@
                     <label for="shortName" class="col-sm-2 control-label">Hospital Type</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="hospitaltype name="hospitaltype" placeholder="Hospital Type">
+                      <input type="text" class="form-control" id="hospitaltype" name="hospitaltype" placeholder="Hospital Type">
                     </div>
                   </div>
                    <div class="form-group">
@@ -164,6 +165,13 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Minor Ots</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="MinorOts" name="MinorOts" placeholder="Minor Ots">
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label for="inputAddress" class="col-sm-2 control-label">Hospital Address</label>
 
                     <div class="col-sm-10">
@@ -212,13 +220,7 @@
                      <input type="text" class="form-control" id="serviceTaxRegistrationNumber" name="serviceTaxRegistrationNumber" placeholder="service Tax Registration Number">
                     </div>
                   </div>
-                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">branch Address</label>
-
-                    <div class="col-sm-10">
-                       <input type="text" class="form-control" id="LbranchAddress" name="branchAddress" placeholder="branch Address">
-                    </div>
-                  </div>
+                   
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">bank Name</label>
 
@@ -238,6 +240,13 @@
 
                     <div class="col-sm-10">
                        <input type="text" class="form-control" id="IFSCCode" name="IFSCCode" placeholder="IFSC Code">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">branch Address</label>
+
+                    <div class="col-sm-10">
+                       <input type="text" class="form-control" id="LbranchAddress" name="branchAddress" placeholder="branch Address">
                     </div>
                   </div>
                    <div class="form-group">
@@ -262,7 +271,7 @@
                     </div>
                   </div>
                    <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label"> fullTime Consultants</label>
+                    <label for="inputName" class="col-sm-2 control-label">fullTime Consultants</label>
 
                     <div class="col-sm-10">
                        <input type="text" class="form-control" id=" fullTimeConsultants" name="fullTimeConsultants" placeholder="  fullTime Consultants">
@@ -335,7 +344,7 @@
                     <div class="col-sm-offset-2 col-sm-10">
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                          <input type="checkbox"> I agree to the <a href="#">terms</a>
                         </label>
                       </div>
                     </div>

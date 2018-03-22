@@ -103,11 +103,12 @@ class User_model extends CI_Model
         return $insert_id;
     }
     
-    /**
-     * This function used to get user information by id
-     * @param number $userId : This is user id
-     * @return array $result : This is user information
-     */
+
+    function addHospitalInfo($hospitalinfo)
+    {
+         $this->db->insert('hospital',$hospitalinfo);
+         return ($this->db->affected_rows() != 1) ? FALSE : TRUE;
+    }
     function getUserInfo($userId)
     {
         $this->db->select('userId, name, email, mobile, roleId');

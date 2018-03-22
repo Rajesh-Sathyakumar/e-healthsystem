@@ -108,6 +108,159 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         
     }
 
+    function profilesettings()
+    {
+         $this->load->library('form_validation');
+         $this->form_validation->set_rules('hospitalName','Hospital Name','required|max_length[128]|trim');
+         $this->form_validation->set_rules('hospitalshortName','Hospital shortName','required|max_length[128]|trim');
+         $this->form_validation->set_rules('Hospitaltype','Hospital Type','required|max_length[128]|trim');
+         $this->form_validation->set_rules('Pincode','Pincode','required|max_length[6]|trim');
+         $this->form_validation->set_rules('HospitalInchargeName','Hospital Incharge Name','required|max_length[128]|trim');
+         $this->form_validation->set_rules('HospitalInchargemobile','Hospital Incharge mobile','required|max_length[10]|trim');
+         $this->form_validation->set_rules('HospitalInchargePhone','Hospital Incharge Phone','required|max_length[11]|trim');
+         $this->form_validation->set_rules('HospitalInchargeEmail','Hospital Incharge Email','required|max_length[128]|trim');
+         $this->form_validation->set_rules('ownerName','Owner Name','required|max_length[128]|trim');
+         $this->form_validation->set_rules('GeneralBeds','General Beds','required|max_length[128]|trim');
+         $this->form_validation->set_rules('DayCareBeds','Day Care Beds','required|max_length[128]|trim');
+         $this->form_validation->set_rules('ICUBeds','ICU Beds','required|max_length[128]|trim');
+         $this->form_validation->set_rules('ICCUBeds','ICCU Beds','required|max_length[128]|trim');
+         $this->form_validation->set_rules('HDUBeds','HDU Beds','required|max_length[128]|trim');
+         $this->form_validation->set_rules('MajorOts','Major Ots','required|max_length[128]|trim');
+         $this->form_validation->set_rules('MinorOts','Minor Ots','required|max_length[128]|trim');
+        $this->form_validation->set_rules('HospitalAddress','Hospital Address','required|max_length[128]|trim');
+        $this->form_validation->set_rules('Latitude','Latitude','required|max_length[128]|trim');
+        $this->form_validation->set_rules('Longitude','Longitude','required|max_length[128]|trim');
+        $this->form_validation->set_rules('panNumber','pan Number','required|max_length[128]|trim');
+        $this->form_validation->set_rules('clinicalRegistrationNumber','clinical Registration Number','required|max_length[128]|trim');
+        $this->form_validation->set_rules('panCardHolderName','panCard Holder Name','required|max_length[128]|trim');
+        $this->form_validation->set_rules('serviceTaxRegistrationNumber','service Tax Registration Number','required|max_length[128]|trim');
+        $this->form_validation->set_rules('bankName','bank Name','required|max_length[128]|trim');
+        $this->form_validation->set_rules('bankAccountNumber','bank Account Number','required|max_length[128]|trim');
+        $this->form_validation->set_rules('IFSCCode','IFSC Code','required|max_length[11]|trim');
+        $this->form_validation->set_rules('branchAddress','branch Address','required|max_length[128]|trim');
+        $this->form_validation->set_rules('payeeName','payee Name','required|max_length[128]|trim');
+        $this->form_validation->set_rules('numberOfFullTimePhysicians','number Of FullTime Physicians','required|max_length[128]|trim');
+        $this->form_validation->set_rules('remarks','remarks','required|max_length[128]|trim');
+        $this->form_validation->set_rules('fullTimeConsultants','fullTime Consultants','required|max_length[128]|trim');
+        $this->form_validation->set_rules('PartTimeConsultants','PartTime Consultants','required|max_length[128]|trim');
+        $this->form_validation->set_rules('VisitingConsultants','Visiting Consultants','required|max_length[128]|trim');
+        $this->form_validation->set_rules('dutyDoctors','duty Doctors','required|max_length[128]|trim');
+        $this->form_validation->set_rules('generalNurses','general Nurses','required|max_length[128]|trim');
+        $this->form_validation->set_rules('pharmacytype','pharmacy type','required|max_length[128]|trim'); 
+        $this->form_validation->set_rules('state','state','required|max_length[128]|trim');
+         $this->form_validation->set_rules('District','District','required|max_length[128]|trim');
+         $this->form_validation->set_rules('location','Location','required|max_length[128]|trim');
+         $this->form_validation->set_rules('nabh','nabh Accredition','required|max_length[128]|trim');
+
+
+          if($this->form_validation->run() == TRUE)
+            {  $info="error";
+               $this->loadViews("/profile",$this->global,NULL,NULL);
+            }
+            else
+            {
+               // $this->loadViews("dashboard",$this->global,NULL,NULL);
+                $hospital_name = ucwords(strtolower($this->security->xss_clean($this->input->post('hospitalName'))));
+                $hospital_shortName = ucwords(strtolower($this->security->xss_clean($this->input->post('hospitalshortName'))));
+                $pincode = $this->security->xss_clean($this->input->post('Pincode'));
+                $hospital_incharge_name = ucwords(strtolower($this->security->xss_clean($this->input->post('HospitalInchargeName'))));
+                $hospital_incharge_mobile = $this->security->xss_clean($this->input->post('HospitalInchargemobile'));
+                $hospital_incharge_phone = $this->security->xss_clean($this->input->post('HospitalInchargePhone'));
+                $hospital_incharge_email = $this->security->xss_clean($this->input->post('HospitalInchargeEmail'));
+                $owner_name = ucwords(strtolower($this->security->xss_clean($this->input->post('ownerName'))));
+                $generalBeds = $this->security->xss_clean($this->input->post('GeneralBeds'));
+                $dayCareBeds = $this->security->xss_clean($this->input->post('DayCareBeds'));
+                $icuBeds = $this->security->xss_clean($this->input->post('ICUBeds'));
+                $iccuBeds = $this->security->xss_clean($this->input->post('ICCUBeds')); 
+                $hduBeds = $this->security->xss_clean($this->input->post('HDUBeds'));
+                $majorOts = $this->security->xss_clean($this->input->post('MajorOts'));
+                $minorOts = $this->security->xss_clean($this->input->post('MinorOts'));
+                $hospitalAddress = ucwords(strtolower($this->security->xss_clean($this->input->post('HospitalAddress'))));
+                $latitude = $this->security->xss_clean($this->input->post('Latitude'));
+                $Longitude = $this->security->xss_clean($this->input->post('longitude'));
+                $panNumber = ucwords(strtolower($this->security->xss_clean($this->input->post('panNumber'))));
+                $clinicalRegistrationNumber = ucwords(strtolower($this->security->xss_clean($this->input->post('clinicalRegistrationNumber'))));
+                $panCardHolderName = ucwords(strtolower($this->security->xss_clean($this->input->post('panCardHolderName'))));
+                $serviceTaxRegistrationNumber = ucwords(strtolower($this->security->xss_clean($this->input->post('serviceTaxRegistrationNumber'))));
+                $bank_name = ucwords(strtolower($this->security->xss_clean($this->input->post('bankName'))));
+                $bankAccountNumber = ucwords(strtolower($this->security->xss_clean($this->input->post('bankAccountNumber'))));
+                $ifsc_code = ucwords(strtolower($this->security->xss_clean($this->input->post('IFSCCode'))));
+                $branchAddress = ucwords(strtolower($this->security->xss_clean($this->input->post('branchAddress'))));
+                $payeeName = ucwords(strtolower($this->security->xss_clean($this->input->post('payeeName'))));
+                $numberOfFullTimePhysicians = ucwords(strtolower($this->security->xss_clean($this->input->post('numberOfFullTimePhysicians'))));
+                $remarks = ucwords(strtolower($this->security->xss_clean($this->input->post('remarks'))));
+                $fullTimeConsultants = ucwords(strtolower($this->security->xss_clean($this->input->post('fullTimeConsultants'))));
+                $partTimeConsultants = $this->security->xss_clean($this->input->post('PartTimeConsultants'));
+                $visitingConsultants = $this->security->xss_clean($this->input->post('VisitingConsultants'));
+                $dutyDoctors = $this->security->xss_clean($this->input->post('dutyDoctors'));
+                $generalNurses = $this->security->xss_clean($this->input->post('generalNurses'));
+                $pharmacy_type = $this->security->xss_clean($this->input->post('pharmacytype'));
+                $state = $this->security->xss_clean($this->input->post('state'));
+                $district = $this->security->xss_clean($this->input->post('District'));
+                $location = $this->security->xss_clean($this->input->post('location'));
+                $hospital_type = $this->security->xss_clean($this->input->post('Hospitaltype'));
+                $nabh = $this->security->xss_clean($this->input->post('nabh'));
+
+
+                $hospitalinfo = array('hospital_name'=>$hospital_name,   
+                                        'hospital_shortName'=> $hospital_shortName,  
+                                        'pincode'=>  $pincode, 
+                                        'hospital_incharge_name'=>  $hospital_incharge_name, 
+                                        'hospital_incharge_mobile'=>  $hospital_incharge_mobile, 
+                                        'hospital_incharge_phone'=>  $hospital_incharge_phone, 
+                                        'hospital_incharge_email'=> $hospital_incharge_email,
+                                        'owner_name'=>  $owner_name, 
+                                        'generalBeds'=> $generalBeds, 
+                                        'dayCareBeds'=>  $dayCareBeds, 
+                                        'icuBeds'=> $icuBeds,
+                                        'iccuBeds'=> $iccuBeds, 
+                                        'hduBeds'=> $hduBeds,
+                                        'majorOts'=> $majorOts, 
+                                        'minorOts'=>  $minorOts,  
+                                        'hospitalAddress'=> $hospitalAddress,  
+                                        'latitude'=> $latitude, 
+                                        'Longitude'=> $Longitude,
+                                        'panNumber'=> $panNumber,
+                                        'clinicalRegistrationNumber'=> $clinicalRegistrationNumber,
+                                        'panCardHolderName' =>$panCardHolderName, 
+                                        'serviceTaxRegistrationNumber'=> $serviceTaxRegistrationNumber, 
+                                        'bank_name'=>  $bank_name,  
+                                        'bankAccountNumber'=> $bankAccountNumber,
+                                        'ifsc_code'=>  $ifsc_code, 
+                                        'branchAddress'=> $branchAddress,
+                                        'payeeName'=> $payeeName,  
+                                        'numberOfFullTimePhysicians' => $numberOfFullTimePhysicians,
+                                        'remarks'=> $remarks,
+                                        'fullTimeConsultants'=> $fullTimeConsultants,
+                                        'partTimeConsultants'=> $partTimeConsultants,
+                                        'visitingConsultants'=> $visitingConsultants,
+                                        'dutyDoctors'=> $dutyDoctors, 
+                                        'generalNurses'=> $generalNurses, 
+                                        'pharmacy_type'=>   $pharmacy_type,
+                                        'state'=> $state,
+                                        'district'=> $district, 
+                                        'location'=>  $location,
+                                        'hospital_type'=>  $hospital_type, 
+                                        'nabh'=>   $nabh);
+                $this->load->model('user_model');
+                $result_insert = $this->user_model->addHospitalInfo($hospitalinfo);
+
+                if($result_insert == TRUE)
+                {
+                    $this->session->set_flashdata('success', 'Profile updated successfully');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'profile updation failed');
+                }
+
+                redirect('/dashboard');
+            }
+
+
+
+}
+
 
     /**
      * This function is used to load the add new form
