@@ -169,7 +169,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         $this->form_validation->set_rules('pharmacytype','pharmacy type','required|max_length[128]|trim'); 
         $this->form_validation->set_rules('state','state','required|max_length[128]|trim');
          $this->form_validation->set_rules('District','District','required|max_length[128]|trim');
-         $this->form_validation->set_rules('location','Location','required|max_length[128]|trim');
+         $this->form_validation->set_rules('location','location','required|max_length[128]|trim');
          $this->form_validation->set_rules('nabh','nabh Accredition','required|max_length[128]|trim');
 
 

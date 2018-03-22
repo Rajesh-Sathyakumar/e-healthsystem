@@ -274,21 +274,21 @@
                     <label for="inputName" class="col-sm-2 control-label">fullTime Consultants</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id=" fullTimeConsultants" name="fullTimeConsultants" placeholder="  fullTime Consultants">
+                       <input type="text" class="form-control" id=" fullTimeConsultants" name="fullTimeConsultants" placeholder="fullTime Consultants">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">PartTime Consultants</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="PartTimeConsultants" name="PartTimeConsultants" placeholder="PartTime  Consultants">
+                       <input type="text" class="form-control" id="PartTimeConsultants" name="PartTimeConsultants" placeholder="PartTime Consultants">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Visiting Consultants</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="VisitingConsultants" name="VisitingConsultants" placeholder="Visiting  Consultants">
+                       <input type="text" class="form-control" id="VisitingConsultants" name="VisitingConsultants" placeholder="Visiting Consultants">
                     </div>
                   </div>
                    <div class="form-group">
