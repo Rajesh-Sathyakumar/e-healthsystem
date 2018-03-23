@@ -46,7 +46,7 @@ class User extends BaseController
             
             $count = $this->user_model->userListingCount($searchText);
 
-			$returns = $this->paginationCompress ( "userListing/", $count, 10 );
+            $returns = $this->paginationCompress ( "userListing/", $count, 10 );
             
             $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
             
@@ -60,7 +60,13 @@ class User extends BaseController
     function requests()
     {
         $this->global['pageTitle'] = 'e-Healthcare : Requests';
-        $this->loadViews("request", $this->global, NULL, NULL);
+
+        $hospitalId = $this->user_model->getHospitalId($this->session->userdata('email'));
+        echo $hospitalId;
+        $this->user_model->getEmpanelmentRequestsListing($hospitalId);
+         $data['empanelmentRequests'] = $this->user_model->getEmpanelmentRequestsListing($hospitalId);
+         $this->loadViews("request", $this->global, $data, NULL);
+
     }
 
     function beneficiaries()
@@ -75,41 +81,14 @@ class User extends BaseController
 {
 $crud = new grocery_CRUD();
 $crud->set_table('scheme');
-$crud->set_subject('Scheme');
 //$crud->set_theme('bootstrap');
-$crud->callback_before_insert(array($this,'insert_time_callback'));
-$crud->callback_before_update(array($this,'update_time_callback'));
-
 $crud->columns('scheme_name','description','maximum_amount','guidelines','type','fund_allocated','file_url');
-$crud->fields('scheme_name','description','maximum_amount','guidelines','creation_date','updation_date','created_by','updated_by','type','fund_allocated','file_url');
-$crud->change_field_type('creation_date','invisible');
-$crud->change_field_type('updation_date','invisible');
-$crud->change_field_type('created_by','invisible');
-$crud->change_field_type('updated_by','invisible');
+$crud->fields('scheme_name','description','maximum_amount','guidelines','type','fund_allocated','file_url');
 $crud->set_field_upload('file_url','assets/uploads/files');
 $output = $crud->render();
  
 $this->loadSchemes($output);        
 }
-
-function insert_time_callback($post_array) {
-
-    $post_array['creation_date'] = date('Y-m-d H:i:s');
-    $post_array['updation_date'] = date('Y-m-d H:i:s');
-    $post_array['created_by'] = $this->global ['name'];
-    $post_array['updated_by'] = $this->global ['name'];
-    return $post_array;
-    }
-
-function update_time_callback($post_array) {
-
-    //$post_array['creation_date'] = date('Y-m-d H:i:s');
-    $post_array['updation_date'] = date('Y-m-d H:i:s');
-    //$post_array['created_by'] = $name;
-    $post_array['updated_by'] = $this->global ['name'];
-    return $post_array;
-    }
- 
  
 function loadSchemes($output = null)
  
@@ -130,23 +109,23 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
 
     function profilesettings()
     {
-        $this->load->library('form_validation');
-        //$this->form_validation->set_rules('hospitalName','Hospital Name','required|max_length[128]|trim');
-        $this->form_validation->set_rules('hospitalshortName','Hospital short Name','required|max_length[128]|trim');
-        $this->form_validation->set_rules('hospitaltype','Hospital Type','required|max_length[128]|trim');
-        $this->form_validation->set_rules('Pincode','Pincode','required|max_length[6]|trim');
-        $this->form_validation->set_rules('HospitalInchargeName','Hospital Incharge Name','required|max_length[128]|trim');
-        $this->form_validation->set_rules('HospitalInchargemobile','Hospital Incharge mobile','required|max_length[10]|trim');
-        $this->form_validation->set_rules('HospitalInchargePhone','Hospital Incharge Phone','required|max_length[11]|trim');
-        //$this->form_validation->set_rules('HospitalInchargeEmail','Hospital Incharge Email','required|max_length[128]|trim');
-        $this->form_validation->set_rules('ownerName','Owner Name','required|max_length[128]|trim');
-        $this->form_validation->set_rules('GeneralBeds','General Beds','required|max_length[128]|trim');
-        $this->form_validation->set_rules('DayCareBeds','Day Care Beds','required|max_length[128]|trim');
-        $this->form_validation->set_rules('ICUBeds','ICU Beds','required|max_length[128]|trim');
-        $this->form_validation->set_rules('ICCUBeds','ICCU Beds','required|max_length[128]|trim');
-        $this->form_validation->set_rules('HDUBeds','HDU Beds','required|max_length[128]|trim');
-        $this->form_validation->set_rules('MajorOts','Major Ots','required|max_length[128]|trim');
-        $this->form_validation->set_rules('MinorOts','Minor Ots','required|max_length[128]|trim');
+         $this->load->library('form_validation');
+         $this->form_validation->set_rules('hospitalName','Hospital Name','required|max_length[128]|trim');
+         $this->form_validation->set_rules('hospitalshortName','Hospital short Name','required|max_length[128]|trim');
+         $this->form_validation->set_rules('hospitaltype','Hospital Type','required|max_length[128]|trim');
+         $this->form_validation->set_rules('Pincode','Pincode','required|max_length[6]|trim');
+         $this->form_validation->set_rules('HospitalInchargeName','Hospital Incharge Name','required|max_length[128]|trim');
+         $this->form_validation->set_rules('HospitalInchargemobile','Hospital Incharge mobile','required|max_length[10]|trim');
+         $this->form_validation->set_rules('HospitalInchargePhone','Hospital Incharge Phone','required|max_length[11]|trim');
+         $this->form_validation->set_rules('HospitalInchargeEmail','Hospital Incharge Email','required|max_length[128]|trim');
+         $this->form_validation->set_rules('ownerName','Owner Name','required|max_length[128]|trim');
+         $this->form_validation->set_rules('GeneralBeds','General Beds','required|max_length[128]|trim');
+         $this->form_validation->set_rules('DayCareBeds','Day Care Beds','required|max_length[128]|trim');
+         $this->form_validation->set_rules('ICUBeds','ICU Beds','required|max_length[128]|trim');
+         $this->form_validation->set_rules('ICCUBeds','ICCU Beds','required|max_length[128]|trim');
+         $this->form_validation->set_rules('HDUBeds','HDU Beds','required|max_length[128]|trim');
+         $this->form_validation->set_rules('MajorOts','Major Ots','required|max_length[128]|trim');
+         $this->form_validation->set_rules('MinorOts','Minor Ots','required|max_length[128]|trim');
         $this->form_validation->set_rules('HospitalAddress','Hospital Address','required|max_length[128]|trim');
         $this->form_validation->set_rules('Latitude','Latitude','required|max_length[128]|trim');
         $this->form_validation->set_rules('Longitude','Longitude','required|max_length[128]|trim');
@@ -168,25 +147,26 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         $this->form_validation->set_rules('generalNurses','general Nurses','required|max_length[128]|trim');
         $this->form_validation->set_rules('pharmacytype','pharmacy type','required|max_length[128]|trim'); 
         $this->form_validation->set_rules('state','state','required|max_length[128]|trim');
-        $this->form_validation->set_rules('District','District','required|max_length[128]|trim');
-        $this->form_validation->set_rules('location','location','required|max_length[128]|trim');
-        $this->form_validation->set_rules('nabh','nabh Accredition','required|max_length[128]|trim');
+         $this->form_validation->set_rules('District','District','required|max_length[128]|trim');
+         $this->form_validation->set_rules('location','Location','required|max_length[128]|trim');
+         $this->form_validation->set_rules('nabh','nabh Accredition','required|max_length[128]|trim');
 
 
           if($this->form_validation->run() == FALSE)
             { 
-               $this->loadViews("/profile",$this->global,NULL,NULL);
+                $this->loadViews("profile",$this->global,NULL,NULL);
+              // $this->loadViews("/profile",$this->global,NULL,NULL);
             }
             else
             {
                // $this->loadViews("dashboard",$this->global,NULL,NULL);
-                $hospital_incharge_name = ucwords(strtolower($this->security->xss_clean($this->input->post('HospitalInchargeName'))));
-                $hospital_email = $this->security->xss_clean($this->input->post('HospitalEmail'));
-                //$hospital_name = ucwords(strtolower($this->security->xss_clean($this->input->post('hospitalName'))));
+                $hospital_name = ucwords(strtolower($this->security->xss_clean($this->input->post('hospitalName'))));
                 $hospital_shortName = ucwords(strtolower($this->security->xss_clean($this->input->post('hospitalshortName'))));
                 $pincode = $this->security->xss_clean($this->input->post('Pincode'));
+                $hospital_incharge_name = ucwords(strtolower($this->security->xss_clean($this->input->post('HospitalInchargeName'))));
                 $hospital_incharge_mobile = $this->security->xss_clean($this->input->post('HospitalInchargemobile'));
                 $hospital_incharge_phone = $this->security->xss_clean($this->input->post('HospitalInchargePhone'));
+                $hospital_incharge_email = $this->security->xss_clean($this->input->post('HospitalInchargeEmail'));
                 $owner_name = ucwords(strtolower($this->security->xss_clean($this->input->post('ownerName'))));
                 $generalBeds = $this->security->xss_clean($this->input->post('GeneralBeds'));
                 $dayCareBeds = $this->security->xss_clean($this->input->post('DayCareBeds'));
@@ -197,7 +177,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                 $minorOts = $this->security->xss_clean($this->input->post('MinorOts'));
                 $hospitalAddress = ucwords(strtolower($this->security->xss_clean($this->input->post('HospitalAddress'))));
                 $latitude = $this->security->xss_clean($this->input->post('Latitude'));
-                $Longitude = $this->security->xss_clean($this->input->post('Longitude'));
+                $Longitude = $this->security->xss_clean($this->input->post('longitude'));
                 $panNumber = ucwords(strtolower($this->security->xss_clean($this->input->post('panNumber'))));
                 $clinicalRegistrationNumber = ucwords(strtolower($this->security->xss_clean($this->input->post('clinicalRegistrationNumber'))));
                 $panCardHolderName = ucwords(strtolower($this->security->xss_clean($this->input->post('panCardHolderName'))));
@@ -222,13 +202,13 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                 $nabh = $this->security->xss_clean($this->input->post('nabh'));
 
 
-                $hospitalinfo = array(//'hospital_name'=>$hospital_name,   
+                $hospitalinfo = array('hospital_name'=>$hospital_name,   
                                         'hospital_shortName'=> $hospital_shortName,  
                                         'pincode'=>  $pincode, 
                                         'hospital_incharge_name'=>  $hospital_incharge_name, 
                                         'hospital_incharge_mobile'=>  $hospital_incharge_mobile, 
                                         'hospital_incharge_phone'=>  $hospital_incharge_phone, 
-                                        //'hospital_email'=> $hospital_email,
+                                        'hospital_incharge_email'=> $hospital_incharge_email,
                                         'owner_name'=>  $owner_name, 
                                         'generalBeds'=> $generalBeds, 
                                         'dayCareBeds'=>  $dayCareBeds, 
@@ -239,7 +219,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                                         'minorOts'=>  $minorOts,  
                                         'hospitalAddress'=> $hospitalAddress,  
                                         'latitude'=> $latitude, 
-                                        'longitude'=> $Longitude,
+                                        'Longitude'=> $Longitude,
                                         'panNumber'=> $panNumber,
                                         'clinicalRegistrationNumber'=> $clinicalRegistrationNumber,
                                         'panCardHolderName' =>$panCardHolderName, 
@@ -263,9 +243,16 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                                         'hospital_type'=>  $hospital_type, 
                                         'nabh'=>   $nabh);
                 $this->load->model('user_model');
-            $row = $this->user_model->addHospitalInfo($hospitalinfo,$hospital_email);
+                $result_insert = $this->user_model->addHospitalInfo($hospitalinfo);
 
-              
+                if($result_insert == TRUE)
+                {
+                    $this->session->set_flashdata('success', 'Profile updated successfully');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'profile updation failed');
+                }
 
                 redirect('/dashboard');
             }
