@@ -12,6 +12,7 @@ class BaseController extends CI_Controller {
 	protected $vendorId = '';
 	protected $name = '';
 	protected $roleText = '';
+	protected $email = '';
 	protected $global = array ();
 	protected $lastLogin = '';
 	
@@ -40,6 +41,7 @@ class BaseController extends CI_Controller {
 			$this->role = $this->session->userdata ( 'role' );
 			$this->vendorId = $this->session->userdata ( 'userId' );
 			$this->name = $this->session->userdata ( 'name' );
+			$this->email = $this->session->userdata( 'email' );
 			$this->roleText = $this->session->userdata ( 'roleText' );
 			$this->lastLogin = $this->session->userdata ( 'lastLogin' );
 			
@@ -47,6 +49,7 @@ class BaseController extends CI_Controller {
 			$this->global ['role'] = $this->role;
 			$this->global ['role_text'] = $this->roleText;
 			$this->global ['last_login'] = $this->lastLogin;
+			$this->global ['email'] = $this->email;
 		}
 	}
 	

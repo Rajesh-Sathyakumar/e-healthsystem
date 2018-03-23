@@ -103,118 +103,56 @@ class User_model extends CI_Model
         return $insert_id;
     }
     
-
-    function addHospitalInfo($hospitalinfo,$hospital_email)
+    function addNewHospital($hospitalinfo)
     {
-        // $pincode = $hospitalinfo['pincode'];
-        // $hospital_shortName = $hospitalinfo['hospital_shortName'];
-        // $hospital_incharge_name = $hospitalinfo['hospital_incharge_name'];
-        // $hospital_incharge_mobile = $hospitalinfo['hospital_incharge_mobile'];
-        // $hospital_incharge_phone = $hospitalinfo['hospital_incharge_phone'];
-        // $owner_name = $hospitalinfo['owner_name'];
-        // $generalBeds = $hospitalinfo['generalBeds'];
-        // $dayCareBeds = $hospitalinfo['dayCareBeds'];
-        // $icuBeds = $hospitalinfo['icuBeds'];
-        // $iccuBeds = $hospitalinfo['iccuBeds'];
-        // $hduBeds = $hospitalinfo['hduBeds'];
-        // $majorOts = $hospitalinfo['majorOts'];
-        // $minorOts = $hospitalinfo['minorOts'];
-        // $hospitalAddress = $hospitalinfo['hospitalAddress'];
-        // $latitude = $hospitalinfo['latitude'];
-        // $Longitude = $hospitalinfo['longitude'];
-        // $panNumber = $hospitalinfo['panNumber'];
-        // $clinicalRegistrationNumber = $hospitalinfo['clinicalRegistrationNumber'];
-        // $panCardHolderName = $hospitalinfo['panCardHolderName'];
-        // $serviceTaxRegistrationNumber = $hospitalinfo['serviceTaxRegistrationNumber'];
-        // $bank_name = $hospitalinfo['bank_name'];
-        // $bankAccountNumber = $hospitalinfo['bankAccountNumber'];
-        // $ifsc_code = $hospitalinfo['ifsc_code'];
-        // $branchAddress = $hospitalinfo['branchAddress'];
-        // $payeeName = $hospitalinfo['payeeName'];
-        // $numberOfFullTimePhysicians = $hospitalinfo['numberOfFullTimePhysicians'];
-        // $remarks = $hospitalinfo['remarks'];
-        // $fullTimeConsultants = $hospitalinfo['fullTimeConsultants'];
-        // $partTimeConsultants = $hospitalinfo['partTimeConsultants'];
-        // $visitingConsultants = $hospitalinfo['visitingConsultants'];
-        // $dutyDoctors = $hospitalinfo['dutyDoctors'];
-        // $generalNurses = $hospitalinfo['generalNurses'];
-        // $pharmacy_type = $hospitalinfo['pharmacy_type'];
-        // $state = $hospitalinfo['state'];
-        // $district = $hospitalinfo['district']; 
-        // $location = $hospitalinfo['location'];
-        // $hospital_type = $hospitalinfo['hospital_type'];
-        // $nabh =  $hospitalinfo['nabh'];
-
-
-
-   
-        // $this->db->set('pincode',$pincode);
-        // $this->db->set('hospital_shortName',$hospital_shortName);
-        //  $this->db->set('hospital_incharge_name',$hospital_incharge_name);
-        //  $this->db->set('hospital_incharge_phone',$hospital_incharge_phone);
-        //  $this->db->set('hospital.hospital_incharge_mobile',$hospital_incharge_mobile);
-        //  $this->db->set('hospital.owner_name',$owner_name);
-        //  $this->db->set('hospital.generalBeds',$generalBeds);
-        //  $this->db->set('hospital.dayCareBeds',$dayCareBeds);
-        //  $this->db->set('hospital.icuBeds',$icuBeds);
-        //  $this->db->set('hospital.iccuBeds',$iccuBeds);
-        //  $this->db->set('hospital.hduBeds',$hduBeds);
-        //  $this->db->set('hospital.majorOts',$majorOts);
-        //  $this->db->set('hospital.minorOts',$minorOts);
-        //  $this->db->set('hospital.hospitalAddress',$hospitalAddress);
-        //  $this->db->set('hospital.latitude',$latitude);
-        //  $this->db->set('hospital.Longitude',$Longitude);
-        //  $this->db->set('hospital.panNumber',$panNumber);
-        //  $this->db->set('hospital.clinicalRegistrationNumber',$clinicalRegistrationNumber);
-        //  $this->db->set('hospital.panCardHolderName',$panCardHolderName);
-        //  $this->db->set('hospital.serviceTaxRegistrationNumber',$serviceTaxRegistrationNumber);
-        //  $this->db->set('hospital.bank_name',$bank_name);
-        //  $this->db->set('hospital.bankAccountNumber',$bankAccountNumber);
-        //  $this->db->set('hospital.ifsc_code',$ifsc_code);
-        //  $this->db->set('hospital.branchAddress',$branchAddress);
-        //  $this->db->set('hospital.payeeName',$payeeName);
-        //  $this->db->set('hospital.numberOfFullTimePhysicians',$numberOfFullTimePhysicians);
-        //  $this->db->set('hospital.remarks',$remarks);
-        //  $this->db->set('hospital.fullTimeConsultants',$fullTimeConsultants);
-        //  $this->db->set('hospital.partTimeConsultants',$partTimeConsultants);
-        // $this->db->set('hospital.visitingConsultants',$visitingConsultants);
-        // $this->db->set('hospital.dutyDoctors',$dutyDoctors);
-        // $this->db->set('hospital.generalNurses',$generalNurses);
-        // $this->db->set('hospital.pharmacy_type',$pharmacy_type);
-        // $this->db->set('hospital.state',$state);
-        // $this->db->set('hospital.location',$location);
-        // $this->db->set('hospital.district',$district);
-        // $this->db->set('hospital.hospital_type',$hospital_type);
-        // $this->db->set('hospital.nabh',$nabh);
-
-        $this->db->where('hospital_email',$hospital_email);
-        $this->db->update('hospital',$hospitalinfo);
-
-       if($this->db->affected_rows()!=1)
-       {
-        return FALSE;
-       }
-       else
-       {
-        return TRUE;
-       }
-       
+        $this->db->trans_start();
+        $this->db->insert('hospital', $hospitalinfo);
         
-       
+        $insert_id = $this->db->insert_id();
         
+        $this->db->trans_complete();
         
+        return $insert_id;
+    }
 
-    }    
+    function addHospitalInfo($hospitalinfo)
+    {
+         $this->db->insert('hospital',$hospitalinfo);
+         return ($this->db->affected_rows() != 1) ? FALSE : TRUE;
+    }
     function getUserInfo($userId)
     {
         $this->db->select('userId, name, email, mobile, roleId');
         $this->db->from('tbl_users');
         $this->db->where('isDeleted', 0);
-		$this->db->where('roleId !=', 1);
+        $this->db->where('roleId !=', 1);
         $this->db->where('userId', $userId);
         $query = $this->db->get();
         
         return $query->result();
+    }
+    function getHospitalId($email)
+    {
+        $this->db->select('hospital_id');
+        $this->db->from('hospital');
+        $this->db->where('hospital_email',$email);
+        $query = $this->db->get();
+        $hos =  $query->row();
+        return $hos->hospital_id;
+        //return $query->result();
+
+    }
+    function getEmpanelmentRequestsListing($hospitalId)
+    {
+         $this->db->select('a.empanelment_request_id, a.status, a.status_message, b.scheme_name');
+         $this->db->from('empanelment_request a'); 
+    $this->db->join('scheme b', 'a.scheme_id=b.scheme_id');
+    // $this->db->join('hospital c', 'c.hospital_id=a.hospital_id', 'left');
+    $this->db->where('a.hospital_id',$hospitalId);
+   
+        $query = $this->db->get();
+        return $query->result();
+
     }
     
     
