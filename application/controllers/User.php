@@ -60,9 +60,9 @@ class User extends BaseController
     function requests()
     {
         $this->global['pageTitle'] = 'e-Healthcare : Requests';
-
+        //echo $this->session->userdata('email');
         $hospitalId = $this->user_model->getHospitalId($this->session->userdata('email'));
-        echo $hospitalId;
+        //echo $hospitalId;
         $this->user_model->getEmpanelmentRequestsListing($hospitalId);
          $data['empanelmentRequests'] = $this->user_model->getEmpanelmentRequestsListing($hospitalId);
          $this->loadViews("request", $this->global, $data, NULL);
@@ -102,8 +102,15 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     {
            
              $this->global['pageTitle'] = 'e-Healthcare : Profile Update';
+             $this->load->model('user_model');
+             $email = $this->session->userdata('email');
+              //$this->user_model->populateprofilefields($email);
+             $data['profilefields'] = $this->user_model->populateprofilefields($email);
             
-            $this->loadViews("profile", $this->global, NULL, NULL);
+             
+            
+           
+            $this->loadViews("profile", $this->global, $data, NULL);
         
     }
 
@@ -117,7 +124,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
          $this->form_validation->set_rules('HospitalInchargeName','Hospital Incharge Name','required|max_length[128]|trim');
          $this->form_validation->set_rules('HospitalInchargemobile','Hospital Incharge mobile','required|max_length[10]|trim');
          $this->form_validation->set_rules('HospitalInchargePhone','Hospital Incharge Phone','required|max_length[11]|trim');
-         $this->form_validation->set_rules('HospitalInchargeEmail','Hospital Incharge Email','required|max_length[128]|trim');
+         $this->form_validation->set_rules('HospitalEmail','Hospital Incharge Email','required|max_length[128]|trim');
          $this->form_validation->set_rules('ownerName','Owner Name','required|max_length[128]|trim');
          $this->form_validation->set_rules('GeneralBeds','General Beds','required|max_length[128]|trim');
          $this->form_validation->set_rules('DayCareBeds','Day Care Beds','required|max_length[128]|trim');
@@ -154,7 +161,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
 
           if($this->form_validation->run() == FALSE)
             { 
-                $this->loadViews("profile",$this->global,NULL,NULL);
+                $this->loadViews("request",$this->global,NULL,NULL);
               // $this->loadViews("/profile",$this->global,NULL,NULL);
             }
             else
@@ -166,7 +173,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                 $hospital_incharge_name = ucwords(strtolower($this->security->xss_clean($this->input->post('HospitalInchargeName'))));
                 $hospital_incharge_mobile = $this->security->xss_clean($this->input->post('HospitalInchargemobile'));
                 $hospital_incharge_phone = $this->security->xss_clean($this->input->post('HospitalInchargePhone'));
-                $hospital_incharge_email = $this->security->xss_clean($this->input->post('HospitalInchargeEmail'));
+                $hospital_email = $this->security->xss_clean($this->input->post('HospitalEmail'));
                 $owner_name = ucwords(strtolower($this->security->xss_clean($this->input->post('ownerName'))));
                 $generalBeds = $this->security->xss_clean($this->input->post('GeneralBeds'));
                 $dayCareBeds = $this->security->xss_clean($this->input->post('DayCareBeds'));
@@ -208,7 +215,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                                         'hospital_incharge_name'=>  $hospital_incharge_name, 
                                         'hospital_incharge_mobile'=>  $hospital_incharge_mobile, 
                                         'hospital_incharge_phone'=>  $hospital_incharge_phone, 
-                                        'hospital_incharge_email'=> $hospital_incharge_email,
+                                        //'hospital_email'=> $hospital_email,
                                         'owner_name'=>  $owner_name, 
                                         'generalBeds'=> $generalBeds, 
                                         'dayCareBeds'=>  $dayCareBeds, 
@@ -219,7 +226,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                                         'minorOts'=>  $minorOts,  
                                         'hospitalAddress'=> $hospitalAddress,  
                                         'latitude'=> $latitude, 
-                                        'Longitude'=> $Longitude,
+                                        'longitude'=> $Longitude,
                                         'panNumber'=> $panNumber,
                                         'clinicalRegistrationNumber'=> $clinicalRegistrationNumber,
                                         'panCardHolderName' =>$panCardHolderName, 
@@ -243,9 +250,9 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                                         'hospital_type'=>  $hospital_type, 
                                         'nabh'=>   $nabh);
                 $this->load->model('user_model');
-                $result_insert = $this->user_model->addHospitalInfo($hospitalinfo);
+                $result = $this->user_model->addHospitalInfo($hospitalinfo,$hospital_email);
 
-                if($result_insert == TRUE)
+                if($result == TRUE)
                 {
                     $this->session->set_flashdata('success', 'Profile updated successfully');
                 }
@@ -254,7 +261,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                     $this->session->set_flashdata('error', 'profile updation failed');
                 }
 
-                redirect('/dashboard');
+               redirect('/dashboard');
             }
 
 
