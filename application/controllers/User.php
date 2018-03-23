@@ -113,6 +113,13 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
             $this->loadViews("profile", $this->global, $data, NULL);
         
     }
+    function requestprocess()
+    {
+         $this->global['pageTitle'] = 'e-Healthcare : Profile View Only';
+        $email = $this->session->userdata('email');
+         $data['profiledata'] = $this->user_model->profileviewdata($email);
+          $this->loadViews("profileview", $this->global, $data, NULL);
+    }
 
     function profilesettings()
     {
@@ -582,6 +589,24 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
 
         $data['schemeRecords'] = $this->user_model->schemesListing();    
         $this->loadViews("schemes", $this->global, $data, NULL);
+    }
+
+
+    // function profileviewformat()
+    // {
+    //     $this->global['pageTitle'] = 'e-Healthcare : Profile(view only)';
+
+    //       //$email = $this->session->userdata('email');
+    //       //$data['profileRecords'] = $this->user_model->profileview($email);    
+    //       $this->loadViews("empanelmentrequest", $this->global, NULL, NULL);
+    // }
+
+
+
+    function empanelrequest()
+    {
+        $this->global['pageTitle'] = 'e-Healthcare : Empanelment Request';
+        $this->loadViews("empanelform", $this->global, NULL, NULL);
     }
 }
 

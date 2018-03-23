@@ -89,7 +89,9 @@ $route['createPasswordUser'] = "login/createPasswordUser";
 $route['profileupdate'] = "user/profileupdate";
 $route['schemesList'] = "user/schemesList";
 $route['profilesettings'] = "user/profilesettings";
-//$route['addHospitalInfo'] = "user/addHospitalInfo";
+$route['empanelrequest'] = "user/empanelrequest";
+$route['requestprocess'] = "user/requestprocess";
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
