@@ -8,6 +8,7 @@
     </h1>
     </section>
     <section class="content">
+        <div class="row">
     	 <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
@@ -237,7 +238,7 @@
                     <label for="inputName" class="col-sm-2 control-label">PartTime Consultants</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="PartTimeConsultants"  value = "<?php echo $profiledata->partTimeConsultants; ?>" name="PartTimeConsultants" placeholder="PartTime Consultants">
+                       <input type="text" class="form-control" id="PartTimeConsultants"  value = "<?php echo $profiledata->partTimeConsultants; ?>" name="PartTimeConsultants" placeholder="PartTime Consultants" readonly>
                     </div>
                   </div>
                   <div class="form-group">
@@ -306,6 +307,7 @@
                      
           </div>
       </div>
+    </div>
   </section>
 
     

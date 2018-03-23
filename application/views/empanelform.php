@@ -8,6 +8,7 @@
     </h1>
     </section>
     <section class="content">
+    	  <div class="row">
     	 <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
@@ -118,13 +119,17 @@
                       <input type="text" class="form-control" id="districtAdmin_updatedAt"  name="districtAdmin_updatedAt" placeholder="DistrictAdmin UpdatedAt">
                     </div>
                   </div>
-              </form>
-             <div class="col-sm-offset-2 col-sm-10">
-                       <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>" title="Login history" enabled="true">Submit</a>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-danger">Submit</button>
                     </div>
+                  </div>
+              </form>
+            
                      
           </div>
       </div>
+  </div>
   </section>
 
     
