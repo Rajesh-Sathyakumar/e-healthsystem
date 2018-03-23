@@ -131,14 +131,14 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     function profilesettings()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('hospitalName','Hospital Name','required|max_length[128]|trim');
+        //$this->form_validation->set_rules('hospitalName','Hospital Name','required|max_length[128]|trim');
         $this->form_validation->set_rules('hospitalshortName','Hospital short Name','required|max_length[128]|trim');
         $this->form_validation->set_rules('hospitaltype','Hospital Type','required|max_length[128]|trim');
         $this->form_validation->set_rules('Pincode','Pincode','required|max_length[6]|trim');
         $this->form_validation->set_rules('HospitalInchargeName','Hospital Incharge Name','required|max_length[128]|trim');
         $this->form_validation->set_rules('HospitalInchargemobile','Hospital Incharge mobile','required|max_length[10]|trim');
         $this->form_validation->set_rules('HospitalInchargePhone','Hospital Incharge Phone','required|max_length[11]|trim');
-        $this->form_validation->set_rules('HospitalInchargeEmail','Hospital Incharge Email','required|max_length[128]|trim');
+        //$this->form_validation->set_rules('HospitalInchargeEmail','Hospital Incharge Email','required|max_length[128]|trim');
         $this->form_validation->set_rules('ownerName','Owner Name','required|max_length[128]|trim');
         $this->form_validation->set_rules('GeneralBeds','General Beds','required|max_length[128]|trim');
         $this->form_validation->set_rules('DayCareBeds','Day Care Beds','required|max_length[128]|trim');
@@ -180,13 +180,13 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
             else
             {
                // $this->loadViews("dashboard",$this->global,NULL,NULL);
-                $hospital_name = ucwords(strtolower($this->security->xss_clean($this->input->post('hospitalName'))));
+                $hospital_incharge_name = ucwords(strtolower($this->security->xss_clean($this->input->post('HospitalInchargeName'))));
+                $hospital_email = $this->security->xss_clean($this->input->post('HospitalEmail'));
+                //$hospital_name = ucwords(strtolower($this->security->xss_clean($this->input->post('hospitalName'))));
                 $hospital_shortName = ucwords(strtolower($this->security->xss_clean($this->input->post('hospitalshortName'))));
                 $pincode = $this->security->xss_clean($this->input->post('Pincode'));
-                $hospital_incharge_name = ucwords(strtolower($this->security->xss_clean($this->input->post('HospitalInchargeName'))));
                 $hospital_incharge_mobile = $this->security->xss_clean($this->input->post('HospitalInchargemobile'));
                 $hospital_incharge_phone = $this->security->xss_clean($this->input->post('HospitalInchargePhone'));
-                $hospital_incharge_email = $this->security->xss_clean($this->input->post('HospitalInchargeEmail'));
                 $owner_name = ucwords(strtolower($this->security->xss_clean($this->input->post('ownerName'))));
                 $generalBeds = $this->security->xss_clean($this->input->post('GeneralBeds'));
                 $dayCareBeds = $this->security->xss_clean($this->input->post('DayCareBeds'));
@@ -197,7 +197,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                 $minorOts = $this->security->xss_clean($this->input->post('MinorOts'));
                 $hospitalAddress = ucwords(strtolower($this->security->xss_clean($this->input->post('HospitalAddress'))));
                 $latitude = $this->security->xss_clean($this->input->post('Latitude'));
-                $Longitude = $this->security->xss_clean($this->input->post('longitude'));
+                $Longitude = $this->security->xss_clean($this->input->post('Longitude'));
                 $panNumber = ucwords(strtolower($this->security->xss_clean($this->input->post('panNumber'))));
                 $clinicalRegistrationNumber = ucwords(strtolower($this->security->xss_clean($this->input->post('clinicalRegistrationNumber'))));
                 $panCardHolderName = ucwords(strtolower($this->security->xss_clean($this->input->post('panCardHolderName'))));
@@ -222,13 +222,13 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                 $nabh = $this->security->xss_clean($this->input->post('nabh'));
 
 
-                $hospitalinfo = array('hospital_name'=>$hospital_name,   
+                $hospitalinfo = array(//'hospital_name'=>$hospital_name,   
                                         'hospital_shortName'=> $hospital_shortName,  
                                         'pincode'=>  $pincode, 
                                         'hospital_incharge_name'=>  $hospital_incharge_name, 
                                         'hospital_incharge_mobile'=>  $hospital_incharge_mobile, 
                                         'hospital_incharge_phone'=>  $hospital_incharge_phone, 
-                                        'hospital_incharge_email'=> $hospital_incharge_email,
+                                        //'hospital_email'=> $hospital_email,
                                         'owner_name'=>  $owner_name, 
                                         'generalBeds'=> $generalBeds, 
                                         'dayCareBeds'=>  $dayCareBeds, 
@@ -239,7 +239,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                                         'minorOts'=>  $minorOts,  
                                         'hospitalAddress'=> $hospitalAddress,  
                                         'latitude'=> $latitude, 
-                                        'Longitude'=> $Longitude,
+                                        'longitude'=> $Longitude,
                                         'panNumber'=> $panNumber,
                                         'clinicalRegistrationNumber'=> $clinicalRegistrationNumber,
                                         'panCardHolderName' =>$panCardHolderName, 
@@ -263,16 +263,9 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                                         'hospital_type'=>  $hospital_type, 
                                         'nabh'=>   $nabh);
                 $this->load->model('user_model');
-                $result_insert = $this->user_model->addHospitalInfo($hospitalinfo);
+            $row = $this->user_model->addHospitalInfo($hospitalinfo,$hospital_email);
 
-                if($result_insert == TRUE)
-                {
-                    $this->session->set_flashdata('success', 'Profile updated successfully');
-                }
-                else
-                {
-                    $this->session->set_flashdata('error', 'profile updation failed');
-                }
+              
 
                 redirect('/dashboard');
             }

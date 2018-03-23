@@ -90,7 +90,7 @@
                     <label for="inputName" class="col-sm-2 control-label">Hospital Incharge Name</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="HospitalInchargeName" name="HospitalInchargeName" placeholder="Hospital Incharge Name">
+                      <input type="text" class="form-control" value="<?php echo $name; ?>" id="HospitalInchargeName" name="HospitalInchargeName" placeholder="Hospital Incharge Name">
                     </div>
                   </div>
                   <div class="form-group">
@@ -109,10 +109,10 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Hospital Incharge Email</label>
+                    <label for="inputEmail" class="col-sm-2 control-label">Hospital Email</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="HospitalInchargeEmail" name="HospitalInchargeEmail" placeholder="Hospital Incharge Email">
+                      <input type="email" class="form-control" id="HospitalEmail" name="HospitalEmail" placeholder="Hospital Email">
                     </div>
                   </div>
                   <div class="form-group">
@@ -351,7 +351,7 @@
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Submit</button>
+                      <button type="submit" class="btn btn-danger">Update</button>
                     </div>
                   </div>
                 </form>
