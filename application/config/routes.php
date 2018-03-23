@@ -91,6 +91,8 @@ $route['schemesList'] = "user/schemesList";
 $route['profilesettings'] = "user/profilesettings";
 $route['approve'] = "user/approve";
 $route['showRequestProfile'] = "user/showRequestProfile";
+$route['changeStatusAfterApproval'] = "user/changeStatusAfterApproval";
+$route['changeStatusAfterRejection'] = "user/changeStatusAfterRejection";
 //$route['addHospitalInfo'] = "user/addHospitalInfo";
 
 /* End of file routes.php */

@@ -277,7 +277,7 @@ class User_model extends CI_Model
 
     function approvalForState()
     {
-        $this->db->select('empanelment_request_id,organisation_id,scheme_id,documents,status');
+        $this->db->select('empanelment_request_id,organisation_id,scheme_id,documents,status,stateAdmin_status');
         $this->db->from('empanelment_request');
         $this->db->where('districtAdmin_status','approved');
 
@@ -287,17 +287,69 @@ class User_model extends CI_Model
         return $result;
     }
 
-    function detailsOfRequest($empanelment_request_id)
+    // function detailsOfRequest($empanelment_request_id)
+    // {
+
+    //     $this->db->select('*');
+    //     $this->db->from('hospital');
+    //     $this->db->join('empanelment_request', 'empanelment_request.hospital_id = hospital.hospital_id','left');
+    //     //$this->db->where('empanelment_request_id',$empanelment_request_id);
+
+    //     $query = $this->db->get();
+    //     echo $query->num_rows();
+    //     $result = $query->result();
+    //     //return $result;
+    // }
+
+    function detailsOfRequest()
     {
 
         $this->db->select('*');
         $this->db->from('hospital');
-        $this->db->join('empanelment_request', 'empanelment_request.hospital_id = hospital.hospital_id','right');
-        // $this->db->where('empanelment_request_id',$empanelment_request_id);
+        $this->db->join('empanelment_request', 'empanelment_request.hospital_id = hospital.hospital_id','left');
+        //$this->db->where('empanelment_request_id',$empanelment_request_id);
 
         $query = $this->db->get();
         $result = $query->result();
         return $result;
+    }
+
+    function changeStatus($empanelment_request_id,$comments,$yesOrNo)
+    {
+        $this->db->where($empanelment_request_id);
+        
+
+        $request_row = $this->db->get_where('empanelment_request', array('empanelment_request_id' => $empanelment_request_id))->row();
+
+        if($yesOrNo == "yes")
+        {
+        $data = array(
+           'stateAdmin_comments' => $comments,
+           'stateAdmin_status' => "approved" 
+        );
+    }
+    else
+    {
+        $data = array(
+           'stateAdmin_comments' => $comments,
+           'stateAdmin_status' => "rejected" 
+        );    
+    }
+
+        $this->db->where('empanelment_request_id', $empanelment_request_id);
+        $this->db->update('empanelment_request', $data); 
+    
+    }
+
+    function getStatus($empanelment_request_id)
+    {
+        $this->db->select('stateAdmin_status');
+        $this->db->from('empanelment_request');
+        $this->db->where('empanelment_request_id',$empanelment_request_id);
+
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result[0]->stateAdmin_status;
     }
 
 }

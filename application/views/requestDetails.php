@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        User Profile
+        Empanelment Request
       </h1>
     </section>
 
@@ -21,68 +21,53 @@
               <div class="active tab-pane" id="settings">
                 <?php $this->load->helper('form'); ?>
                 <form class="form-horizontal" method="post" action="<?php echo base_url() ?>profilesettings">
-                    <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                    <div class="col-sm-10">
-                      <!-- <input type="text" class="form-control" id="hospitalName" name="hospitalName" placeholder="Name of admin"> -->
-                      <label for="inputName" class="col-sm-2 ">Hospital Name</label>                                                
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">State</label>
-
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="hospitalName" name="hospitalName" placeholder="State Name">
-                    </div>
-                  </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Hospital Name</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="hospitalName" name="hospitalName" placeholder="Hospital Name">
+                      <input type="text" class="form-control" id="hospitalName" name="hospitalName" placeholder="Hospital Name" readonly="true" value="<?php echo $requestDetails[0]->hospital_name ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="shortName" class="col-sm-2 control-label">Hospital shortName</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="hospitalshortName" name="hospitalshortName" placeholder="Hospital short Name">
+                      <input type="text" class="form-control" id="hospitalshortName" name="hospitalshortName" placeholder="Hospital short Name" readonly="true" value="<?php echo $requestDetails[0]->hospital_shortName ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="shortName" class="col-sm-2 control-label">Hospital Type</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="hospitaltype" name="hospitaltype" placeholder="Hospital Type">
+                      <input type="text" class="form-control" id="hospitaltype" name="hospitaltype" placeholder="Hospital Type" readonly="true" value="<?php echo $requestDetails[0]->hospital_type ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="pincode" class="col-sm-2 control-label">Pincode</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="Pincode" name="Pincode" placeholder="Pincode">
+                      <input type="text" class="form-control" id="Pincode" name="Pincode" placeholder="Pincode" readonly="true" value="<?php echo $requestDetails[0]->pincode ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Hospital Incharge Name</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="HospitalInchargeName" name="HospitalInchargeName" placeholder="Hospital Incharge Name">
+                      <input type="text" class="form-control" id="HospitalInchargeName" name="HospitalInchargeName" placeholder="Hospital Incharge Name" readonly="true" value="<?php echo $requestDetails[0]->hospital_incharge_name ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Hospital Incharge mobile</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="HospitalInchargemobile" name="HospitalInchargemobile" placeholder="Hospital Incharge mobile">
+                      <input type="text" class="form-control" id="HospitalInchargemobile" name="HospitalInchargemobile" placeholder="Hospital Incharge mobile" readonly="true" value="<?php echo $requestDetails[0]->hospital_incharge_mobile ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Hospital Incharge Phone</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="HospitalInchargePhone" name="HospitalInchargePhone" placeholder="Hospital Incharge Phone">
+                      <input type="text" class="form-control" id="HospitalInchargePhone" name="HospitalInchargePhone" placeholder="Hospital Incharge Phone" readonly="true" value="<?php echo $requestDetails[0]->hospital_incharge_phone ?>">
                     </div>
                   </div>
 
@@ -90,112 +75,112 @@
                     <label for="inputEmail" class="col-sm-2 control-label">Hospital Incharge Email</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="HospitalInchargeEmail" name="HospitalInchargeEmail" placeholder="Hospital Incharge Email">
+                      <input type="email" class="form-control" id="HospitalInchargeEmail" name="HospitalInchargeEmail" placeholder="Hospital Incharge Email" readonly="true" value="<?php echo $requestDetails[0]->hospital_email ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Owner Name</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="ownerName"  name="ownerName"  placeholder="Owner Name">
+                      <input type="text" class="form-control" id="ownerName"  name="ownerName"  placeholder="Owner Name" readonly="true" value="<?php echo $requestDetails[0]->owner_name ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">General Beds</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="General Beds"  name="GeneralBeds"  placeholder="General Beds">
+                      <input type="text" class="form-control" id="General Beds"  name="GeneralBeds"  placeholder="General Beds" readonly="true" value="<?php echo $requestDetails[0]->generalBeds ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Day Care Beds</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="DayCareBeds"  name="DayCareBeds"  placeholder="Day Care Beds">
+                      <input type="text" class="form-control" id="DayCareBeds"  name="DayCareBeds"  placeholder="Day Care Beds" readonly="true" value="<?php echo $requestDetails[0]->dayCareBeds ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">ICU Beds</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="ICUBeds"  name="ICUBeds"  placeholder="ICU Beds">
+                      <input type="text" class="form-control" id="ICUBeds"  name="ICUBeds"  placeholder="ICU Beds" readonly="true" value="<?php echo $requestDetails[0]->icuBeds ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">ICCU Beds</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="ICCUBeds"  name="ICCUBeds"  placeholder="ICCU Beds">
+                      <input type="text" class="form-control" id="ICCUBeds"  name="ICCUBeds"  placeholder="ICCU Beds" readonly="true" value="<?php echo $requestDetails[0]->iccuBeds ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">HDU Beds</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="HDUBeds"  name="HDUBeds"  placeholder="HDU Beds">
+                      <input type="text" class="form-control" id="HDUBeds"  name="HDUBeds"  placeholder="HDU Beds" readonly="true" value="<?php echo $requestDetails[0]->hduBeds ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Major Ots</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="MajorOts" name="MajorOts" placeholder="Major Ots">
+                      <input type="text" class="form-control" id="MajorOts" name="MajorOts" placeholder="Major Ots" readonly="true" value="<?php echo $requestDetails[0]->majorOts ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Minor Ots</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="MinorOts" name="MinorOts" placeholder="Minor Ots">
+                      <input type="text" class="form-control" id="MinorOts" name="MinorOts" placeholder="Minor Ots" readonly="true" value="<?php echo $requestDetails[0]->minorOts ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputAddress" class="col-sm-2 control-label">Hospital Address</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="HospitalAddress" name="HospitalAddress" placeholder="Hospital Address">
+                      <input type="text" class="form-control" id="HospitalAddress" name="HospitalAddress" placeholder="Hospital Address" readonly="true" value="<?php echo $requestDetails[0]->hospitalAddress ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Latitude</label>
 
                     <div class="col-sm-10">
-                     <input type="text" class="form-control" id="Latitude" name="Latitude" placeholder="Latitude">
+                     <input type="text" class="form-control" id="Latitude" name="Latitude" placeholder="Latitude" readonly="true" value="<?php echo $requestDetails[0]->latitude ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Longitude</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="Longitude" name="Longitude" placeholder="Longitude">
+                       <input type="text" class="form-control" id="Longitude" name="Longitude" placeholder="Longitude" readonly="true" value="<?php echo $requestDetails[0]->longitude ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">pan Number</label>
 
                     <div class="col-sm-10">
-                     <input type="text" class="form-control" id="panNumber" name="panNumber" placeholder="pan Number">
+                     <input type="text" class="form-control" id="panNumber" name="panNumber" placeholder="pan Number" readonly="true" value="<?php echo $requestDetails[0]->panNumber ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">clinical Registration Number</label>
 
                     <div class="col-sm-10">
-                     <input type="text" class="form-control" id="clinicalRegistrationNumber" name="clinicalRegistrationNumber" placeholder="clinical Registration Number">
+                     <input type="text" class="form-control" id="clinicalRegistrationNumber" name="clinicalRegistrationNumber" placeholder="clinical Registration Number" readonly="true" value="<?php echo $requestDetails[0]->clinicalRegistrationNumber ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">panCard Holder Name</label>
 
                     <div class="col-sm-10">
-                     <input type="text" class="form-control" id="panCardHolderName" name="panCardHolderName" placeholder="panCard Holder Name">
+                     <input type="text" class="form-control" id="panCardHolderName" name="panCardHolderName" placeholder="panCard Holder Name" readonly="true" value="<?php echo $requestDetails[0]->panCardHolderName ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">service Tax Registration Number</label>
 
                     <div class="col-sm-10">
-                     <input type="text" class="form-control" id="serviceTaxRegistrationNumber" name="serviceTaxRegistrationNumber" placeholder="service Tax Registration Number">
+                     <input type="text" class="form-control" id="serviceTaxRegistrationNumber" name="serviceTaxRegistrationNumber" placeholder="service Tax Registration Number" readonly="true" value="<?php echo $requestDetails[0]->serviceTaxRegistrationNumber ?>">
                     </div>
                   </div>
                    
@@ -203,133 +188,133 @@
                     <label for="inputName" class="col-sm-2 control-label">bank Name</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="bankName" name="bankName" placeholder="bank Name">
+                       <input type="text" class="form-control" id="bankName" name="bankName" placeholder="bank Name" readonly="true" value="Unknown">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">bank Account Number</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="bankAccountNumber" name="bankAccountNumber" placeholder="bank Account Number">
+                       <input type="text" class="form-control" id="bankAccountNumber" name="bankAccountNumber" placeholder="bank Account Number" readonly="true" value="<?php echo $requestDetails[0]->bankAccountNumber ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">IFSC Code</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="IFSCCode" name="IFSCCode" placeholder="IFSC Code">
+                       <input type="text" class="form-control" id="IFSCCode" name="IFSCCode" placeholder="IFSC Code" readonly="true" value="<?php echo $requestDetails[0]->ifsc_code ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">branch Address</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="LbranchAddress" name="branchAddress" placeholder="branch Address">
+                       <input type="text" class="form-control" id="LbranchAddress" name="branchAddress" placeholder="branch Address" readonly="true" value="<?php echo $requestDetails[0]->branchAddress ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">payee Name</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="payeeName" name="payeeName" placeholder="payee Name">
+                       <input type="text" class="form-control" id="payeeName" name="payeeName" placeholder="payee Name" readonly="true" value="<?php echo $requestDetails[0]->payeeName ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">number Of FullTime Physicians</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="numberOfFullTimePhysicians" name="numberOfFullTimePhysicians" placeholder="number Of FullTime Physicians">
+                       <input type="text" class="form-control" id="numberOfFullTimePhysicians" name="numberOfFullTimePhysicians" placeholder="number Of FullTime Physicians" readonly="true" value="<?php echo $requestDetails[0]->numberOfFullTimePhysicians ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">remarks</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="remarks" name="remarks" placeholder="remarks">
+                       <input type="text" class="form-control" id="remarks" name="remarks" placeholder="remarks" readonly="true" value="<?php echo $requestDetails[0]->remarks ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">fullTime Consultants</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id=" fullTimeConsultants" name="fullTimeConsultants" placeholder="fullTime Consultants">
+                       <input type="text" class="form-control" id=" fullTimeConsultants" name="fullTimeConsultants" placeholder="fullTime Consultants" readonly="true" value="<?php echo $requestDetails[0]->fullTimeConsultants ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">PartTime Consultants</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="PartTimeConsultants" name="PartTimeConsultants" placeholder="PartTime Consultants">
+                       <input type="text" class="form-control" id="PartTimeConsultants" name="PartTimeConsultants" placeholder="PartTime Consultants" readonly="true" value="<?php echo $requestDetails[0]->partTimeConsultants ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Visiting Consultants</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="VisitingConsultants" name="VisitingConsultants" placeholder="Visiting Consultants">
+                       <input type="text" class="form-control" id="VisitingConsultants" name="VisitingConsultants" placeholder="Visiting Consultants" readonly="true" value="<?php echo $requestDetails[0]->visitingConsultants ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">duty Doctors</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="dutyDoctors" name="dutyDoctors" placeholder="duty Doctors">
+                       <input type="text" class="form-control" id="dutyDoctors" name="dutyDoctors" placeholder="duty Doctors" readonly="true" value="<?php echo $requestDetails[0]->dutyDoctors ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">general Nurses</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="generalNurses" name="generalNurses" placeholder="general Nurses">
+                       <input type="text" class="form-control" id="generalNurses" name="generalNurses" placeholder="general Nurses" readonly="true" value="<?php echo $requestDetails[0]->hospital_name ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">pharmacy type</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="pharmacytype" name="pharmacytype" placeholder="pharmacy type">
+                       <input type="text" class="form-control" id="pharmacytype" name="pharmacytype" placeholder="pharmacy type" readonly="true" value="<?php echo $requestDetails[0]->pharmacy_type ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">state</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="state" name="state" placeholder="state">
+                       <input type="text" class="form-control" id="state" name="state" placeholder="state" readonly="true" value="<?php echo $requestDetails[0]->state ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">District</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="District" name="District" placeholder="District">
+                       <input type="text" class="form-control" id="District" name="District" placeholder="District" readonly="true" value="<?php echo $requestDetails[0]->district ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Location</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="location" name="location" placeholder="location">
+                       <input type="text" class="form-control" id="location" name="location" placeholder="location" readonly="true" value="<?php echo $requestDetails[0]->location ?>">
                     </div>
                   </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">nabh Accredition</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="nabh" name="nabh" placeholder="nabh Accredition">
+                       <input type="text" class="form-control" id="nabh" name="nabh" placeholder="nabh Accredition" readonly="true" value="<?php echo $requestDetails[0]->nabh ?>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Remarks</label>
+                    <div class="col-sm-10">
+                      <textarea type="text" class="form-control" id="comments" name="comments" placeholder="Enter your remarks here"></textarea>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> I agree to the <a href="#">terms</a>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Submit</button>
+                      <!-- <button type="submit" class="btn btn-success">Approve</button>
+                      <button type="submit" class="btn btn-danger">Reject</button> -->
+                      <a class="btn btn-success" href="<?php echo base_url(); ?>changeStatusAfterApproval">Approve</a>
+                      <a class="btn btn-danger" href="<?php echo base_url(); ?>changeStatusAfterRejection">Reject</a>
                     </div>
                   </div>
                 </form>

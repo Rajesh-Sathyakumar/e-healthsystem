@@ -610,15 +610,38 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     {
         $this->global['pageTitle'] = 'e-Healthcare : Request Details';
 
-        $empanelment_request_id = $this->uri->segment(2);
+        // $empanelment_request_id = $this->uri->segment(3);
 
-        // print_r($empanelment_request_id);
+        // $empanelment_request_id = $this->input->get($id);
+
+        // echo $empanelment_request_id;
             
-        $data['requestDetails'] = $this->user_model->detailsOfRequest($empanelment_request_id);
+        // $data['requestDetails'] = $this->user_model->detailsOfRequest($empanelment_request_id);
 
-        // print_r($data['requestDetails']);
+        $data['requestDetails'] = $this->user_model->detailsOfRequest();
 
         $this->loadViews("requestDetails", $this->global, $data, NULL);
+    }
+
+    function changeStatusAfterApproval()
+    {
+        $this->global['pageTitle'] = 'e-Healthcare : Approval';
+        $data['approvalRecords'] = $this->user_model->approvalForState();
+        $empanelment_request_id = 1;
+        $comments = "requested approved";
+        $this->user_model->changeStatus($empanelment_request_id,$comments,"yes");
+        $this->loadViews("approval", $this->global, $data, NULL);        
+    }
+
+    function changeStatusAfterRejection()
+    {
+        $this->global['pageTitle'] = 'e-Healthcare : Approval';
+        $data['approvalRecords'] = $this->user_model->approvalForState();
+        $empanelment_request_id = 4;
+        $comments = "submit aadhar";
+        $this->user_model->changeStatus($empanelment_request_id,$comments,"no");
+        $data['status'] = "rejected";
+        $this->loadViews("approval", $this->global, $data, NULL);
     }
 }
 
