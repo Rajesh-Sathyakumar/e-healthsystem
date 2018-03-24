@@ -38,9 +38,9 @@
                     <tr>
 
                       <td><?php echo $record->empanelment_request_id ?></td>
+                      <td><?php echo $record->scheme_name ?></td>
                       <td><?php echo $record->status ?></td>
                       <td><?php echo $record->status_message ?></td>
-                      <td><?php echo $record->scheme_name ?></td>
                       
                         <?php
                       }

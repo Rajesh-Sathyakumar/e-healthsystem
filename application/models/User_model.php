@@ -303,6 +303,23 @@ class User_model extends CI_Model
         return $result;
     }
 
+    function requestProcessing($schemeId, $email, $hospitalId)
+    {
+            // echo $schemeId;
+            // echo $email;
+            // echo $hospitalId;
+        $empanelment['scheme_id'] = $schemeId;
+        $empanelment['hospital_id'] = $hospitalId;
+        $empanelment['status'] ="pending";
+        $empanelment['organisation_id'] = 1;
+        $this->db->insert('empanelment_request', $empanelment);
+         $insert_id = $this->db->insert_id();
+         echo $insert_id;
+
+    }
+
+
+
 }
 
   

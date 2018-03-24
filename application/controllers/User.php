@@ -60,12 +60,11 @@ class User extends BaseController
     function requests()
     {
         $this->global['pageTitle'] = 'e-Healthcare : Requests';
-        //echo $this->session->userdata('email');
+      //cho $this->session->userdata('email');
         $hospitalId = $this->user_model->getHospitalId($this->session->userdata('email'));
         //echo $hospitalId;
-       // $this->user_model->getEmpanelmentRequestsListing($hospitalId);
-         $data['empanelmentRequests'] = $this->user_model->getEmpanelmentRequestsListing($hospitalId);
-         $this->loadViews("request", $this->global, $data, NULL);
+        $data['empanelmentRequests'] = $this->user_model->getEmpanelmentRequestsListing($hospitalId);
+        $this->loadViews("request", $this->global, $data, NULL);
 
     }
 
@@ -132,7 +131,9 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     {
          $this->global['pageTitle'] = 'e-Healthcare : Profile View Only';
         $email = $this->session->userdata('email');
+        $schemeId = $this->uri->segment(2);
          $data['profiledata'] = $this->user_model->profileviewdata($email);
+         $data['schemeId'] = $schemeId;
           $this->loadViews("profileview", $this->global, $data, NULL);
     }
 
@@ -601,9 +602,25 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     function schemesList()
     {
         $this->global['pageTitle'] = 'e-Healthcare : Schemes List';
-
-        $data['schemeRecords'] = $this->user_model->schemesListing();    
+        //$hospitalId = $this->user_model->getHospitalId($this->session->userdata('email'));
+        $data['schemeRecords'] = $this->user_model->schemesListing();
+        //$this->user_model->getSchemeEmpanelment($hospitalId,)    
         $this->loadViews("schemes", $this->global, $data, NULL);
+    }
+
+    function proceedRequest()
+    {
+        $schemeId = $this->uri->segment(2);
+        $email = $this->session->userdata('email');
+        $hospitalId = $this->user_model->getHospitalId($email);
+        // echo $schemeId;
+        // echo $email;
+        // echo $hospitalId;      
+        $this->user_model->requestProcessing($schemeId, $email, $hospitalId );
+        $this->global['pageTitle'] = 'e-Healthcare : Dashboard';
+          $this->loadViews("dashboard", $this->global, NULL, NULL);
+
+
     }
 
 

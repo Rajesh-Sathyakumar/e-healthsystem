@@ -302,7 +302,7 @@
               <div class="col-sm-5">
                        <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>profileupdate" title="Login history" enabled="true">Edit Profile</a></div>
                        <div class="col-sm-5">
-                       <a class="btn btn-sm btn-primary" href="#" title="Login history" enabled="true">Proceed Request</a></div>
+                       <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>proceedRequest/<?php echo $schemeId; ?>" title="Login history" enabled="true">Proceed Request</a></div>
                     </div>
                      
           </div>
