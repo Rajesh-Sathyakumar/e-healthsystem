@@ -277,7 +277,7 @@ class User_model extends CI_Model
         $query = $this->db->get();
 
          $result = $query->result();        
-        return $result; 
+         return $result; 
 
     }
 
@@ -291,6 +291,16 @@ class User_model extends CI_Model
         //echo $res->hospital_shortName;
        return $query->row();
 
+    }
+    function profileviewdata($email)
+    {
+        $this->db->select('*');
+        $this->db->from('hospital');
+        $this->db->where('hospital_email',$email);
+        $query = $this->db->get();
+
+        $result = $query->row();
+        return $result;
     }
 
 }
