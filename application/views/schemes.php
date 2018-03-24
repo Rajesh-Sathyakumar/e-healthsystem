@@ -3,7 +3,7 @@
      <section class="content-header">
       <h1>
         Schemes available
-      </h1>
+    </h1>
     </section>
 
     <!-- Main content -->
@@ -43,13 +43,14 @@
                         if($record->scheme_id == 1)
                         {
                         ?>
-                        <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>profileupdate" title="Login history" enabled="true">Request</a></td>
+                        <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>requestprocess/<?php echo $record->scheme_id; ?>" title="Login history" enabled="true">Request</a></td>
+
                         <?php
                       }
                       else
                       {
                         ?>
-                        <a class="btn btn-sm btn-success" href="#" title="Login history" disabled="true">Approved</a></td>
+                        <a class="btn btn-sm btn-success" href="#" title="Approve Button" disabled="true">Approved</a></td>
                         <?php
                       }
                       ?>

@@ -7,7 +7,7 @@
 
      <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Empanelment Application Request Tracking</h3>
+              <h3 class="box-title">Application Details Tracking</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -21,26 +21,27 @@
                 <table class="table no-margin">
                   <thead>
                   <tr>
-                    <th>Empanelment Request ID</th>
-                    <th>Scheme</th>
-                    <th>Status</th>
-                    <th>Description</th>
+                    <th>S.No</th>
+                    <th>Patient Name</th>
+                    <th>Availed For</th>
+                    <th>Amount Credited</th>
                     
                   </tr>
                   </thead>
                   <tbody>
+                   <tbody>
                    <?php
-                    if(!empty($empanelmentRequests))
+                    if(!empty($listPatient))
                     {
-                        foreach($empanelmentRequests as $record)
+                        foreach($listPatient as $record)
                         {
                     ?>
                     <tr>
-
-                      <td><?php echo $record->empanelment_request_id ?></td>
-                      <td><?php echo $record->scheme_name ?></td>
-                      <td><?php echo $record->status ?></td>
-                      <td><?php echo $record->status_message ?></td>
+                      <td>1</td>
+                      <td><?php echo $record->patientName ?></td>
+                      <td><?php echo $record->disease_name ?></td>
+                      <td><?php echo $record->amount_credited ?></td>
+                      
                       
                         <?php
                       }
@@ -50,7 +51,9 @@
                         }
                    
                     ?>
-                </tbody>
+                  
+                  </tbody>
+                  
                   </tbody>
                 </table>
               </div>
@@ -58,11 +61,9 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-                          </div>
+              
+            </div>
             <!-- /.box-footer -->
           </div>
           <!-- /.box -->
         </div>
-        <
-    <!-- /.content -->
-  </div>

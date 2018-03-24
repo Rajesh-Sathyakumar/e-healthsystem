@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
+<<<<<<< HEAD
 -- Generation Time: Mar 22, 2018 at 02:46 PM
+=======
+-- Generation Time: Mar 23, 2018 at 01:51 PM
+>>>>>>> master
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.7
 
@@ -100,6 +104,32 @@ INSERT INTO `disease_coverage` (`disease_coverage_id`, `disease_id`, `scheme_id`
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
+=======
+-- Table structure for table `eligible_criteria`
+--
+
+CREATE TABLE `eligible_criteria` (
+  `eligible_criteria_id` int(11) NOT NULL,
+  `criteria` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `eligible_criteria_bridge`
+--
+
+CREATE TABLE `eligible_criteria_bridge` (
+  `eligible_criteria_bridge_id` int(11) NOT NULL,
+  `scheme_id` int(11) NOT NULL,
+  `eligible_criteria_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+>>>>>>> master
 -- Table structure for table `empanelment_request`
 --
 
@@ -121,6 +151,17 @@ CREATE TABLE `empanelment_request` (
   `districtAdmin_updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+<<<<<<< HEAD
+=======
+--
+-- Dumping data for table `empanelment_request`
+--
+
+INSERT INTO `empanelment_request` (`empanelment_request_id`, `organisation_id`, `status`, `scheme_id`, `documents`, `status_message`, `hospital_id`, `stateAdmin_id`, `stateAdmin_comments`, `stateAdmin_status`, `stateAdmin_updatedAt`, `districtAdmin_id`, `districtAdmin_comments`, `districtAdmin_status`, `districtAdmin_updatedAt`) VALUES
+(1, 1, 'approved', 1, 'dfh', 'approved by admin', 8, 18, 'approved', 'xrnjxmk', '2018-03-22 16:59:56', 14, 'fxdb ', 'dggnds', '0000-00-00 00:00:00'),
+(2, 1, 'approved', 1, 'sdflk', 'documents are verified', 1, 18, 'dsvgs', 'dsg', '2018-03-23 06:20:27', 19, 'wft', 'qwgtf', '0000-00-00 00:00:00');
+
+>>>>>>> master
 -- --------------------------------------------------------
 
 --
@@ -188,8 +229,16 @@ CREATE TABLE `hospital` (
 --
 
 INSERT INTO `hospital` (`hospital_id`, `hospital_name`, `hospital_shortName`, `pincode`, `hospital_incharge_name`, `hospital_incharge_mobile`, `hospital_incharge_phone`, `hospital_email`, `owner_name`, `generalBeds`, `dayCareBeds`, `icuBeds`, `iccuBeds`, `hduBeds`, `majorOts`, `minorOts`, `hospitalAddress`, `latitude`, `longitude`, `panNumber`, `clinicalRegistrationNumber`, `panCardHolderName`, `serviceTaxRegistrationNumber`, `branchAddress`, `bankAccountNumber`, `ifsc_code`, `payeeName`, `numberOfFullTimePhysicians`, `remarks`, `fullTimeConsultants`, `partTimeConsultants`, `visitingConsultants`, `dutyDoctors`, `generalNurses`, `bank_name`, `pharmacy_type`, `state`, `district`, `location`, `hospital_type`, `nabh`) VALUES
+<<<<<<< HEAD
 (1, 'apollo nursing home', 'apollo', 600099, 'yuva', '9840595496', '', 'yuvaammu3@gmail.com', 'xyz', 100, 23, 50, 25, 23, 222, 123, '69/21, xyzxyz, abc - 600099', 23.45, 23.234, '123412341234', '1xya245', 'apollo', 'afaks34', 'tvk nagar', '123434556', '234567IOB', 'yuva', 20, 'sdkjf', 24, 12, 22, 20, 40, 'iob', 'outsourcing', 'tamilnadu', 'chennai', 'center', 'private', 'first level'),
 (2, 'Maya', 'Maya', 600011, 'Gana', '9840595496', '04425502946', 'abc@gmail.com', 'Edwin', 23, 21, 232, 42, 2, 34, 24, '4,dh.scgg,dy', 23.4667, 0, '234512345677fg', 'Gs34sdh', 'Fgh', '335gfsd', 'Dshj', '113563`', '2bb5', 'Wg', 45, '34sg', 34, 34, 34, 232, 35, 'Iob', 'DSSG', 'TAMILNADU', 'CHENNAI', 'ASSGMK', '', 'FINAL');
+=======
+(1, 'Apollo Nursing Home', 'Apollo', 600011, 'Yuvarani', '9840595496', '04425502946', 'yuvaammu3@gmail.com', 'Edwin Kishore', 100, 23, 50, 25, 23, 222, 12345, '69/21, Xyzxyz, Abc - 600099', 23.45, 0, '123412341234', '1xya245', 'Apollo', 'Afaks34', 'Tvk Nagar', '123434556', '234567iob', 'Yuva', 20, 'Sdkjf', 24, 12, 22, 20, 40, 'Iob', 'outsourcing', 'tamilnadu', 'chennai', 'center', 'private', 'fvjm'),
+(2, 'Apollo Nursing Home', 'Apollo', 600099, 'Yuvarani', '9840595496', '04425502946', 'abc@gmail.com', 'Gana', 100, 23, 50, 25, 23, 222, 12345, '69/21, Xyzxyz, Abc - 600099', 23.45, 0, '123412341234', '1xya245', 'Apollo', 'Afaks34', 'Tvk Nagar', '123434556', '234567iob', 'Yuva', 20, 'Sdkjf', 24, 12, 22, 20, 40, 'Iob', 'outsourcing', 'tamilnadu', 'chennai', 'center', 'private', 'fvjm'),
+(4, 'Apollo Nursing Home', 'Apollo', 600099, 'Yuvarani', '9840595496', '04425502946', 'edwin@gmail.com', 'Gana', 100, 23, 50, 25, 23, 222, 12345, '69/21, Xyzxyz, Abc - 600099', 23.45, 0, '123412341234', '1xya245', 'Apollo', 'Afaks34', 'Tvk Nagar', '123434556', '234567iob', 'Yuva', 20, 'Sdkjf', 24, 12, 22, 20, 40, 'Iob', 'outsourcing', 'tamilnadu', 'chennai', 'center', 'private', 'fvjm'),
+(6, 'Apollo Nursing Home', 'Apollo', 600099, 'Yuvarani', '9840595496', '04425502946', 'edwinkishore@gmail.com', 'Gana', 100, 23, 50, 25, 23, 222, 12345, '69/21, Xyzxyz, Abc - 600099', 23.45, 0, '123412341234', '1xya245', 'Apollo', 'Afaks34', 'Tvk Nagar', '123434556', '234567iob', 'Yuva', 20, 'Sdkjf', 24, 12, 22, 20, 40, 'Iob', 'outsourcing', 'tamilnadu', 'chennai', 'center', 'private', 'fvjm'),
+(8, 'Apollo Nursing Home', 'Apollo', 600099, 'Yuvarani', '9840595496', '04425502946', 'akn@gmail.com', 'Gana', 100, 23, 50, 25, 23, 222, 12345, '69/21, Xyzxyz, Abc - 600099', 23.45, 0, '123412341234', '1xya245', 'Apollo', 'Afaks34', 'Tvk Nagar', '123434556', '234567iob', 'Yuva', 20, 'Sdkjf', 24, 12, 22, 20, 40, 'Iob', 'outsourcing', 'tamilnadu', 'chennai', 'center', 'private', 'fvjm');
+>>>>>>> master
 
 -- --------------------------------------------------------
 
@@ -227,6 +276,16 @@ CREATE TABLE `organisation` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+<<<<<<< HEAD
+=======
+--
+-- Dumping data for table `organisation`
+--
+
+INSERT INTO `organisation` (`organisation_id`, `organisation_name`, `license`, `user_id`) VALUES
+(1, 'dfadf', 'sdaf2', 2);
+
+>>>>>>> master
 -- --------------------------------------------------------
 
 --
@@ -264,15 +323,36 @@ CREATE TABLE `scheme` (
   `requiredFile_url1` varchar(255) DEFAULT NULL,
   `requiredFile_url2` varchar(255) DEFAULT NULL,
   `requiredFile_url3` varchar(255) DEFAULT NULL,
+<<<<<<< HEAD
   `beneficiaries_count` int(11) DEFAULT NULL
+=======
+  `beneficiaries_count` int(11) DEFAULT NULL,
+  `type_id` int(11) NOT NULL
+>>>>>>> master
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `scheme`
 --
 
+<<<<<<< HEAD
 INSERT INTO `scheme` (`scheme_id`, `scheme_name`, `description`, `maximum_amount`, `type`, `creation_date`, `updation_date`, `fund_allocated`, `created_by`, `updated_by`, `requiredFile_url1`, `requiredFile_url2`, `requiredFile_url3`, `beneficiaries_count`) VALUES
 (1, 'rsby', 'scheme for kidney operation', 12000, 'insurance', '2018-03-21 16:00:33', '0000-00-00 00:00:00', 8888888, 'yuva', '', NULL, NULL, NULL, NULL);
+=======
+INSERT INTO `scheme` (`scheme_id`, `scheme_name`, `description`, `maximum_amount`, `type`, `creation_date`, `updation_date`, `fund_allocated`, `created_by`, `updated_by`, `requiredFile_url1`, `requiredFile_url2`, `requiredFile_url3`, `beneficiaries_count`, `type_id`) VALUES
+(1, 'rsby', 'scheme for kidney operation', 12000, 'insurance', '2018-03-21 16:00:33', '0000-00-00 00:00:00', 8888888, 'yuva', '', NULL, NULL, NULL, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `scheme_type`
+--
+
+CREATE TABLE `scheme_type` (
+  `type_id` int(11) NOT NULL,
+  `type_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+>>>>>>> master
 
 -- --------------------------------------------------------
 
@@ -361,7 +441,19 @@ INSERT INTO `tbl_last_login` (`id`, `userId`, `sessionData`, `machineIp`, `userA
 (63, 14, '{\"role\":\"3\",\"roleText\":\"Hospital\",\"name\":\"Yuvarani\"}', '127.0.0.1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 7', '2018-03-22 12:15:10'),
 (64, 9, '{\"role\":\"1\",\"roleText\":\"Administrator\",\"name\":\"Swarna Swapna\"}', '127.0.0.1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 7', '2018-03-22 18:09:20'),
 (65, 14, '{\"role\":\"3\",\"roleText\":\"Hospital\",\"name\":\"Yuvarani\"}', '127.0.0.1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 7', '2018-03-22 18:33:15'),
+<<<<<<< HEAD
 (66, 21, '{\"role\":\"3\",\"roleText\":\"Hospital\",\"name\":\"Maya Nursing Home\"}', '127.0.0.1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 7', '2018-03-22 18:58:05');
+=======
+(66, 21, '{\"role\":\"3\",\"roleText\":\"Hospital\",\"name\":\"Maya Nursing Home\"}', '127.0.0.1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 7', '2018-03-22 18:58:05'),
+(67, 14, '{\"role\":\"3\",\"roleText\":\"Hospital\",\"name\":\"Yuvarani\"}', '127.0.0.1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 7', '2018-03-22 20:59:33'),
+(68, 22, '{\"role\":\"3\",\"roleText\":\"Hospital\",\"name\":\"Akn Nursing Home\"}', '127.0.0.1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 7', '2018-03-22 22:30:31'),
+(69, 14, '{\"role\":\"3\",\"roleText\":\"Hospital\",\"name\":\"Yuvarani\"}', '127.0.0.1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 7', '2018-03-23 08:47:47'),
+(70, 9, '{\"role\":\"1\",\"roleText\":\"Administrator\",\"name\":\"Swarna Swapna\",\"email\":\"swarna.ilas@gmail.com\"}', '127.0.0.1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 7', '2018-03-23 11:05:37'),
+(71, 14, '{\"role\":\"3\",\"roleText\":\"Hospital\",\"name\":\"Yuvarani\",\"email\":\"yuvaammu3@gmail.com\"}', '127.0.0.1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 7', '2018-03-23 11:12:35'),
+(72, 14, '{\"role\":\"3\",\"roleText\":\"Hospital\",\"name\":\"Yuvarani\",\"email\":\"yuvaammu3@gmail.com\"}', '127.0.0.1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 7', '2018-03-23 13:44:49'),
+(73, 14, '{\"role\":\"3\",\"roleText\":\"Hospital\",\"name\":\"Yuvarani\",\"email\":\"yuvaammu3@gmail.com\"}', '127.0.0.1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 7', '2018-03-23 14:32:59'),
+(74, 14, '{\"role\":\"3\",\"roleText\":\"Hospital\",\"name\":\"Yuvarani\",\"email\":\"yuvaammu3@gmail.com\"}', '127.0.0.1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 7', '2018-03-23 18:04:15');
+>>>>>>> master
 
 -- --------------------------------------------------------
 
@@ -448,7 +540,12 @@ INSERT INTO `tbl_users` (`userId`, `email`, `password`, `name`, `mobile`, `roleI
 (15, 'yuvarani421997@gmail.com', '$2y$10$vQOrtZ9uKDNClJX6XaplwO5bHRDGfQyDTTJSlp42Z1iHn7GPzXRFW', '', '9840595496', 3, 0, 0, '2018-03-21 12:16:46', NULL, NULL),
 (18, 'abc@gmail.com', '$2y$10$rsJA4HwkpZzKmfXm8MZT0O/fORjvbmMO5yJ87hSrLfAa2hw.4YWx6', 'State Admin', '9840595496', 4, 0, 9, '2018-03-21 16:38:34', NULL, NULL),
 (19, 'abcd@gmail.com', '$2y$10$R4dGvgrvfYL2XAXh/pkLxOUNvU6X6mXyWwi7kyGxN443.xa3DK6/q', 'District Admin', '9840595496', 5, 0, 9, '2018-03-21 16:39:17', NULL, NULL),
+<<<<<<< HEAD
 (21, 'ucs14334@rmd.ac.in', '$2y$10$JQUAJopsZHhkVgqVt1KUX.LUIgQye43jpWG/dRp4MaiuKIeF7yhMe', 'Maya Nursing Home', '9840595496', 3, 0, 0, '2018-03-22 13:27:58', NULL, NULL);
+=======
+(21, 'ucs14334@rmd.ac.in', '$2y$10$JQUAJopsZHhkVgqVt1KUX.LUIgQye43jpWG/dRp4MaiuKIeF7yhMe', 'Maya Nursing Home', '9840595496', 3, 0, 0, '2018-03-22 13:27:58', NULL, NULL),
+(22, 'akn@gmail.com', '$2y$10$Gw23ZASxz6UoyJoTSH1DVO8U72zgrykyYRonXqxZ2A6n4mElpxulC', 'Akn Nursing Home', '9840154072', 3, 0, 0, '2018-03-22 15:28:42', NULL, NULL);
+>>>>>>> master
 
 --
 -- Indexes for dumped tables
@@ -484,6 +581,23 @@ ALTER TABLE `disease_coverage`
   ADD KEY `scheme_id` (`scheme_id`);
 
 --
+<<<<<<< HEAD
+=======
+-- Indexes for table `eligible_criteria`
+--
+ALTER TABLE `eligible_criteria`
+  ADD PRIMARY KEY (`eligible_criteria_id`);
+
+--
+-- Indexes for table `eligible_criteria_bridge`
+--
+ALTER TABLE `eligible_criteria_bridge`
+  ADD PRIMARY KEY (`eligible_criteria_bridge_id`),
+  ADD KEY `scheme_id` (`scheme_id`),
+  ADD KEY `eligible_criteria_id` (`eligible_criteria_id`);
+
+--
+>>>>>>> master
 -- Indexes for table `empanelment_request`
 --
 ALTER TABLE `empanelment_request`
@@ -540,7 +654,18 @@ ALTER TABLE `programme`
 -- Indexes for table `scheme`
 --
 ALTER TABLE `scheme`
+<<<<<<< HEAD
   ADD PRIMARY KEY (`scheme_id`);
+=======
+  ADD PRIMARY KEY (`scheme_id`),
+  ADD KEY `type_id` (`type_id`);
+
+--
+-- Indexes for table `scheme_type`
+--
+ALTER TABLE `scheme_type`
+  ADD PRIMARY KEY (`type_id`);
+>>>>>>> master
 
 --
 -- Indexes for table `tbl_last_login`
@@ -587,10 +712,27 @@ ALTER TABLE `disease`
 ALTER TABLE `disease_coverage`
   MODIFY `disease_coverage_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+<<<<<<< HEAD
 -- AUTO_INCREMENT for table `empanelment_request`
 --
 ALTER TABLE `empanelment_request`
   MODIFY `empanelment_request_id` int(11) NOT NULL AUTO_INCREMENT;
+=======
+-- AUTO_INCREMENT for table `eligible_criteria`
+--
+ALTER TABLE `eligible_criteria`
+  MODIFY `eligible_criteria_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `eligible_criteria_bridge`
+--
+ALTER TABLE `eligible_criteria_bridge`
+  MODIFY `eligible_criteria_bridge_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `empanelment_request`
+--
+ALTER TABLE `empanelment_request`
+  MODIFY `empanelment_request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+>>>>>>> master
 --
 -- AUTO_INCREMENT for table `fund`
 --
@@ -600,7 +742,11 @@ ALTER TABLE `fund`
 -- AUTO_INCREMENT for table `hospital`
 --
 ALTER TABLE `hospital`
+<<<<<<< HEAD
   MODIFY `hospital_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+=======
+  MODIFY `hospital_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+>>>>>>> master
 --
 -- AUTO_INCREMENT for table `hospital_facilities`
 --
@@ -615,7 +761,11 @@ ALTER TABLE `hospital_facilities_bridge`
 -- AUTO_INCREMENT for table `organisation`
 --
 ALTER TABLE `organisation`
+<<<<<<< HEAD
   MODIFY `organisation_id` int(11) NOT NULL AUTO_INCREMENT;
+=======
+  MODIFY `organisation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+>>>>>>> master
 --
 -- AUTO_INCREMENT for table `programme`
 --
@@ -627,10 +777,22 @@ ALTER TABLE `programme`
 ALTER TABLE `scheme`
   MODIFY `scheme_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+<<<<<<< HEAD
 -- AUTO_INCREMENT for table `tbl_last_login`
 --
 ALTER TABLE `tbl_last_login`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+=======
+-- AUTO_INCREMENT for table `scheme_type`
+--
+ALTER TABLE `scheme_type`
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tbl_last_login`
+--
+ALTER TABLE `tbl_last_login`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+>>>>>>> master
 --
 -- AUTO_INCREMENT for table `tbl_reset_password`
 --
@@ -645,7 +807,11 @@ ALTER TABLE `tbl_roles`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
+<<<<<<< HEAD
   MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+=======
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+>>>>>>> master
 --
 -- Constraints for dumped tables
 --
@@ -665,6 +831,16 @@ ALTER TABLE `disease_coverage`
   ADD CONSTRAINT `disease_coverage_ibfk_2` FOREIGN KEY (`scheme_id`) REFERENCES `scheme` (`scheme_id`);
 
 --
+<<<<<<< HEAD
+=======
+-- Constraints for table `eligible_criteria_bridge`
+--
+ALTER TABLE `eligible_criteria_bridge`
+  ADD CONSTRAINT `eligible_criteria_bridge_ibfk_1` FOREIGN KEY (`scheme_id`) REFERENCES `scheme` (`scheme_id`),
+  ADD CONSTRAINT `eligible_criteria_bridge_ibfk_2` FOREIGN KEY (`eligible_criteria_id`) REFERENCES `eligible_criteria` (`eligible_criteria_id`);
+
+--
+>>>>>>> master
 -- Constraints for table `empanelment_request`
 --
 ALTER TABLE `empanelment_request`
@@ -688,6 +864,15 @@ ALTER TABLE `hospital_facilities_bridge`
   ADD CONSTRAINT `hospital_facilities_bridge_ibfk_1` FOREIGN KEY (`hospital_id`) REFERENCES `hospital` (`hospital_id`),
   ADD CONSTRAINT `hospital_facilities_bridge_ibfk_2` FOREIGN KEY (`hospital_id`) REFERENCES `hospital` (`hospital_id`),
   ADD CONSTRAINT `hospital_facilities_bridge_ibfk_3` FOREIGN KEY (`hospital_facility_id`) REFERENCES `hospital_facilities` (`hospital_facilities_id`);
+<<<<<<< HEAD
+=======
+
+--
+-- Constraints for table `scheme`
+--
+ALTER TABLE `scheme`
+  ADD CONSTRAINT `scheme_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `scheme_type` (`type_id`);
+>>>>>>> master
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

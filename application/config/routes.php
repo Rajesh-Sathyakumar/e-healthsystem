@@ -94,6 +94,13 @@ $route['showRequestProfile/(:num)'] = "user/showRequestProfile/$1";
 $route['changeStatus/(:num)/(:any)'] = "user/changeStatus";
 $route['changeStatusAfterRejection/(:num)'] = "user/changeStatusAfterRejection";
 //$route['addHospitalInfo'] = "user/addHospitalInfo";
+$route['listBeneficiaries/(:any)'] = "user/listBeneficiaries/$1";
+$route['addHospitalInfo'] = "user/addHospitalInfo";
+$route['empanelrequest'] = "user/empanelrequest";
+$route['requestprocess/(:any)'] = "user/requestprocess/$1";
+$route['proceedRequest/(:any)'] = "user/proceedRequest/$1";
+
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

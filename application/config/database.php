@@ -77,6 +77,7 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
+	'port' => '',
 	'password' => '',
 	'database' => 'e-healthcare',
 	'dbdriver' => 'mysqli',

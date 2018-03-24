@@ -73,6 +73,7 @@ class Login extends CI_Controller
                                         'role'=>$result->roleId,
                                         'roleText'=>$result->role,
                                         'name'=>$result->name,
+                                        'email' => $email,
                                         'lastLogin'=> $lastLogin->createdDtm,
                                         'isLoggedIn' => TRUE
                                 );
@@ -106,7 +107,8 @@ public function addNewHospitalUser()
             $this->load->library('form_validation');
             
             $this->form_validation->set_rules('hname','Hospital Name','required|max_length[128]|trim');
-            $this->form_validation->set_rules('email','Email','required|valid_email|max_length[128]|trim');
+            $this->form_validation->set_rules('fname','Hospital Incharge Name','required|max_length[128]|trim');
+            $this->form_validation->set_rules('email','Hospital Email','required|valid_email|max_length[128]|trim');
             $this->form_validation->set_rules('password','Password','required|max_length[20]');
             $this->form_validation->set_rules('cpassword','Confirm Password','required|matches[password]|max_length[20]|trim');
            
@@ -119,15 +121,17 @@ public function addNewHospitalUser()
             else
             {
                 $name = ucwords(strtolower($this->security->xss_clean($this->input->post('hname'))));
+                $inchargeName = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
                 $email = $this->security->xss_clean($this->input->post('email'));
                 $password = $this->input->post('password');
                 $roleId = 3;
                 $mobile = $this->security->xss_clean($this->input->post('mobile'));
-                
-                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId, 'name'=> $name,
-                                    'mobile'=>$mobile, 'createdBy'=>"Hospital", 'createdDtm'=>date('Y-m-d H:i:s'));
+                $hospitalInfo = array('hospital_name'=>$name, 'hospital_incharge_name'=>$inchargeName, 'hospital_email'=>$email);
+                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId, 'name'=> $inchargeName,
+                                 'mobile'=>$mobile, 'createdBy'=>"Hospital", 'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $this->load->model('user_model');
+                $result1 = $this->user_model->addNewHospital($hospitalInfo);
                 $result = $this->user_model->addNewUser($userInfo);
                 
                 if($result > 0)

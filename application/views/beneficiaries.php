@@ -29,14 +29,27 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">1</a></td>
-                    <td>RSBY</td>
-                    <td><span class="label label-success">10</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                    </td>
-                  </tr>
+                   <?php
+                    if(!empty($beneficiariesResult))
+                    {
+                        foreach($beneficiariesResult as $record)
+                        {
+                    ?>
+                    <tr>
+                      <td>1</td>
+                      <td><?php echo $record->schemeName ?></td>
+                      <td><?php echo $record->scheme_count ?></td>
+                      <td><a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>listBeneficiaries/<?php echo $record->schemeName; ?>" title="Login history" enabled="true">View</a></td>
+                      
+                      
+                        <?php
+                      }
+                      ?>
+                    </tr>
+                    <?php
+                        }
+                   
+                    ?>
                   
                   </tbody>
                 </table>

@@ -25,13 +25,6 @@ class User_model extends CI_Model
         return $query->num_rows();
     }
     
-    /**
-     * This function is used to get the user listing count
-     * @param string $searchText : This is optional search text
-     * @param number $page : This is pagination offset
-     * @param number $segment : This is pagination limit
-     * @return array $result : This is result
-     */
     function userListing($searchText = '', $page, $segment)
     {
         $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role');
@@ -52,10 +45,6 @@ class User_model extends CI_Model
         return $result;
     }
     
-    /**
-     * This function is used to get the user roles information
-     * @return array $result : This is result of the query
-     */
     function getUserRoles()
     {
         $this->db->select('roleId, role');
@@ -66,12 +55,6 @@ class User_model extends CI_Model
         return $query->result();
     }
 
-    /**
-     * This function is used to check whether email id is already exist or not
-     * @param {string} $email : This is email id
-     * @param {number} $userId : This is user id
-     * @return {mixed} $result : This is searched result
-     */
     function checkEmailExists($email, $userId = 0)
     {
         $this->db->select("email");
@@ -86,11 +69,6 @@ class User_model extends CI_Model
         return $query->result();
     }
     
-    
-    /**
-     * This function is used to add new user to system
-     * @return number $insert_id : This is last inserted id
-     */
     function addNewUser($userInfo)
     {
         $this->db->trans_start();
@@ -103,30 +81,90 @@ class User_model extends CI_Model
         return $insert_id;
     }
     
-
-    function addHospitalInfo($hospitalinfo)
+    function addNewHospital($hospitalinfo)
     {
-         $this->db->insert('hospital',$hospitalinfo);
-         return ($this->db->affected_rows() != 1) ? FALSE : TRUE;
+        $this->db->trans_start();
+        $this->db->insert('hospital', $hospitalinfo);
+        
+        $insert_id = $this->db->insert_id();
+        
+        $this->db->trans_complete();
+        
+        return $insert_id;
+    }
+
+    function addHospitalInfo($hospitalinfo,$email)
+    {
+        $this->db->where('hospital_email',$email);
+         $this->db->update('hospital',$hospitalinfo);
+         
+         // echo $this->db->affected_rows();
+         // echo $email;
+       return ($this->db->affected_rows() != 1) ? FALSE : TRUE;
     }
     function getUserInfo($userId)
     {
         $this->db->select('userId, name, email, mobile, roleId');
         $this->db->from('tbl_users');
         $this->db->where('isDeleted', 0);
-		$this->db->where('roleId !=', 1);
+        $this->db->where('roleId !=', 1);
         $this->db->where('userId', $userId);
         $query = $this->db->get();
         
         return $query->result();
     }
+    function getHospitalId($email)
+    {
+        $this->db->select('hospital_id');
+        $this->db->from('hospital');
+        $this->db->where('hospital_email',$email);
+        $query = $this->db->get();
+        $hos =  $query->row();
+        //echo $hos->hospital_id;
+        return $hos->hospital_id;
+        //return $query->result();
+
+    }
+    function getEmpanelmentRequestsListing($hospitalId)
+    {
+         $this->db->select('a.empanelment_request_id, a.status, a.status_message, b.scheme_name');
+         $this->db->from('empanelment_request a'); 
+    $this->db->join('scheme b', 'a.scheme_id=b.scheme_id');
+    // $this->db->join('hospital c', 'c.hospital_id=a.hospital_id', 'left');
+    $this->db->where('a.hospital_id',$hospitalId);
+   
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
+    function getPatientDetails($hospitalId, $schemeName)
+    {
+        $this->db->select('a.patientName, a.amount_credited, b.disease_name, c.scheme_name');
+        $this->db->from('application_details a');
+        $this->db->join('disease b', 'a.disease_id = b.disease_id');
+        $this->db->join('scheme c', 'a.scheme_id = c.scheme_id');
+        $this->db->where('a.hospital_id', $hospitalId);
+        $this->db->where('c.scheme_name',$schemeName);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function getBeneficiaries($hospitalId)
+    {
+        $query =  $this->db->select('scheme.scheme_name as schemeName, COUNT(application_details.status) as scheme_count')
+                      ->from('application_details')
+                      ->join('scheme', 'application_details.scheme_id=scheme.scheme_id','left')
+                      ->group_by('application_details.scheme_id')
+                      ->where('application_details.status', 'approved')
+                      ->where('hospital_id',$hospitalId)
+                      ->get();
+        // $res = $query->num_rows();
+        // echo $res;
+        return $query->result();
+    }
     
-    
-    /**
-     * This function is used to update the user information
-     * @param array $userInfo : This is users updated information
-     * @param number $userId : This is user id
-     */
+
     function editUser($userInfo, $userId)
     {
         $this->db->where('userId', $userId);
@@ -135,13 +173,6 @@ class User_model extends CI_Model
         return TRUE;
     }
     
-    
-    
-    /**
-     * This function is used to delete the user information
-     * @param number $userId : This is user id
-     * @return boolean $result : TRUE / FALSE
-     */
     function deleteUser($userId, $userInfo)
     {
         $this->db->where('userId', $userId);
@@ -150,11 +181,6 @@ class User_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-
-    /**
-     * This function is used to match users password for change password
-     * @param number $userId : This is user id
-     */
     function matchOldPassword($userId, $oldPassword)
     {
         $this->db->select('userId, password');
@@ -175,11 +201,7 @@ class User_model extends CI_Model
         }
     }
     
-    /**
-     * This function is used to change users password
-     * @param number $userId : This is user id
-     * @param array $userInfo : This is user updation info
-     */
+
     function changePassword($userId, $userInfo)
     {
         $this->db->where('userId', $userId);
@@ -189,11 +211,6 @@ class User_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-
-    /**
-     * This function is used to get user login history
-     * @param number $userId : This is user id
-     */
     function loginHistoryCount($userId, $searchText, $fromDate, $toDate)
     {
         $this->db->select('BaseTbl.userId, BaseTbl.sessionData, BaseTbl.machineIp, BaseTbl.userAgent, BaseTbl.agentString, BaseTbl.platform, BaseTbl.createdDtm');
@@ -216,13 +233,6 @@ class User_model extends CI_Model
         return $query->num_rows();
     }
 
-    /**
-     * This function is used to get user login history
-     * @param number $userId : This is user id
-     * @param number $page : This is pagination offset
-     * @param number $segment : This is pagination limit
-     * @return array $result : This is result
-     */
     function loginHistory($userId, $searchText, $fromDate, $toDate, $page, $segment)
     {
         $this->db->select('BaseTbl.userId, BaseTbl.sessionData, BaseTbl.machineIp, BaseTbl.userAgent, BaseTbl.agentString, BaseTbl.platform, BaseTbl.createdDtm');
@@ -248,11 +258,7 @@ class User_model extends CI_Model
         return $result;
     }
 
-    /**
-     * This function used to get user information by id
-     * @param number $userId : This is user id
-     * @return array $result : This is user information
-     */
+
     function getUserInfoById($userId)
     {
         $this->db->select('userId, name, email, mobile, roleId');
@@ -271,9 +277,48 @@ class User_model extends CI_Model
         $query = $this->db->get();
 
          $result = $query->result();        
-        return $result; 
+         return $result; 
 
     }
+
+    function populateprofilefields($email)
+    {
+        $this->db->select('*');
+        $this->db->from('hospital');
+        $this->db->where('hospital_email',$email);
+        $query = $this->db->get();
+        //$res = $query->row();
+        //echo $res->hospital_shortName;
+       return $query->row();
+
+    }
+    function profileviewdata($email)
+    {
+        $this->db->select('*');
+        $this->db->from('hospital');
+        $this->db->where('hospital_email',$email);
+        $query = $this->db->get();
+
+        $result = $query->row();
+        return $result;
+    }
+
+    function requestProcessing($schemeId, $email, $hospitalId)
+    {
+            // echo $schemeId;
+            // echo $email;
+            // echo $hospitalId;
+        $empanelment['scheme_id'] = $schemeId;
+        $empanelment['hospital_id'] = $hospitalId;
+        $empanelment['status'] ="pending";
+        $empanelment['organisation_id'] = 1;
+        $this->db->insert('empanelment_request', $empanelment);
+         $insert_id = $this->db->insert_id();
+         echo $insert_id;
+
+    }
+
+
 
     function approvalForState()
     {
@@ -348,3 +393,4 @@ class User_model extends CI_Model
 }
 
   
+

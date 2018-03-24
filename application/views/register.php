@@ -43,9 +43,13 @@
         <input type="text" class="form-control" name="hname" id="hname" placeholder="Hospital Name">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" name="fname" id="fname" placeholder="Hospital Incharge Name">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
       
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+        <input type="email" class="form-control" name="email" id="email" placeholder="Hospital Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
