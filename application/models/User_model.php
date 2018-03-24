@@ -137,6 +137,32 @@ class User_model extends CI_Model
         return $query->result();
 
     }
+
+    function getPatientDetails($hospitalId, $schemeName)
+    {
+        $this->db->select('a.patientName, a.amount_credited, b.disease_name, c.scheme_name');
+        $this->db->from('application_details a');
+        $this->db->join('disease b', 'a.disease_id = b.disease_id');
+        $this->db->join('scheme c', 'a.scheme_id = c.scheme_id');
+        $this->db->where('a.hospital_id', $hospitalId);
+        $this->db->where('c.scheme_name',$schemeName);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function getBeneficiaries($hospitalId)
+    {
+        $query =  $this->db->select('scheme.scheme_name as schemeName, COUNT(application_details.status) as scheme_count')
+                      ->from('application_details')
+                      ->join('scheme', 'application_details.scheme_id=scheme.scheme_id','left')
+                      ->group_by('application_details.scheme_id')
+                      ->where('application_details.status', 'approved')
+                      ->where('hospital_id',$hospitalId)
+                      ->get();
+        // $res = $query->num_rows();
+        // echo $res;
+        return $query->result();
+    }
     
 
     function editUser($userInfo, $userId)

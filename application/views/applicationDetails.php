@@ -7,7 +7,7 @@
 
      <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Beneficiaries Details Tracking</h3>
+              <h3 class="box-title">Application Details Tracking</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -22,24 +22,25 @@
                   <thead>
                   <tr>
                     <th>S.No</th>
-                    <th>Scheme</th>
-                    <th>Number of Patient benefited</th>
-                    <th>List Of Patients</th>
+                    <th>Patient Name</th>
+                    <th>Availed For</th>
+                    <th>Amount Credited</th>
                     
                   </tr>
                   </thead>
                   <tbody>
+                   <tbody>
                    <?php
-                    if(!empty($beneficiariesResult))
+                    if(!empty($listPatient))
                     {
-                        foreach($beneficiariesResult as $record)
+                        foreach($listPatient as $record)
                         {
                     ?>
                     <tr>
                       <td>1</td>
-                      <td><?php echo $record->schemeName ?></td>
-                      <td><?php echo $record->scheme_count ?></td>
-                      <td><a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>listBeneficiaries/<?php echo $record->schemeName; ?>" title="Login history" enabled="true">View</a></td>
+                      <td><?php echo $record->patientName ?></td>
+                      <td><?php echo $record->disease_name ?></td>
+                      <td><?php echo $record->amount_credited ?></td>
                       
                       
                         <?php
@@ -50,6 +51,8 @@
                         }
                    
                     ?>
+                  
+                  </tbody>
                   
                   </tbody>
                 </table>

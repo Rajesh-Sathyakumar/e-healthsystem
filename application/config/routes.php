@@ -89,6 +89,7 @@ $route['createPasswordUser'] = "login/createPasswordUser";
 $route['profileupdate'] = "user/profileupdate";
 $route['schemesList'] = "user/schemesList";
 $route['profilesettings'] = "user/profilesettings";
+$route['listBeneficiaries/(:any)'] = "user/listBeneficiaries/$1";
 //$route['addHospitalInfo'] = "user/addHospitalInfo";
 
 /* End of file routes.php */

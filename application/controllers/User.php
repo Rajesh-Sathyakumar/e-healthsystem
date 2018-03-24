@@ -63,9 +63,21 @@ class User extends BaseController
         //echo $this->session->userdata('email');
         $hospitalId = $this->user_model->getHospitalId($this->session->userdata('email'));
         //echo $hospitalId;
-        $this->user_model->getEmpanelmentRequestsListing($hospitalId);
+       // $this->user_model->getEmpanelmentRequestsListing($hospitalId);
          $data['empanelmentRequests'] = $this->user_model->getEmpanelmentRequestsListing($hospitalId);
          $this->loadViews("request", $this->global, $data, NULL);
+
+    }
+
+    function  listBeneficiaries()
+    {
+        $this->global['pageTitle'] = 'e-Healthcare : ListBeneficiaries';
+        $schemeName = $this->uri->segment(2);
+        
+        //echo $schemeName;
+         $hospitalId = $this->user_model->getHospitalId($this->session->userdata('email'));
+         $data['listPatient'] = $this->user_model->getPatientDetails($hospitalId, $schemeName);
+         $this->loadViews("applicationDetails", $this->global, $data, NULL);
 
     }
 
@@ -73,8 +85,11 @@ class User extends BaseController
     {
            
              $this->global['pageTitle'] = 'e-Healthcare : Beneficiaries';
-            
-            $this->loadViews("beneficiaries", $this->global, NULL, NULL);
+            $hospitalId = $this->user_model->getHospitalId($this->session->userdata('email'));
+        //echo $hospitalId;
+        //$this->user_model->getBeneficiaries($hospitalId);
+         $data['beneficiariesResult'] = $this->user_model->getBeneficiaries($hospitalId);
+            $this->loadViews("beneficiaries", $this->global, $data, NULL);
         
     }
     public function schemes()
