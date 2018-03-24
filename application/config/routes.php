@@ -89,7 +89,7 @@ $route['createPasswordUser'] = "login/createPasswordUser";
 $route['profileupdate'] = "user/profileupdate";
 $route['schemesList'] = "user/schemesList";
 $route['profilesettings'] = "user/profilesettings";
-$route['empanelrequest'] = "user/empanelrequest";
+//$route['empanelrequest'] = "user/empanelrequest";
 $route['requestprocess'] = "user/requestprocess";
 
 

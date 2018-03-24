@@ -603,11 +603,11 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
 
 
 
-    function empanelrequest()
-    {
-        $this->global['pageTitle'] = 'e-Healthcare : Empanelment Request';
-        $this->loadViews("empanelform", $this->global, NULL, NULL);
-    }
+    // function empanelrequest()
+    // {
+    //     $this->global['pageTitle'] = 'e-Healthcare : Empanelment Request';
+    //     $this->loadViews("empanelform", $this->global, NULL, NULL);
+    // }
 }
 
 ?>
