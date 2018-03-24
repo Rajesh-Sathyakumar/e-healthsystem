@@ -15,6 +15,14 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/app.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/js/jquery.validate.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/js/validation.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/js/fastclick.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/js/demo.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/js/moment.js"  type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/js/bootstrap-datetimepicker.min.js"  type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/js/global.js"  type="text/javascript"></script>
+    <script src="<?php echo base_url()?>js/ajaxfileupload.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/js/moment.min.js"  type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/js/select2.min.js"  type="text/javascript"></script>
     <script type="text/javascript">
         var windowURL = window.location.href;
         pageURL = windowURL.substring(0, windowURL.lastIndexOf('/'));
@@ -24,6 +32,12 @@
         var y= $('a[href="'+windowURL+'"]');
             y.addClass('active');
             y.parent().addClass('active');
+            $(document).ready(function() {
+    $('.js-example-basic-multiple').select2({
+    placeholder: "Select one"
+});
+});
+
     </script>
   </body>
 </html>

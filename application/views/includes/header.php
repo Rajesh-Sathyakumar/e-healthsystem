@@ -10,6 +10,8 @@
     <link href="<?php echo base_url(); ?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons 2.0.0 -->
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap-datetimepicker.min.css" type="text/css">
+    <link href="<?php echo base_url(); ?>assets/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
@@ -102,26 +104,52 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
               </a>
             </li>
+            <?php
+            if($role == ROLE_ADMIN)
+            {
+            ?>
+            <li>
+            <a href="#">
+            <i class="fa fa-desktop"></i> <span>Scheme</span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active">
+                                    <a href="<?php echo site_url('scheme/add');?>"><i class="fa fa-plus"></i> Add</a>
+                                </li>
+                <li>
+                                    <a href="<?php echo site_url('scheme/index');?>"><i class="fa fa-list-ul"></i> Listing</a>
+                                </li>
+              </ul>
+                        </li>
+            <li>
+                            <a href="#">
+                                <i class="fa fa-desktop"></i> <span>Scheme Type</span>
+                            </a>
+                            <ul class="treeview-menu">
+                <li class="active">
+                                    <a href="<?php echo site_url('scheme_type/add');?>"><i class="fa fa-plus"></i> Add</a>
+                                </li>
+                <li>
+                                    <a href="<?php echo site_url('scheme_type/index');?>"><i class="fa fa-list-ul"></i> Listing</a>
+                                </li>
+              </ul>
+                        </li>
+            <?php
+            }
+            ?>
             <li class="treeview">
               <?php
             if($role == ROLE_HOSPITAL)
             {
             ?>
-              <a href="<?php echo base_url(); ?>schemesList" >
-                <i class="fa fa-plus-square"></i>
-                <span>Schemes</span>
-              </a>
-            <?php
-            }
-            ?>
-            <?php
-            if($role == ROLE_ADMIN)
-            {
-            ?>
-              <a href="<?php echo base_url(); ?>user/schemes" >
-                <i class="fa fa-plus-square"></i>
-                <span>Schemes</span>
-              </a>
+              <a href="#">
+                                <i class="fa fa-desktop"></i> <span>Scheme</span>
+                            </a>
+                            <ul class="treeview-menu">
+                              <li class="active">
+                                    <a href="<?php echo site_url('scheme/index');?>"><i class="fa fa-list-ul"></i> Listing</a>
+                              </li> 
+                            </ul>
             <?php
             }
             ?>

@@ -27,7 +27,23 @@ class User extends BaseController
         
         $this->loadViews("dashboard", $this->global, NULL , NULL);
     }
-    
+    public function do_upload() { 
+         $config['upload_path']   = 'assets/uploads/files'; 
+         $config['allowed_types'] = 'gif|jpg|png|pdf|csv|doc'; 
+         $config['max_size']      = 100; 
+         $config['max_width']     = 1024; 
+         $config['max_height']    = 768;  
+         $this->load->library('upload', $config);
+         if ( ! $this->upload->do_upload('userfile')) {
+            $error = array('error' => $this->upload->display_errors()); 
+            $this->load->view('upload_form', $error); 
+         }
+            
+         else { 
+            $data = array('upload_data' => $this->upload->data()); 
+            $this->load->view('upload_success', $data); 
+         } 
+      } 
     /**
      * This function is used to load the user list
      */
@@ -66,7 +82,7 @@ class User extends BaseController
     function beneficiaries()
     {
            
-             $this->global['pageTitle'] = 'e-Healthcare : Beneficiaries';
+            $this->global['pageTitle'] = 'e-Healthcare : Beneficiaries';
             
             $this->loadViews("beneficiaries", $this->global, NULL, NULL);
         
@@ -114,7 +130,7 @@ function update_time_callback($post_array) {
 function loadSchemes($output = null)
  
 {
-$this->global['pageTitle'] = 'e-Healthcare : Schemes'; 
+$this->global['pageTitle'] = 'e-Healthcare : Schemes';
 $this->loadViews("template_crud_user", $this->global, $output, NULL);
 }
 
