@@ -5,13 +5,13 @@
             <div class="box-header with-border">
               	<h3 class="box-title">Scheme Add</h3>
             </div>
-            <?php echo form_open('scheme/do_upload'); ?>
+            <?php echo form_open('scheme/add'); ?>
           	<div class="box-body">
           		<div class="row clearfix">
 				<div class="col-md-6">
 						<br>
                 <label for="type_id" class="control-label"> Scheme Type</label>
-                <select class="js-example-basic-multiple js-states" name="type_id" style="width: 75%" multiple="multiple">
+                <select class="js-example-basic-single js-states" name="type_id" style="width: 75%">
 								<?php 
 								foreach($all_scheme_type as $scheme_type)
 								{
