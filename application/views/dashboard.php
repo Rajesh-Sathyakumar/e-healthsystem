@@ -17,11 +17,11 @@
               <!-- small box -->
                 <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3><?php echo $numberOfSchemes ?></h3>
                   <p>Schemes</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-bag"></i>
+                  <i class="fa fa-stethoscope"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -34,7 +34,7 @@
                   <p>Beneficiaries</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
+                  <i class="fa fa-users"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -43,7 +43,7 @@
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>44</h3>
+                  <h3><?php echo $numberOfUsers ?></h3>
                   <p>Users</p>
                 </div>
                 <div class="icon">
@@ -56,7 +56,7 @@
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3>65</h3>
+                  <h3><?php echo $numberOfHospitals ?></h3>
                   <p>Hospitals</p>
                 </div>
                 <div class="icon">
@@ -76,11 +76,11 @@
               <!-- small box -->
                 <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3><?php echo $numberOfSchemes ?></h3>
                   <p>Schemes</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-bag"></i>
+                  <i class="fa fa-stethoscope"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -93,7 +93,7 @@
                   <p>Beneficiaries</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
+                  <i class="fa fa-users"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -104,7 +104,7 @@
         }
         ?>
         <?php
-        if($role == ROLE_STATE_ADMIN)
+        if($role == ROLE_STATE_ADMIN || $role == ROLE_DISTRICT_ADMIN)
             {
             ?>
         <div class="row">
@@ -112,11 +112,11 @@
               <!-- small box -->
                 <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3><?php echo $numberOfSchemes ?></h3>
                   <p>Schemes</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-bag"></i>
+                  <i class="fa fa-stethoscope"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -125,15 +125,15 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px"></sup></h3>
+                  <h3><?php echo $numberOfPrograms ?><sup style="font-size: 20px"></sup></h3>
                   <p>Programs</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
+                  <i class="fa fa-hospital-o"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
-            </div><!-- ./col -->
+            </div><!-- ./col --><?php echo $numberOfSchemes ?>
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-yellow">
@@ -142,7 +142,7 @@
                   <p>Beneficiaries</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-person-add"></i>
+                  <i class="fa fa-users" size=""></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>

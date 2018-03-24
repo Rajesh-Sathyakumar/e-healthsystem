@@ -44,6 +44,18 @@
             </div>
               <?php
             }
+            else if($role == ROLE_DISTRICT_ADMIN)
+            {
+              ?>
+              <div class="box-body">
+              <strong><i class="fa fa-institution"></i>Chennai</strong>
+
+              <p class="text-muted">
+                District approval admin for schemes in Chennai region
+              </p>
+            </div>
+            <?php
+            }
             else
             {
               ?>
@@ -81,7 +93,7 @@
                 <?php $this->load->helper('form'); ?>
                 <form class="form-horizontal" method="post" action="<?php echo base_url() ?>profilesettings">
                   <?php
-                  if($role == ROLE_STATE_ADMIN)
+                  if($role == ROLE_STATE_ADMIN || $role == ROLE_DISTRICT_ADMIN || $role == ROLE_ADMIN)
                   {
                     ?>
                     <div class="form-group">
@@ -91,15 +103,45 @@
                       <input type="text" class="form-control" id="hospitalName" name="hospitalName" placeholder="Name of admin">
                     </div>
                   </div>
+                  <?php 
+                  if($role == ROLE_STATE_ADMIN)
+                  {
+                    ?>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">State</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="hospitalName" name="hospitalName" placeholder="State Name">
+                      <input type="text" class="form-control" id="stateName" name="stateName" placeholder="State Name">
                     </div>
                   </div>
-                    <?php
-                  }
+                  <?php
+                }
+                else if($role == ROLE_DISTRICT_ADMIN)
+                {
+                  ?>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">District</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="districtName" name="districtName" placeholder="District Name">
+                    </div>
+                  </div>
+                  <?php
+                }
+                else
+                {
+                  ?>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Admin</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="adminName" name="adminName" placeholder="Admin Name">
+                    </div>
+                  </div>
+                  <?php
+                }
+              }
+                 
                   else
                   {
                   ?>

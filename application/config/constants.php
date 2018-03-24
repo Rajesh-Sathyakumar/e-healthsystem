@@ -91,6 +91,7 @@ define('ROLE_ADMIN','1');
 define('ROLE_ORGANIZATION','2');
 define('ROLE_HOSPITAL','3');
 define('ROLE_STATE_ADMIN','4');
+define('ROLE_DISTRICT_ADMIN','5');
 
 /* STATUS AT EVERY LEVEL */
 define('APPROVED','approved');

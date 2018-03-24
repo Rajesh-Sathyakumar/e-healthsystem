@@ -320,11 +320,26 @@ class User_model extends CI_Model
 
 
 
-    function approvalForState()
+    function approvalForState($id = null)
     {
-        $this->db->select('empanelment_request_id,organisation_id,scheme_id,documents,status,stateAdmin_status');
-        $this->db->from('empanelment_request');
-        $this->db->where('districtAdmin_status','approved');
+
+            $this->db->select('er.empanelment_request_id,er.documents,er.status,er.stateAdmin_status,sc.scheme_name');
+            $this->db->from('empanelment_request er');
+            $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','right');
+            $this->db->where('districtAdmin_status','approved');
+
+            $query = $this->db->get();
+
+            $result = $query->result();
+            return $result;
+    }
+
+    function approvalForDistrict($id)
+    {
+        $this->db->select('er.empanelment_request_id,er.documents,er.status,er.districtAdmin_status,sc.scheme_name');
+        $this->db->from('empanelment_request er');
+        $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','right');
+        $this->db->where('districtAdmin_id',$id);
 
         $query = $this->db->get();
 
@@ -362,20 +377,31 @@ class User_model extends CI_Model
         return $result;
     }
 
-    function changeStatus($empanelment_request_id,$comments,$status)
+    function changeStatus($empanelment_request_id,$comments,$status,$role)
     {
         $this->db->where($empanelment_request_id);
 
         $request_row = $this->db->get_where('empanelment_request', array('empanelment_request_id' => $empanelment_request_id))->row();
 
-        $data = array(
-           'stateAdmin_comments' => $comments,
-           'stateAdmin_status' => $status 
-        );
+        if($role == ROLE_STATE_ADMIN)
+        {
+            $data = array(
+               'stateAdmin_comments' => $comments,
+               'stateAdmin_status' => $status,
+               'status' => "State ".$status 
+            );
+        }
+        else if($role == ROLE_DISTRICT_ADMIN)
+        {
+             $data = array(
+               'districtAdmin_comments' => $comments,
+               'districtAdmin_status' => $status, 
+               'status' => "District ".$status
+            );    
+        }
 
         $this->db->where('empanelment_request_id', $empanelment_request_id);
         $this->db->update('empanelment_request', $data); 
-        echo $comments;
     
     }
 
@@ -388,6 +414,16 @@ class User_model extends CI_Model
         $query = $this->db->get();
         $result = $query->row();
         return $result->stateAdmin_status;
+    }
+
+    function getNumber($table_name)
+    {
+        $this->db->select('*');
+        $this->db->from($table_name);
+
+        $query = $this->db->get();
+        $result = $query->num_rows();
+        return $result;
     }
 
 }

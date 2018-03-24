@@ -24,8 +24,13 @@ class User extends BaseController
     public function index()
     {
         $this->global['pageTitle'] = 'e-Healthcare : Dashboard';
+
+        $data['numberOfSchemes'] = $this->user_model->getNumber("scheme");
+        $data['numberOfPrograms'] = $this->user_model->getNumber("programme");
+        $data['numberOfUsers'] = $this->user_model->getNumber("tbl_users");
+        $data['numberOfHospitals'] = $this->user_model->getNumber("hospital");
         
-        $this->loadViews("dashboard", $this->global, NULL , NULL);
+        $this->loadViews("dashboard", $this->global, $data , NULL);
     }
     
     /**
@@ -608,16 +613,6 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         $this->loadViews("schemes", $this->global, $data, NULL);
     }
 
-<<<<<<< HEAD
-    function approve()
-    {
-        $this->global['pageTitle'] = 'e-Healthcare : Approval';
-
-        $data['approvalRecords'] = $this->user_model->approvalForState();
-
-        $this->loadViews("approval", $this->global, $data, NULL);
-    }
-
     function showRequestProfile()
     {
         $this->global['pageTitle'] = 'e-Healthcare : Request Details';
@@ -629,22 +624,35 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         $this->loadViews("requestDetails", $this->global, $data, NULL);
     }
 
-    function changeStatus()
+    function approve()
     {
         $this->global['pageTitle'] = 'e-Healthcare : Approval';
-        $data['approvalRecords'] = $this->user_model->approvalForState();
-        $comments = $_POST['comments'];
         
-        // $empanelment_request_id = $this->uri->segment(2);
-        // $status = $this->uri->segment(3);
-        $empanelment_request_id = _POST['id'];
-        $status = _POST['Status'];
-        $this->user_model->changeStatus($empanelment_request_id,$comments,$status);
-        echo $comments;
-        //$this->loadViews("approval", $this->global, $data, NULL);        
+        $role = $this->session->userdata('role');
+        $district_admin_id = $this->session->userdata('userId');
+        
+        $task = $this->uri->segment(4);
+        if($task == "change")
+        {
+            $comments = $this->input->post('comments');
+            $empanelment_request_id = $this->uri->segment(2);
+            $status = $this->uri->segment(3);
+            // $empanelment_request_id = _POST['id'];
+            // $status = _POST['Status'];
+            $this->user_model->changeStatus($empanelment_request_id,$comments,$status,$role);    
+        }
+        if($role == ROLE_STATE_ADMIN)
+        {
+            $data['approvalRecords'] = $this->user_model->approvalForState(1);
+        }
+        else if($role == ROLE_DISTRICT_ADMIN)
+        {
+             $data['approvalRecords'] = $this->user_model->approvalForDistrict($district_admin_id);    
+        }
+
+        $this->loadViews("approval", $this->global, $data, NULL);
     }
 
-=======
     function proceedRequest()
     {
         $schemeId = $this->uri->segment(2);
@@ -655,7 +663,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         // echo $hospitalId;      
         $this->user_model->requestProcessing($schemeId, $email, $hospitalId );
         $this->global['pageTitle'] = 'e-Healthcare : Dashboard';
-          $this->loadViews("dashboard", $this->global, NULL, NULL);
+        $this->loadViews("dashboard", $this->global, NULL, NULL);
 
 
     }
@@ -677,7 +685,6 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     //     $this->global['pageTitle'] = 'e-Healthcare : Empanelment Request';
     //     $this->loadViews("empanelform", $this->global, NULL, NULL);
     // }
->>>>>>> master
 }
 
 ?>

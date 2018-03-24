@@ -174,7 +174,7 @@
             </li>
             <?php
             }
-            if($role == ROLE_STATE_ADMIN)
+            if($role == ROLE_STATE_ADMIN || $role == ROLE_DISTRICT_ADMIN)
             {
             ?>
             <li class="treeview">
@@ -190,7 +190,7 @@
               </a>
             </li>
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>approve" >
+              <a href="<?php echo base_url(); ?>approve/1/1/show" >
                 <i class="glyphicon glyphicon-ok"></i>
                 <span>Approval</span>
               </a>

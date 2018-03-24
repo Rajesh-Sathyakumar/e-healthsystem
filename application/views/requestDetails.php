@@ -311,8 +311,8 @@
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <a class="btn btn-success" method="post" href="<?php echo base_url(); ?>changeStatus/<?php echo $this->uri->segment(2); ?>/approved">Approve</a>
-                      <a class="btn btn-danger" method="post" href="<?php echo base_url(); ?>changeStatus/<?php echo $this->uri->segment(2); ?>/rejected">Reject</a>
+                      <a class="btn btn-success" method="post" href="<?php echo base_url(); ?>approve/<?php echo $this->uri->segment(2); ?>/approved/change">Approve</a>
+                      <a class="btn btn-danger" method="post" href="<?php echo base_url(); ?>approve/<?php echo $this->uri->segment(2); ?>/rejected/change">Reject</a>
                     </div>
                   </div>
                 </form>
