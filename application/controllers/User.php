@@ -610,39 +610,28 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     {
         $this->global['pageTitle'] = 'e-Healthcare : Request Details';
 
-        // $empanelment_request_id = $this->uri->segment(3);
+        $empanelment_request_id = $this->uri->segment(2);
 
-        // $empanelment_request_id = $this->input->get($id);
-
-        // echo $empanelment_request_id;
-            
-        // $data['requestDetails'] = $this->user_model->detailsOfRequest($empanelment_request_id);
-
-        $data['requestDetails'] = $this->user_model->detailsOfRequest();
-
+        $data['requestDetails'] = $this->user_model->detailsOfRequest($empanelment_request_id);
+       
         $this->loadViews("requestDetails", $this->global, $data, NULL);
     }
 
-    function changeStatusAfterApproval()
+    function changeStatus()
     {
         $this->global['pageTitle'] = 'e-Healthcare : Approval';
         $data['approvalRecords'] = $this->user_model->approvalForState();
-        $empanelment_request_id = 1;
-        $comments = "requested approved";
-        $this->user_model->changeStatus($empanelment_request_id,$comments,"yes");
-        $this->loadViews("approval", $this->global, $data, NULL);        
+        $comments = $_POST['comments'];
+        
+        // $empanelment_request_id = $this->uri->segment(2);
+        // $status = $this->uri->segment(3);
+        $empanelment_request_id = _POST['id'];
+        $status = _POST['Status'];
+        $this->user_model->changeStatus($empanelment_request_id,$comments,$status);
+        echo $comments;
+        //$this->loadViews("approval", $this->global, $data, NULL);        
     }
 
-    function changeStatusAfterRejection()
-    {
-        $this->global['pageTitle'] = 'e-Healthcare : Approval';
-        $data['approvalRecords'] = $this->user_model->approvalForState();
-        $empanelment_request_id = 4;
-        $comments = "submit aadhar";
-        $this->user_model->changeStatus($empanelment_request_id,$comments,"no");
-        $data['status'] = "rejected";
-        $this->loadViews("approval", $this->global, $data, NULL);
-    }
 }
 
 ?>

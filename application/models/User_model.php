@@ -292,52 +292,45 @@ class User_model extends CI_Model
 
     //     $this->db->select('*');
     //     $this->db->from('hospital');
-    //     $this->db->join('empanelment_request', 'empanelment_request.hospital_id = hospital.hospital_id','left');
-    //     //$this->db->where('empanelment_request_id',$empanelment_request_id);
+    //     $this->db->join('empanelment_request', 'empanelment_request.hospital_id = hospital.hospital_id','inner');
+    //     $this->db->where('empanelment_request_id',$empanelment_request_id);
 
     //     $query = $this->db->get();
-    //     echo $query->num_rows();
-    //     $result = $query->result();
-    //     //return $result;
+    //     $result = $query->row();
+    //     //echo $query->num_rows();
+    //     // $finalResult['result'] = $result;
+    //     // $finalResult['empanelment_request_id'] = $empanelment_request_id;
+    //     // // echo $finalResult['empanelment_request_id'];
+    //     // // echo $finalResult['result']['hospital_id'];
+    //      return $result;
     // }
 
-    function detailsOfRequest()
+    function detailsOfRequest($empanelment_request_id)
     {
-
         $this->db->select('*');
         $this->db->from('hospital');
         $this->db->join('empanelment_request', 'empanelment_request.hospital_id = hospital.hospital_id','left');
-        //$this->db->where('empanelment_request_id',$empanelment_request_id);
-
+        $this->db->where('empanelment_request_id',$empanelment_request_id);
         $query = $this->db->get();
-        $result = $query->result();
+        // echo $query->num_rows();
+        $result = $query->row();
         return $result;
     }
 
-    function changeStatus($empanelment_request_id,$comments,$yesOrNo)
+    function changeStatus($empanelment_request_id,$comments,$status)
     {
         $this->db->where($empanelment_request_id);
-        
 
         $request_row = $this->db->get_where('empanelment_request', array('empanelment_request_id' => $empanelment_request_id))->row();
 
-        if($yesOrNo == "yes")
-        {
         $data = array(
            'stateAdmin_comments' => $comments,
-           'stateAdmin_status' => "approved" 
+           'stateAdmin_status' => $status 
         );
-    }
-    else
-    {
-        $data = array(
-           'stateAdmin_comments' => $comments,
-           'stateAdmin_status' => "rejected" 
-        );    
-    }
 
         $this->db->where('empanelment_request_id', $empanelment_request_id);
         $this->db->update('empanelment_request', $data); 
+        echo $comments;
     
     }
 
@@ -348,8 +341,8 @@ class User_model extends CI_Model
         $this->db->where('empanelment_request_id',$empanelment_request_id);
 
         $query = $this->db->get();
-        $result = $query->result();
-        return $result[0]->stateAdmin_status;
+        $result = $query->row();
+        return $result->stateAdmin_status;
     }
 
 }

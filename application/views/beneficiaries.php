@@ -4,7 +4,7 @@
 
     <!-- Main content -->
 
-
+<section class="content">
      <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Beneficiaries Details Tracking</h3>
@@ -40,14 +40,8 @@
                   
                   </tbody>
                 </table>
-              </div>
-              <!-- /.table-responsive -->
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              
-            </div>
-            <!-- /.box-footer -->
+             </div>
           </div>
-          <!-- /.box -->
         </div>
+    </section>
+  </div>

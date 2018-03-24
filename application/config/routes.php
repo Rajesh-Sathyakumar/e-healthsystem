@@ -90,9 +90,9 @@ $route['profileupdate'] = "user/profileupdate";
 $route['schemesList'] = "user/schemesList";
 $route['profilesettings'] = "user/profilesettings";
 $route['approve'] = "user/approve";
-$route['showRequestProfile'] = "user/showRequestProfile";
-$route['changeStatusAfterApproval'] = "user/changeStatusAfterApproval";
-$route['changeStatusAfterRejection'] = "user/changeStatusAfterRejection";
+$route['showRequestProfile/(:num)'] = "user/showRequestProfile/$1";
+$route['changeStatus/(:num)/(:any)'] = "user/changeStatus";
+$route['changeStatusAfterRejection/(:num)'] = "user/changeStatusAfterRejection";
 //$route['addHospitalInfo'] = "user/addHospitalInfo";
 
 /* End of file routes.php */

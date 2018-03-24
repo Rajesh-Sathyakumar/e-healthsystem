@@ -45,7 +45,7 @@
                       <td><?php echo $record->scheme_id ?></td>
                       <td><?php echo $record->documents ?></td>
                       <td><?php echo $record->status ?></td>
-                      <td><a class="btn btn-info btn-sm" name="id" value="<?php echo $id ?>" href="<?php echo base_url(); ?>showRequestProfile" title="View Request" enabled="true" method="get">View</a></td>
+                      <td><a class="btn btn-info btn-sm" href="<?php echo base_url(); ?>showRequestProfile/<?php echo $record->empanelment_request_id ?>" title="View Request" enabled="true">View</a></td>
                       <td><?php 
                             if($record->stateAdmin_status == "approved")
                             {
