@@ -3,21 +3,27 @@
      <section class="content-header">
       <h1>
      Beneficiaries Details Tracking
+     <?php 
+    if($role == ROLE_HOSPITAL)
+      {
+    ?>
     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
                Add Patient
               </button>
+              <?php
+            }
+        ?>
     </h1>
     </section>
 
     <!-- Main content -->
 
-<<<<<<< HEAD
-<section class="content">
-     <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Beneficiaries Details Tracking</h3>
-=======
+
  <section class="content">
+  <?php 
+    if($role == ROLE_HOSPITAL)
+      {
+    ?>
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -26,7 +32,47 @@
             <!-- /.box-header -->
 
 
-        <div class="modal fade" id="modal-default">
+              <div class="box-body">
+                     <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>Scheme</th>
+                    <th>Number of Patient benefited</th>
+                    <th>List Of Patients</th>
+                    
+                  </tr>
+                  </thead>
+                  <tbody>
+                   <?php
+                    if(!empty($beneficiariesResult))
+                    {
+                        foreach($beneficiariesResult as $record)
+                        {
+                    ?>
+                    <tr>
+                      <td>1</td>
+                      <td><?php echo $record->schemeName ?></td>
+                      <td><?php echo $record->scheme_count ?></td>
+                      <td><a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>listBeneficiaries/<?php echo $record->schemeName; ?>" title="Login history" enabled="true">View</a></td>
+                      
+                      <?php
+                      }
+                      ?>
+                    </tr>
+                    <?php
+                      }
+                    ?>
+                  </tbody>
+                </table>
+            
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+         </div>
+          </div>
+           <div class="modal fade" id="modal-default">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -62,7 +108,6 @@
                   </div>
                     <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Fund allocated</label>
->>>>>>> swathy
 
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="inputEmail" placeholder="Fund allocated">
@@ -75,24 +120,32 @@
                <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>addPatientDetails" title="Login history" enabled="true">View</a>
               </div>
             </div>
-<<<<<<< HEAD
             <!-- /.box-header -->
             
-=======
             <!-- /.modal-content -->
           </div>
           <!-- /.modal-dialog -->
         </div>
+        <?php
+      }
+      else if($role == ROLE_DISTRICT_ADMIN || $role == ROLE_STATE_ADMIN)
+      {
+      ?>
+         <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+            </div>
+            <!-- /.box-header -->
 
 
->>>>>>> swathy
-            <div class="box-body">
-              <div class="table-responsive">
-                <table class="table no-margin">
+              <div class="box-body">
+                     <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>S.No</th>
+                    <!-- <th>Application id</th> -->
                     <th>Scheme</th>
+                    <th>Hospital</th>
                     <th>Number of Patient benefited</th>
                     <th>List Of Patients</th>
                     
@@ -100,16 +153,19 @@
                   </thead>
                   <tbody>
                    <?php
-                    if(!empty($beneficiariesResult))
+
+                    if(!empty($beneficiaryDetailsForNodal))
                     {
-                        foreach($beneficiariesResult as $record)
+                        foreach($beneficiaryDetailsForNodal as $record)
                         {
                     ?>
+                    <!-- application_countrd->beneficiaries_count ?> -->
                     <tr>
-                      <td>1</td>
-                      <td><?php echo $record->schemeName ?></td>
-                      <td><?php echo $record->scheme_count ?></td>
-                      <td><a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>listBeneficiaries/<?php echo $record->schemeName; ?>" title="Login history" enabled="true">View</a></td>
+                      <!-- <td><?php echo $record->application_details_id ?></td> -->
+                      <td><?php echo $record->scheme_name ?></td>
+                      <td><?php echo $record->hospital_name ?></td>
+                      <td><?php echo $record->application_count?></td>
+                      <td><a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>listBeneficiaries/<?php echo $record->scheme_name; ?>" title="Show Beneficiaries" enabled="true">View</a></td>
                       
                       <?php
                       }
@@ -120,19 +176,19 @@
                     ?>
                   </tbody>
                 </table>
-<<<<<<< HEAD
-             </div>
-          </div>
-=======
+            
               </div>
               <!-- /.table-responsive -->
             </div>
             <!-- /.box-body -->
          </div>
           </div>
+      <?php
+    }
+    ?>
         </section>
           <!-- /.box -->
->>>>>>> swathy
         </div>
-    </section>
-  </div>
+
+
+

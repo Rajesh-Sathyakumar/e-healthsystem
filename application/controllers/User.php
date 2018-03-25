@@ -29,6 +29,7 @@ class User extends BaseController
         $data['numberOfPrograms'] = $this->user_model->getNumber("programme");
         $data['numberOfUsers'] = $this->user_model->getNumber("tbl_users");
         $data['numberOfHospitals'] = $this->user_model->getNumber("hospital");
+        $data['numberOfBeneficiaries'] = $this->user_model->getNumber("beneficiaries");
         
         $this->loadViews("dashboard", $this->global, $data , NULL);
     }
@@ -111,18 +112,19 @@ class User extends BaseController
            
             $this->global['pageTitle'] = 'e-Healthcare : Beneficiaries';
             $hospitalId = $this->user_model->getHospitalId($this->session->userdata('email'));
-        //echo $hospitalId;
-        //$this->user_model->getBeneficiaries($hospitalId);
+            //echo $hospitalId;
+            //$this->user_model->getBeneficiaries($hospitalId);
 
-         $data['beneficiariesResult'] = $this->user_model->getBeneficiaries($hospitalId);
+             $data['beneficiariesResult'] = $this->user_model->getBeneficiaries($hospitalId);
 
-         $data['schemeNames'] = $this->user_model->getSchemeName($hospitalId);
+             $data['schemeNames'] = $this->user_model->getSchemeName($hospitalId);
 
             $this->loadViews("beneficiaries", $this->global, $data, NULL);
         }
         else
         {
-            $this->loadViews("beneficiaries", $this->global, NULL, NULL);
+            $data['beneficiaryDetailsForNodal'] = $this->user_model->getBeneficiariesForNodal($role);
+            $this->loadViews("beneficiaries", $this->global, $data, NULL);
         }
         
     }
@@ -693,7 +695,6 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         $this->global['pageTitle'] = 'e-Healthcare : schemesList';
   
         $this->user_model->requestProcessing($schemeId, $email, $hospitalId );
-<<<<<<< HEAD
         $this->global['pageTitle'] = 'e-Healthcare : Dashboard';
         $this->loadViews("dashboard", $this->global, NULL, NULL);
 
@@ -703,17 +704,17 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     function reports()
     {
         $this->global['pageTitle'] = 'e-Healthcare : Reports';
+        $id = $this->session->userdata('userId');
         $role = $this->session->userdata('role');
-=======
-        //$this->global['pageTitle'] = 'e-Healthcare : schemesList';
-          $this->loadViews("schemes", $this->global, NULL, NULL);
+
+        $data['reports'] = $this->user_model->getReports($id,$role);
+
+        $this->loadViews("reports", $this->global,$data, NULL);
 
 
     }
     function addPatientDetails()
     {
->>>>>>> swathy
-
         $data['showAllRequests'] = $this->user_model->getAllRequests($role);
         $this->loadViews("reports", $this->global, $data, NULL);
     }

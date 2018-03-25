@@ -129,7 +129,7 @@ class User_model extends CI_Model
     {
          $this->db->select('a.empanelment_request_id, a.status, a.status_message, b.scheme_name');
          $this->db->from('empanelment_request a'); 
-    $this->db->join('scheme b', 'a.scheme_id=b.scheme_id');
+        $this->db->join('scheme b', 'a.scheme_id=b.scheme_id');
     // $this->db->join('hospital c', 'c.hospital_id=a.hospital_id', 'left');
     $this->db->where('a.hospital_id',$hospitalId);
    
@@ -402,7 +402,7 @@ class User_model extends CI_Model
             $this->db->from('empanelment_request er');
             $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','right');
             $this->db->where('districtAdmin_status','approved');
-            // $this->db->where('stateAdmin_status','');
+            $this->db->where('stateAdmin_status','');
 
             $query = $this->db->get();
 
@@ -416,7 +416,7 @@ class User_model extends CI_Model
         $this->db->from('empanelment_request er');
         $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','right');
         $this->db->where('districtAdmin_id',$id);
-        // $this->db->where('districtAdmin_status','');
+        $this->db->where('districtAdmin_status','');
 
         $query = $this->db->get();
 
@@ -495,11 +495,23 @@ class User_model extends CI_Model
 
     function getNumber($table_name)
     {
-        $this->db->select('*');
-        $this->db->from($table_name);
+        if($table_name == "beneficiaries")
+        {
+            $this->db->select('*');
+            $this->db->from("application_details");
+            $this->db->where('status','approved');
 
-        $query = $this->db->get();
-        $result = $query->num_rows();
+            $query = $this->db->get();
+            $result = $query->num_rows();    
+        }
+        else
+        {
+            $this->db->select('*');
+            $this->db->from($table_name);
+
+            $query = $this->db->get();
+            $result = $query->num_rows();
+    }
         return $result;
     }
 
@@ -524,6 +536,63 @@ class User_model extends CI_Model
         $query = $this->db->get();
         $result = $query->result();
         return $result;    
+    }
+
+    function getBeneficiariesForNodal($role)
+    {
+         $user = $this->session->userdata('name');
+        if($role == ROLE_STATE_ADMIN)
+        {
+            $this->db->select('COUNT(app.application_details_id) as application_count,sch.scheme_name,hosp.hospital_name');
+            $this->db->from('application_details app');
+            $this->db->join('scheme sch','app.scheme_id = sch.scheme_id','right');
+            $this->db->join('hospital hosp','app.hospital_id = hosp.hospital_id','right');
+            $this->db->where('app.status','approved');
+            // $this->db->where('hosp.state',$user);
+            $this->db->group_by('app.hospital_id');
+            $this->db->group_by('sch.scheme_name');
+
+            $query = $this->db->get();
+            $result = $query->result();
+            return $result;
+        }
+        else if($role == ROLE_DISTRICT_ADMIN)
+        {
+            $this->db->select('COUNT(app.application_details_id) as application_count,sch.scheme_name,hosp.hospital_name');
+            $this->db->from('application_details app');
+            $this->db->join('scheme sch','app.scheme_id = sch.scheme_id','right');
+            $this->db->join('hospital hosp','app.hospital_id = hosp.hospital_id','right');
+            $this->db->where('app.status','approved');
+            // $this->db->where('hosp.district',$user);
+            $this->db->group_by('app.hospital_id');
+            $this->db->group_by('sch.scheme_name');
+
+            $query = $this->db->get();
+            $result = $query->result();
+            return $result;
+        }
+    }
+
+    function getReports($id,$role)
+    {
+        if($role == ROLE_STATE_ADMIN)
+        {
+            $this->db->select('emp.empanelment_request_id,sch.scheme_name,emp.documents,emp.status,emp.stateAdmin_status');
+            $this->db->from('empanelment_request emp');
+            $this->db->join('scheme sch','emp.scheme_id = sch.scheme_id');
+            $this->db->where('districtAdmin_status','approved');
+        }
+        else
+        {
+            $this->db->select('emp.empanelment_request_id,sch.scheme_name,emp.documents,emp.status,emp.districtAdmin_status');
+            $this->db->from('empanelment_request emp');
+            $this->db->join('scheme sch','emp.scheme_id = sch.scheme_id');
+            $this->db->where('districtAdmin_id',$id);    
+        }
+
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
     }
 
 }

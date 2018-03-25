@@ -30,7 +30,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px"></sup></h3>
+                  <h3><?php echo $numberOfBeneficiaries ?><sup style="font-size: 20px"></sup></h3>
                   <p>Beneficiaries</p>
                 </div>
                 <div class="icon">
@@ -89,7 +89,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px"></sup></h3>
+                  <h3><?php echo $numberOfBeneficiaries ?>sup style="font-size: 20px"></sup></h3>
                   <p>Beneficiaries</p>
                 </div>
                 <div class="icon">
@@ -138,7 +138,7 @@
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>44</h3>
+                  <h3><?php echo $numberOfBeneficiaries ?></h3>
                   <p>Beneficiaries</p>
                 </div>
                 <div class="icon">

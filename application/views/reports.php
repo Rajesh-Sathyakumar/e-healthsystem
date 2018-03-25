@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
      <section class="content-header">
       <h1>
-        Empanelment requests to be approved
+        Empanelment requests under your incharge
       </h1>
     </section>
 
@@ -28,16 +28,22 @@
                 </thead>
                 <tbody>
                   <?php
-                    if(!empty($approvalRecords))
+                    if(!empty($reports))
                     {
-                        foreach($approvalRecords as $record)
+                        foreach($reports as $record)
                         {
                           $id = $record->empanelment_request_id; 
                     ?>
                     <tr>
                       <td><?php echo $record->empanelment_request_id ?></td>
                       <td><?php echo $record->scheme_name ?></td>
-                      <td><?php echo $record->documents ?></td>
+                      <td>
+                        <a href="downloadFile.txt" download>
+                          <button type="button" class="btn btn-info">
+                            <span class="glyphicon glyphicon-download"></span>
+                          </button>
+                        </a>
+                      </td>
                       <td><?php echo $record->status ?></td>
                       <td><a class="btn btn-info btn-sm" href="<?php echo base_url(); ?>showRequestProfile/<?php echo $record->empanelment_request_id ?>" title="View Request" enabled="true">View</a></td>
                       <td><?php 

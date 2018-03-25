@@ -100,7 +100,21 @@
                     <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="hospitalName" name="hospitalName" placeholder="Name of admin">
+                      <?php
+                      if($role == ROLE_STATE_ADMIN)
+                      {
+                        ?>
+                      <input type="text" class="form-control" id="hospitalName" name="hospitalName" placeholder="Name of admin" value = "State Admin" readonly="true">
+                    <?php
+                    }
+                    else
+                    {
+                      ?>
+                      <input type="text" class="form-control" id="hospitalName" name="hospitalName" placeholder="Name of admin" value = "District Admin" readonly="true">
+                      <?php  
+                    }
+                    ?>
+
                     </div>
                   </div>
                   <?php 
@@ -111,7 +125,7 @@
                     <label for="inputName" class="col-sm-2 control-label">State</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="stateName" name="stateName" placeholder="State Name">
+                      <input type="text" class="form-control" id="stateName" name="stateName" placeholder="State Name" value ="<?php echo $this->session->userdata('name'); ?>" readonly="true">
                     </div>
                   </div>
                   <?php
@@ -123,7 +137,7 @@
                     <label for="inputName" class="col-sm-2 control-label">District</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="districtName" name="districtName" placeholder="District Name">
+                      <input type="text" class="form-control" id="districtName" name="districtName" placeholder="District Name" value="<?php echo $this->session->userdata('name'); ?>" readonly="true">
                     </div>
                   </div>
                   <?php

@@ -160,7 +160,7 @@
                             </a>
                             <ul class="treeview-menu">
                               <li class="active">
-                                    <a href="<?php echo site_url('scheme/index');?>"><i class="fa fa-list-ul"></i> Listing</a>
+                                    <a href="<?php echo site_url('user/schemesList');?>"><i class="fa fa-list-ul"></i> Listing</a>
                               </li> 
                             </ul>
             <?php
@@ -208,7 +208,7 @@
               </a>
             </li>
             <li class="treeview">
-              <a href="#" >
+              <a href="<?php echo base_url(); ?>/reports" >
                 <i class="fa fa-files-o"></i>
                 <span>Reports</span>
               </a>
