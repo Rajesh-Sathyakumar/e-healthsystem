@@ -94,6 +94,8 @@ $route['addHospitalInfo'] = "user/addHospitalInfo";
 $route['empanelrequest'] = "user/empanelrequest";
 $route['requestprocess/(:any)'] = "user/requestprocess/$1";
 $route['proceedRequest/(:any)'] = "user/proceedRequest/$1";
+$route['viewrequest'] = "user/viewrequest";
+
 
 
 

@@ -87,7 +87,11 @@ class User extends BaseController
             $hospitalId = $this->user_model->getHospitalId($this->session->userdata('email'));
         //echo $hospitalId;
         //$this->user_model->getBeneficiaries($hospitalId);
+
          $data['beneficiariesResult'] = $this->user_model->getBeneficiaries($hospitalId);
+
+         $data['schemeNames'] = $this->user_model->getSchemeName($hospitalId);
+
             $this->loadViews("beneficiaries", $this->global, $data, NULL);
         
     }
@@ -602,8 +606,8 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     function schemesList()
     {
         $this->global['pageTitle'] = 'e-Healthcare : Schemes List';
-        //$hospitalId = $this->user_model->getHospitalId($this->session->userdata('email'));
-        $data['schemeRecords'] = $this->user_model->schemesListing();
+        $hospitalId = $this->user_model->getHospitalId($this->session->userdata('email'));
+        $data['schemeRecords'] = $this->user_model->schemesListing($hospitalId);
         //$this->user_model->getSchemeEmpanelment($hospitalId,)    
         $this->loadViews("schemes", $this->global, $data, NULL);
     }
@@ -615,11 +619,17 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         $hospitalId = $this->user_model->getHospitalId($email);
         // echo $schemeId;
         // echo $email;
-        // echo $hospitalId;      
+        // echo $hospitalId;    
+        $this->global['pageTitle'] = 'e-Healthcare : schemesList';
+  
         $this->user_model->requestProcessing($schemeId, $email, $hospitalId );
-        $this->global['pageTitle'] = 'e-Healthcare : Dashboard';
-          $this->loadViews("dashboard", $this->global, NULL, NULL);
+        //$this->global['pageTitle'] = 'e-Healthcare : schemesList';
+          $this->loadViews("schemes", $this->global, NULL, NULL);
 
+
+    }
+    function addPatientDetails()
+    {
 
     }
 
@@ -640,6 +650,13 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     //     $this->global['pageTitle'] = 'e-Healthcare : Empanelment Request';
     //     $this->loadViews("empanelform", $this->global, NULL, NULL);
     // }
+
+
+    function viewrequest()
+    {
+        $this->global['pageTitle'] = 'e-Healthcare : View Timeline';
+         $this->loadViews("requestTimeline", $this->global, NULL, NULL);
+    }
 }
 
 ?>

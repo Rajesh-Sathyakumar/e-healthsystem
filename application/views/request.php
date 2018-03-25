@@ -1,19 +1,20 @@
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    
+     <section class="content-header">
+      <h1>
+      Empanelment Application Request Tracking
+    </h1>
+    </section>
+
 
     <!-- Main content -->
 
 
-     <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Empanelment Application Request Tracking</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -24,7 +25,7 @@
                     <th>Empanelment Request ID</th>
                     <th>Scheme</th>
                     <th>Status</th>
-                    <th>Description</th>
+                    <th>View</th>
                     
                   </tr>
                   </thead>
@@ -40,7 +41,8 @@
                       <td><?php echo $record->empanelment_request_id ?></td>
                       <td><?php echo $record->scheme_name ?></td>
                       <td><?php echo $record->status ?></td>
-                      <td><?php echo $record->status_message ?></td>
+                      <td>
+                      <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>viewrequest"  title="Approve Button" enabled="true">view</a></td>
                       
                         <?php
                       }
@@ -56,13 +58,10 @@
               </div>
               <!-- /.table-responsive -->
             </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-                          </div>
-            <!-- /.box-footer -->
+         
           </div>
           <!-- /.box -->
         </div>
-        <
+      </section>
     <!-- /.content -->
   </div>

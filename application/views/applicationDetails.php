@@ -1,23 +1,25 @@
  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    <!-- Con<section class="content-header">
+     content Header (Page header) -->
     
-
+    <section class="content-header">
+      <h1>
+        Beneficiaries Details Tracking
+      </h1>
+        
+     
+    </section>
     <!-- Main content -->
 
 
-     <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Application Details Tracking</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <div class="table-responsive">
                 <table class="table no-margin">
                   <thead>
                   <tr>
@@ -60,10 +62,9 @@
               <!-- /.table-responsive -->
             </div>
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              
-            </div>
+           </div>
             <!-- /.box-footer -->
           </div>
+        </section>
           <!-- /.box -->
         </div>

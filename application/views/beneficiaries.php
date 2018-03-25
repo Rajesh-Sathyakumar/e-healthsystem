@@ -1,21 +1,79 @@
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    
+     <section class="content-header">
+      <h1>
+     Beneficiaries Details Tracking
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+               Add Patient
+              </button>
+    </h1>
+    </section>
 
     <!-- Main content -->
 
-
-     <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Beneficiaries Details Tracking</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
+ <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
             </div>
             <!-- /.box-header -->
+
+
+        <div class="modal fade" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add Details</h4>
+              </div>
+              <div class="modal-body">
+               <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Scheme</label>
+
+                    <div class="form-group">
+                  <label>Select</label>
+                  <select class="form-control">
+                    <option></option>
+                  </select>
+               
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Patient Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputEmail" placeholder="Number of Patient benefited">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Disease</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputEmail" placeholder="Disease">
+                    </div>
+                  </div>
+                    <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Fund allocated</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputEmail" placeholder="Fund allocated">
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+               <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>addPatientDetails" title="Login history" enabled="true">View</a>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+
+
             <div class="box-body">
               <div class="table-responsive">
                 <table class="table no-margin">
@@ -57,10 +115,8 @@
               <!-- /.table-responsive -->
             </div>
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              
-            </div>
-            <!-- /.box-footer -->
+         </div>
           </div>
+        </section>
           <!-- /.box -->
         </div>
