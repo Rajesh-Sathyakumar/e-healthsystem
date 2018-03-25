@@ -37,7 +37,6 @@
     placeholder: "Select one"
 });
 });
-
     </script>
   </body>
 </html>
