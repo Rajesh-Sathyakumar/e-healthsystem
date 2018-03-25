@@ -270,16 +270,91 @@ class User_model extends CI_Model
         return $query->row();
     }
 
-    function schemesListing()
+    function schemesListing($hospitalId)
     {
+        // $this->db->select('scheme_id, scheme_name, description');
+        // $this->db->from('scheme');
+        // $query = $this->db->get();
+
+        //  $result = $query->result();        
+        //  return $result; 
+        $this->db->select('scheme_id');
+        $this->db->from('empanelment_request');
+        $this->db->where('hospital_id',$hospitalId);
+        $query = $this->db->get();
+        $result = $query->result();
+        $schemeIds = array();
+        foreach($result as $row)
+        {
+            $schemeIds[] = $row->scheme_id;
+         }
+         $ids = implode(",",$schemeIds);
+         $list = explode(",",$ids);
+
         $this->db->select('scheme_id, scheme_name, description');
         $this->db->from('scheme');
+        $this->db->where_not_in('scheme_id',$list);
         $query = $this->db->get();
+        //echo $query->num_rows();
 
          $result = $query->result();        
          return $result; 
 
+
     }
+
+    function getSchemeName($hospitalId)
+    {
+        $this->db->select('scheme_id');
+        $this->db->from('empanelment_request');
+        $this->db->where('hospital_id',$hospitalId);
+         $this->db->where('status','approved');
+
+        $query = $this->db->get();
+        $result = $query->result();
+        $schemeIds = array();
+        foreach($result as $row)
+        {
+            $schemeIds[] = $row->scheme_id;
+         }
+         $ids = implode(",",$schemeIds);
+         $list = explode(",",$ids);
+
+        $this->db->select('scheme_id, scheme_name, description');
+        $this->db->from('scheme');
+        $this->db->where_in('scheme_id',$list);
+        $query = $this->db->get();
+        echo $query->num_rows();
+
+
+
+        //  $result = $query->result();  
+        //  $schemeNames =array();
+        //   foreach($result as $row)
+        // {
+        //     $schemeNames[] = $row->scheme_id;
+        //  }
+        //  $ids = implode(",",$schemeNames);
+        //  $list = explode(",",$names);
+
+        // $this->db->select('scheme_name');
+        // $this->db->from('scheme');
+        // $this->db->where_in('scheme_name',$list);
+        // $query = $this->db->get();
+
+        //  return $result; 
+    }
+
+
+    // function getSchemeName($result)
+    // {
+    //     //    $this->db->select('scheme_name');
+    //     // $this->db->from('scheme');
+    //     // $this->db->where('hospital_id',$hospitalId);
+    //     $scheme_name = array();
+
+    // }
+
 
     function populateprofilefields($email)
     {
@@ -454,4 +529,4 @@ class User_model extends CI_Model
 }
 
   
-
+ 
