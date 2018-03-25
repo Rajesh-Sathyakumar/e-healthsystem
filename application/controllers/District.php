@@ -23,9 +23,8 @@ class District extends BaseController{
 
         
        // $data['district_admin'] = $this->District_model->get_district_admin($data['user_id']);
-        
-        $data['_view'] = 'district/index';
        // $this->load->view('layouts/main',$data);
+         $this->global['pageTitle']="List Districts";
         $this->loadViews('district/index', $this->global, $data , NULL);
     }
 
@@ -44,6 +43,7 @@ class District extends BaseController{
             redirect('district/index');
         }
         else
+             $this->global['pageTitle']="Add Districts";
             $this->loadViews('district/add', $this->global, NULL, NULL);
         }
 
@@ -67,7 +67,7 @@ class District extends BaseController{
                 redirect('district/index');
             }
             else
-            {
+            {   $this->global['pageTitle']="Edit Districts";
                 $this->loadViews('district/edit', $this->global, $data , NULL);
             }
         }
