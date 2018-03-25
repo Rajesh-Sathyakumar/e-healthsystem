@@ -99,6 +99,7 @@ $route['addHospitalInfo'] = "user/addHospitalInfo";
 $route['empanelrequest'] = "user/empanelrequest";
 $route['requestprocess/(:any)'] = "user/requestprocess/$1";
 $route['proceedRequest/(:any)'] = "user/proceedRequest/$1";
+$route['reports'] = "user/reports";
 
 
 /* End of file routes.php */

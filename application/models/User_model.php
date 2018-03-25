@@ -322,11 +322,12 @@ class User_model extends CI_Model
 
     function approvalForState($id = null)
     {
-
+            
             $this->db->select('er.empanelment_request_id,er.documents,er.status,er.stateAdmin_status,sc.scheme_name');
             $this->db->from('empanelment_request er');
             $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','right');
             $this->db->where('districtAdmin_status','approved');
+            // $this->db->where('stateAdmin_status','');
 
             $query = $this->db->get();
 
@@ -340,6 +341,7 @@ class User_model extends CI_Model
         $this->db->from('empanelment_request er');
         $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','right');
         $this->db->where('districtAdmin_id',$id);
+        // $this->db->where('districtAdmin_status','');
 
         $query = $this->db->get();
 
@@ -424,6 +426,29 @@ class User_model extends CI_Model
         $query = $this->db->get();
         $result = $query->num_rows();
         return $result;
+    }
+
+    function getAllRequests($role)
+    {
+        if($role == ROLE_STATE_ADMIN)
+        {
+            $this->db->select('er.empanelment_request_id,er.documents,er.status,er.stateAdmin_status,sc.scheme_name');
+            $this->db->from('empanelment_request er');
+            $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','right');
+            $this->db->where('districtAdmin_status','approved');
+        }
+        else if($role == ROLE_DISTRICT_ADMIN)
+        {
+            $this->db->select('er.empanelment_request_id,er.documents,er.status,er.districtAdmin_status,sc.scheme_name');
+            $this->db->from('empanelment_request er');
+            $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','right');
+            $this->db->where('districtAdmin_status','');
+        }
+
+
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;    
     }
 
 }

@@ -16,6 +16,7 @@
               </div>
             </div>
             <!-- /.box-header -->
+            
             <div class="box-body">
               <div class="table-responsive">
                 <table class="table no-margin">
@@ -41,16 +42,13 @@
                       <td><?php echo $record->scheme_count ?></td>
                       <td><a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>listBeneficiaries/<?php echo $record->schemeName; ?>" title="Login history" enabled="true">View</a></td>
                       
-                      
-                        <?php
+                      <?php
                       }
                       ?>
                     </tr>
                     <?php
-                        }
-                   
+                      }
                     ?>
-                  
                   </tbody>
                 </table>
              </div>

@@ -87,13 +87,21 @@ class User extends BaseController
 
     function beneficiaries()
     {
-           
-             $this->global['pageTitle'] = 'e-Healthcare : Beneficiaries';
+            $role = $this->session->userdata('role');
+            $this->global['pageTitle'] = 'e-Healthcare : Beneficiaries';
+            if($role == ROLE_HOSPITAL)
+            {   
+            
             $hospitalId = $this->user_model->getHospitalId($this->session->userdata('email'));
         //echo $hospitalId;
         //$this->user_model->getBeneficiaries($hospitalId);
          $data['beneficiariesResult'] = $this->user_model->getBeneficiaries($hospitalId);
             $this->loadViews("beneficiaries", $this->global, $data, NULL);
+        }
+        else
+        {
+            $this->loadViews("beneficiaries", $this->global, NULL, NULL);
+        }
         
     }
     public function schemes()
@@ -310,7 +318,6 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         {
             $this->load->model('user_model');
             $data['roles'] = $this->user_model->getUserRoles();
-            
             $this->global['pageTitle'] = 'e-Healthcare : Add New User';
 
             $this->loadViews("addNew", $this->global, $data, NULL);
@@ -666,6 +673,15 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         $this->loadViews("dashboard", $this->global, NULL, NULL);
 
 
+    }
+
+    function reports()
+    {
+        $this->global['pageTitle'] = 'e-Healthcare : Reports';
+        $role = $this->session->userdata('role');
+
+        $data['showAllRequests'] = $this->user_model->getAllRequests($role);
+        $this->loadViews("reports", $this->global, $data, NULL);
     }
 
 
