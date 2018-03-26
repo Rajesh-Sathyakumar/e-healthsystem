@@ -270,6 +270,66 @@ class User_model extends CI_Model
         return $query->row();
     }
 
+
+
+
+    function getSchemeName($hospitalId)
+    {
+        $this->db->select('scheme_id');
+        $this->db->from('empanelment_request');
+        $this->db->where('hospital_id',$hospitalId);
+         $this->db->where('status','approved');
+        $query = $this->db->get();
+        $result = $query->result();
+        $schemeIds = array();
+        foreach($result as $row)
+        {
+            $schemeIds[] = $row->scheme_id;
+         }
+         $ids = implode(",",$schemeIds);
+         $list = explode(",",$ids);
+        $this->db->select('scheme_name');
+        $this->db->from('scheme');
+        $this->db->where_in('scheme_id',$list);
+        $query = $this->db->get();
+        return $query->result();
+        //echo $query->num_rows();
+    }
+    function getdiseases($hospitalId)
+    {
+        $this->db->select('scheme_id');
+        $this->db->from('empanelment_request');
+        $this->db->where('hospital_id',$hospitalId);
+         $this->db->where('status','approved');
+        $query = $this->db->get();
+        $result = $query->result();
+        $schemeIds = array();
+        foreach($result as $row)
+        {
+            $schemeIds[] = $row->scheme_id;
+         }
+         $ids = implode(",",$schemeIds);
+         $list = explode(",",$ids);
+         $this->db->select('disease_id');
+        $this->db->from('disease_coverage');
+        $this->db->where_in('scheme_id',$list);
+        $query = $this->db->get();
+        $result =  $query->result();
+        $diseaseIds = array();
+        foreach($result as $row)
+        {
+            $diseaseIds[] = $row->disease_id;
+         }
+         $ids = implode(",",$diseaseIds);
+         $list = explode(",",$ids);
+        $this->db->select('disease_name');
+        $this->db->from('disease');
+        $this->db->where_in('disease_id',$list);
+         $query = $this->db->get();
+         //echo $query->num_rows();
+        return $query->result();
+    }
+
     function schemesListing($hospitalId)
     {
         // $this->db->select('scheme_id, scheme_name, description');
@@ -303,59 +363,7 @@ class User_model extends CI_Model
 
     }
 
-    function getSchemeName($hospitalId)
-    {
-        $this->db->select('scheme_id');
-        $this->db->from('empanelment_request');
-        $this->db->where('hospital_id',$hospitalId);
-         $this->db->where('status','approved');
-
-        $query = $this->db->get();
-        $result = $query->result();
-        $schemeIds = array();
-        foreach($result as $row)
-        {
-            $schemeIds[] = $row->scheme_id;
-         }
-         $ids = implode(",",$schemeIds);
-         $list = explode(",",$ids);
-
-        $this->db->select('scheme_id, scheme_name, description');
-        $this->db->from('scheme');
-        $this->db->where_in('scheme_id',$list);
-        $query = $this->db->get();
-        echo $query->num_rows();
-
-
-
-        //  $result = $query->result();  
-        //  $schemeNames =array();
-        //   foreach($result as $row)
-        // {
-        //     $schemeNames[] = $row->scheme_id;
-        //  }
-        //  $ids = implode(",",$schemeNames);
-        //  $list = explode(",",$names);
-
-        // $this->db->select('scheme_name');
-        // $this->db->from('scheme');
-        // $this->db->where_in('scheme_name',$list);
-        // $query = $this->db->get();
-
-        //  return $result; 
-    }
-
-
-    // function getSchemeName($result)
-    // {
-    //     //    $this->db->select('scheme_name');
-    //     // $this->db->from('scheme');
-    //     // $this->db->where('hospital_id',$hospitalId);
-    //     $scheme_name = array();
-
-    // }
-
-
+   
     function populateprofilefields($email)
     {
         $this->db->select('*');
@@ -402,7 +410,7 @@ class User_model extends CI_Model
             $this->db->from('empanelment_request er');
             $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','right');
             $this->db->where('districtAdmin_status','approved');
-            $this->db->where('stateAdmin_status','');
+            $this->db->where('stateAdmin_status',null);
 
             $query = $this->db->get();
 

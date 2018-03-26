@@ -50,12 +50,7 @@
 							<input type="text" name="maximum_amount" value="<?php echo $this->input->post('maximum_amount'); ?>" class="form-control" id="maximum_amount" />
 						</div>
 					</div>
-					<div class="col-md-6">
-						<label for="guidelines" class="control-label">Guidelines</label>
-						<div class="form-group">
-							<input type="text" name="guidelines" value="<?php echo $this->input->post('guidelines'); ?>" class="form-control" id="guidelines" />
-						</div>
-					</div>
+					
 					<div class="col-md-6">
 						<label for="fund_allocated" class="control-label">Fund Allocated</label>
 						<div class="form-group">

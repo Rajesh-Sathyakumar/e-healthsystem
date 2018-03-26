@@ -44,7 +44,7 @@ class Scheme extends BaseController
 				'type_id' => $this->input->post('type_id'),
 				'scheme_name' => $this->input->post('scheme_name'),
 				'maximum_amount' => $this->input->post('maximum_amount'),
-				'guidelines' => $this->input->post('guidelines'),
+				
 				'creation_date' => date("Y-m-d h:i:sa"),
 				'updation_date' => date("Y-m-d h:i:sa"),
 				'fund_allocated' => $this->input->post('fund_allocated'),
