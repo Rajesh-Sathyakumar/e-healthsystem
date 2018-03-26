@@ -39,7 +39,7 @@
                       <td><?php echo $record->scheme_name ?></td>
                       <td>
                         <a href="downloadFile.txt" download>
-                          <button type="button" class="btn btn-info">
+                          <button type="button" class="btn btn-info btn-sm">
                             <span class="glyphicon glyphicon-download"></span>
                           </button>
                         </a>
