@@ -420,13 +420,21 @@
                        <input type="text" class="form-control" id="state" value = "<?php echo $profilefields->state; ?>" name="state" placeholder="state">
                     </div>
                   </div>
-                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">District</label>
-
+                  <div class="form-group" >
+                   <label for="district" class="col-sm-2 control-label">District Name</label>
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="District" value = "<?php echo $profilefields->district; ?>" name="District" placeholder="District">
-                    </div>
-                  </div>
+                                   <select class="form-control required" name="district_id">
+                                   <?php
+                               foreach($district_all as $district)
+                               {
+                                   $selected = ($district['district_id'] == $this->input->post('district_id')) ? ' selected="selected"' : "";
+
+                                   echo '<option value="'.$district['district_id'].'" '.$selected.'>'.$district['district_name'].'</option>';
+                               }
+                               ?>
+                                   </select>
+                                   </div>
+                                 </div>
                    <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Location</label>
 

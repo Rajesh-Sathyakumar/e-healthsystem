@@ -286,7 +286,7 @@
                     <label for="inputName" class="col-sm-2 control-label">District</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="District" name="District" placeholder="District" readonly="true" value="<?php echo $requestDetails->district ?>">
+                       <input type="text" class="form-control" id="District" name="District" placeholder="District" readonly="true" value="<?php echo $district_name ?>">
                     </div>
                   </div>
                    <div class="form-group">
@@ -306,7 +306,7 @@
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Remarks</label>
                     <div class="col-sm-10">
-                      <textarea type="text" class="form-control" id="comments" name="comments" placeholder="Enter your remarks here"></textarea>
+                      <textarea type="text" class="form-control" id="comments" name="comments" placeholder="Enter your remarks here" required="true"></textarea>
                     </div>
                   </div>
                   <div class="form-group">

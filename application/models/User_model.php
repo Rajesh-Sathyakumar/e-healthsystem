@@ -270,46 +270,15 @@ class User_model extends CI_Model
         return $query->row();
     }
 
-    function schemesListing($hospitalId)
-    {
-        // $this->db->select('scheme_id, scheme_name, description');
-        // $this->db->from('scheme');
-        // $query = $this->db->get();
-
-        //  $result = $query->result();        
-        //  return $result; 
-        $this->db->select('scheme_id');
-        $this->db->from('empanelment_request');
-        $this->db->where('hospital_id',$hospitalId);
-        $query = $this->db->get();
-        $result = $query->result();
-        $schemeIds = array();
-        foreach($result as $row)
-        {
-            $schemeIds[] = $row->scheme_id;
-         }
-         $ids = implode(",",$schemeIds);
-         $list = explode(",",$ids);
-
-        $this->db->select('scheme_id, scheme_name, description');
-        $this->db->from('scheme');
-        $this->db->where_not_in('scheme_id',$list);
-        $query = $this->db->get();
-        //echo $query->num_rows();
-
-         $result = $query->result();        
-         return $result; 
 
 
-    }
 
- function getSchemeName($hospitalId)
+    function getSchemeName($hospitalId)
     {
         $this->db->select('scheme_id');
         $this->db->from('empanelment_request');
         $this->db->where('hospital_id',$hospitalId);
          $this->db->where('status','approved');
-
         $query = $this->db->get();
         $result = $query->result();
         $schemeIds = array();
@@ -319,17 +288,45 @@ class User_model extends CI_Model
          }
          $ids = implode(",",$schemeIds);
          $list = explode(",",$ids);
-
         $this->db->select('scheme_name');
         $this->db->from('scheme');
         $this->db->where_in('scheme_id',$list);
         $query = $this->db->get();
         return $query->result();
         //echo $query->num_rows();
-
-
-
     }
+
+
+
+
+    // function getdiseases($hospitalId)
+
+    // {
+    //     $this->db->select('scheme_id');
+    //     $this->db->from('empanelment_request');
+    //     $this->db->where('hospital_id',$hospitalId);
+    //      $this->db->where('status','approved');
+    //     $query = $this->db->get();
+    //     $result = $query->result();
+    //     $schemeIds = array();
+    //     foreach($result as $row)
+    //     {
+    //         $schemeIds[] = $row->scheme_id;
+    //      }
+    //      $ids = implode(",",$schemeIds);
+    //      $list = explode(",",$ids);
+
+
+    //     $this->db->select('scheme_name');
+    //     $this->db->from('scheme');
+    //     $this->db->where_in('scheme_id',$list);
+    //     $query = $this->db->get();
+    //     return $query->result();
+    //     //echo $query->num_rows();
+
+
+
+    // }
 
 
     function getdiseases($hospitalId)
@@ -353,6 +350,12 @@ class User_model extends CI_Model
         $this->db->from('disease_coverage');
         $this->db->where_in('scheme_id',$list);
         $query = $this->db->get();
+
+         $this->db->select('disease_id');
+        $this->db->from('disease_coverage');
+        $this->db->where_in('scheme_id',$list);
+        $query = $this->db->get();
+
         $result =  $query->result();
         $diseaseIds = array();
         foreach($result as $row)
@@ -375,16 +378,42 @@ class User_model extends CI_Model
     }
 
 
-    // function getSchemeName($result)
-    // {
-    //     //    $this->db->select('scheme_name');
-    //     // $this->db->from('scheme');
-    //     // $this->db->where('hospital_id',$hospitalId);
-    //     $scheme_name = array();
 
-    // }
+    function schemesListing($hospitalId)
+    {
+        // $this->db->select('scheme_id, scheme_name, description');
+        // $this->db->from('scheme');
+        // $query = $this->db->get();
+
+        //  $result = $query->result();        
+        //  return $result; 
+        $this->db->select('scheme_id');
+        $this->db->from('empanelment_request');
+        $this->db->where('hospital_id',$hospitalId);
+        $query = $this->db->get();
+        $result = $query->result();
+        $schemeIds = array();
+        foreach($result as $row)
+        {
+            $schemeIds[] = $row->scheme_id;
+         }
+         $ids = implode(",",$schemeIds);
+         $list = explode(",",$ids);
 
 
+        $this->db->select('scheme_id, scheme_name, description');
+        $this->db->from('scheme');
+        $this->db->where_not_in('scheme_id',$list);
+        $query = $this->db->get();
+        //echo $query->num_rows();
+
+         $result = $query->result();        
+         return $result; 
+
+
+    }
+
+   
     function populateprofilefields($email)
     {
         $this->db->select('*');
@@ -416,9 +445,21 @@ class User_model extends CI_Model
         $empanelment['hospital_id'] = $hospitalId;
         $empanelment['status'] ="pending";
         $empanelment['organisation_id'] = 1;
+        
+        $this->db->select('district_id');
+        $this->db->from('hospital');
+        $this->db->where('hospital_id',$hospitalId);
+
+        $query = $this->db->get();
+        $result = $query->row();
+        $districtAdmin_id = $result->district_id;
+        // echo $districtAdmin_id;
+        // echo $query->num_rows();
+        $empanelment['districtAdmin_id'] = $districtAdmin_id;
+
         $this->db->insert('empanelment_request', $empanelment);
-         $insert_id = $this->db->insert_id();
-         echo $insert_id;
+        $insert_id = $this->db->insert_id();
+        echo $insert_id;
 
     }
 
@@ -431,45 +472,50 @@ class User_model extends CI_Model
             $this->db->from('empanelment_request er');
             $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','right');
             $this->db->where('districtAdmin_status','approved');
-            $this->db->where('stateAdmin_status','');
+            $this->db->where('stateAdmin_status',null);
 
             $query = $this->db->get();
 
             $result = $query->result();
             return $result;
     }
+    function getDistrict($id)
+    {
+        // echo $id;
+       $this->db->select('district_id');
+       $this->db->from('district_admin');
+       $this->db->where('user_id',$id);
+       $query=  $this->db->get();
+       return $query->row()->district_id;
+
+    }
 
     function approvalForDistrict($id)
     {
+
+        $district_id = $this->user_model->getDistrict($id);
         $this->db->select('er.empanelment_request_id,er.documents,er.status,er.districtAdmin_status,sc.scheme_name');
         $this->db->from('empanelment_request er');
-        $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','right');
-        $this->db->where('districtAdmin_id',$id);
-        $this->db->where('districtAdmin_status','');
+        $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','left');
+        $this->db->where('er.districtAdmin_id',$district_id);
+        $this->db->where('er.districtAdmin_status',NULL);
 
-        $query = $this->db->get();
-
+        $query = $this->db->get();        
         $result = $query->result();
         return $result;
     }
 
-    // function detailsOfRequest($empanelment_request_id)
-    // {
+    function getDistrictName($id)
+    {
+        $this->db->select('district_name');
+        $this->db->from('district');
+        $this->db->where('district_id',$id);
 
-    //     $this->db->select('*');
-    //     $this->db->from('hospital');
-    //     $this->db->join('empanelment_request', 'empanelment_request.hospital_id = hospital.hospital_id','inner');
-    //     $this->db->where('empanelment_request_id',$empanelment_request_id);
 
-    //     $query = $this->db->get();
-    //     $result = $query->row();
-    //     //echo $query->num_rows();
-    //     // $finalResult['result'] = $result;
-    //     // $finalResult['empanelment_request_id'] = $empanelment_request_id;
-    //     // // echo $finalResult['empanelment_request_id'];
-    //     // // echo $finalResult['result']['hospital_id'];
-    //      return $result;
-    // }
+        $query = $this->db->get()->row()->district_name;
+        return $query;
+    }
+
 
     function detailsOfRequest($empanelment_request_id)
     {
@@ -478,7 +524,6 @@ class User_model extends CI_Model
         $this->db->join('empanelment_request', 'empanelment_request.hospital_id = hospital.hospital_id','left');
         $this->db->where('empanelment_request_id',$empanelment_request_id);
         $query = $this->db->get();
-        // echo $query->num_rows();
         $result = $query->row();
         return $result;
     }
@@ -494,7 +539,6 @@ class User_model extends CI_Model
             $data = array(
                'stateAdmin_comments' => $comments,
                'stateAdmin_status' => $status,
-               // 'status' => "State ".$status
                'status' => $status 
             );
         }
@@ -614,18 +658,19 @@ class User_model extends CI_Model
         }
         else
         {
+            $district_id = $this->getDistrict($id);
             $this->db->select('emp.empanelment_request_id,sch.scheme_name,emp.documents,emp.status,emp.districtAdmin_status');
             $this->db->from('empanelment_request emp');
             $this->db->join('scheme sch','emp.scheme_id = sch.scheme_id');
-            $this->db->where('districtAdmin_id',$id);    
+            $this->db->where('districtAdmin_id',$district_id);    
         }
 
         $query = $this->db->get();
         $result = $query->result();
         return $result;
     }
-
 }
+
 
   
  

@@ -154,8 +154,10 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
            
              $this->global['pageTitle'] = 'e-Healthcare : Profile Update';
              $this->load->model('user_model');
+             $this->load->model('District_model');
              $email = $this->session->userdata('email');
               //$this->user_model->populateprofilefields($email);
+              $data['district_all']=$this->District_model->get_all_district();
              $data['profilefields'] = $this->user_model->populateprofilefields($email);
             
              
@@ -214,7 +216,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         $this->form_validation->set_rules('generalNurses','general Nurses','required|max_length[128]|trim');
         $this->form_validation->set_rules('pharmacytype','pharmacy type','required|max_length[128]|trim'); 
         $this->form_validation->set_rules('state','state','required|max_length[128]|trim');
-         $this->form_validation->set_rules('District','District','required|max_length[128]|trim');
+         $this->form_validation->set_rules('district_id','district_id','required|max_length[128]|trim');
          $this->form_validation->set_rules('location','Location','required|max_length[128]|trim');
          $this->form_validation->set_rules('nabh','nabh Accredition','required|max_length[128]|trim');
 
@@ -263,7 +265,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                 $generalNurses = $this->security->xss_clean($this->input->post('generalNurses'));
                 $pharmacy_type = $this->security->xss_clean($this->input->post('pharmacytype'));
                 $state = $this->security->xss_clean($this->input->post('state'));
-                $district = $this->security->xss_clean($this->input->post('District'));
+                $district = $this->security->xss_clean($this->input->post('district_id'));
                 $location = $this->security->xss_clean($this->input->post('location'));
                 $hospital_type = $this->security->xss_clean($this->input->post('hospitaltype'));
                 $nabh = $this->security->xss_clean($this->input->post('nabh'));
@@ -305,7 +307,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                                         'generalNurses'=> $generalNurses, 
                                         'pharmacy_type'=>   $pharmacy_type,
                                         'state'=> $state,
-                                        'district'=> $district, 
+                                        'district_id'=> $district, 
                                         'location'=>  $location,
                                         'hospital_type'=>  $hospital_type, 
                                         'nabh'=>   $nabh);
@@ -397,9 +399,14 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                 $password = $this->input->post('password');
                 $roleId = $this->input->post('role');
                 $mobile = $this->security->xss_clean($this->input->post('mobile'));
+                $createdBy = 1;
+               if($this->session->userdata('session_variable')) 
+               {
+                    $createdBy = $this->vendorId;
+                }
                 
                 $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId, 'name'=> $name,
-                                    'mobile'=>$mobile, 'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'));
+                                    'mobile'=>$mobile, 'createdBy'=>$createdBy, 'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $this->load->model('user_model');
                 $result = $this->user_model->addNewUser($userInfo);
@@ -651,6 +658,10 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         $empanelment_request_id = $this->uri->segment(2);
 
         $data['requestDetails'] = $this->user_model->detailsOfRequest($empanelment_request_id);
+
+        $district_id =  $data['requestDetails']->district_id;
+
+        $data['district_name'] = $this->user_model->getDistrictName($district_id);
        
         $this->loadViews("requestDetails", $this->global, $data, NULL);
     }
@@ -694,7 +705,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         // echo $hospitalId;    
         $this->global['pageTitle'] = 'e-Healthcare : schemesList';
   
-        $this->user_model->requestProcessing($schemeId, $email, $hospitalId );
+        $this->user_model->requestProcessing($schemeId, $email, $hospitalId);
         $this->global['pageTitle'] = 'e-Healthcare : Dashboard';
         $this->loadViews("dashboard", $this->global, NULL, NULL);
 

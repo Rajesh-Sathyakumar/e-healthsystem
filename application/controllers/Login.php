@@ -128,7 +128,7 @@ public function addNewHospitalUser()
                 $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 $hospitalInfo = array('hospital_name'=>$name, 'hospital_incharge_name'=>$inchargeName, 'hospital_email'=>$email);
                 $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId, 'name'=> $inchargeName,
-                                 'mobile'=>$mobile, 'createdBy'=>"Hospital", 'createdDtm'=>date('Y-m-d H:i:s'));
+                                 'mobile'=>$mobile, 'createdBy'=>NULL, 'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $this->load->model('user_model');
                 $result1 = $this->user_model->addNewHospital($hospitalInfo);
