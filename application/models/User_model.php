@@ -427,8 +427,9 @@ class User_model extends CI_Model
     }
     function profileviewdata($email)
     {
-        $this->db->select('*');
-        $this->db->from('hospital');
+        $this->db->select('a.*, b.district_name');
+        $this->db->from('hospital a');
+        $this->db->join('district b', 'a.district_id = b.district_id','left');
         $this->db->where('hospital_email',$email);
         $query = $this->db->get();
 
@@ -446,20 +447,24 @@ class User_model extends CI_Model
         $empanelment['status'] ="pending";
         $empanelment['organisation_id'] = 1;
         
-        $this->db->select('district_id');
+        $this->db->select('hospital.district_id, district_admin.user_id');
         $this->db->from('hospital');
+        $this->db->join('district_admin', 'hospital.district_id=district_admin.district_id','left');
         $this->db->where('hospital_id',$hospitalId);
 
         $query = $this->db->get();
         $result = $query->row();
-        $districtAdmin_id = $result->district_id;
+        //$district_id = $result->district_id;
+        $districtAdmin_id = $result->user_id;
         // echo $districtAdmin_id;
-        // echo $query->num_rows();
+        // echo $district_id;
+        //echo $query->num_rows();
+
         $empanelment['districtAdmin_id'] = $districtAdmin_id;
 
         $this->db->insert('empanelment_request', $empanelment);
         $insert_id = $this->db->insert_id();
-        echo $insert_id;
+        
 
     }
 
@@ -497,7 +502,7 @@ class User_model extends CI_Model
         $this->db->select('er.empanelment_request_id,er.documents,er.status,er.districtAdmin_status,sc.scheme_name');
         $this->db->from('empanelment_request er');
         $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','left');
-        $this->db->where('er.districtAdmin_id',$district_id);
+        $this->db->where('er.districtAdmin_id',$id);
         $this->db->where('er.districtAdmin_status',NULL);
 
         $query = $this->db->get();        
@@ -658,11 +663,11 @@ class User_model extends CI_Model
         }
         else
         {
-            $district_id = $this->getDistrict($id);
+            //$district_id = $this->getDistrict($id);
             $this->db->select('emp.empanelment_request_id,sch.scheme_name,emp.documents,emp.status,emp.districtAdmin_status');
             $this->db->from('empanelment_request emp');
             $this->db->join('scheme sch','emp.scheme_id = sch.scheme_id');
-            $this->db->where('districtAdmin_id',$district_id);    
+            $this->db->where('districtAdmin_id',$id);    
         }
 
         $query = $this->db->get();

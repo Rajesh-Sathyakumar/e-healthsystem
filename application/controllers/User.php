@@ -152,17 +152,13 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     function profileupdate()
     {
            
-             $this->global['pageTitle'] = 'e-Healthcare : Profile Update';
-             $this->load->model('user_model');
-             $this->load->model('District_model');
-             $email = $this->session->userdata('email');
+            $this->global['pageTitle'] = 'e-Healthcare : Profile Update';
+            $this->load->model('user_model');
+            $this->load->model('District_model');
+            $email = $this->session->userdata('email');
               //$this->user_model->populateprofilefields($email);
-              $data['district_all']=$this->District_model->get_all_district();
-             $data['profilefields'] = $this->user_model->populateprofilefields($email);
-            
-             
-            
-           
+            $data['district_all']=$this->District_model->get_all_district();
+            $data['profilefields'] = $this->user_model->populateprofilefields($email);
             $this->loadViews("profile", $this->global, $data, NULL);
         
     }
@@ -707,7 +703,14 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
   
         $this->user_model->requestProcessing($schemeId, $email, $hospitalId);
         $this->global['pageTitle'] = 'e-Healthcare : Dashboard';
-        $this->loadViews("dashboard", $this->global, NULL, NULL);
+        $this->global['pageTitle'] = 'e-Healthcare : Dashboard';
+
+        $data['numberOfSchemes'] = $this->user_model->getNumber("scheme");
+        $data['numberOfPrograms'] = $this->user_model->getNumber("programme");
+        $data['numberOfUsers'] = $this->user_model->getNumber("tbl_users");
+        $data['numberOfHospitals'] = $this->user_model->getNumber("hospital");
+        $data['numberOfBeneficiaries'] = $this->user_model->getNumber("beneficiaries");
+        $this->loadViews("dashboard", $this->global, $data, NULL);
 
 
     }
