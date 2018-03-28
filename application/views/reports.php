@@ -16,6 +16,10 @@
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
+                <?php
+                if(!empty($reports))
+                    {
+                      ?>
                 <thead>
                 <tr>
                   <th>Request_id</th>
@@ -28,8 +32,6 @@
                 </thead>
                 <tbody>
                   <?php
-                    if(!empty($reports))
-                    {
                         foreach($reports as $record)
                         {
                           $id = $record->empanelment_request_id; 
@@ -95,7 +97,16 @@
                     } 
                 }
               }
+              else
+              {
                   ?>
+                  <div class="alert alert-info">
+                    <strong>No new requests</strong>
+                  </div>
+                  <?php
+                }
+                  ?>
+             
                 </tbody>
               </table>
             </div>

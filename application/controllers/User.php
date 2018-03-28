@@ -93,18 +93,30 @@ class User extends BaseController
     function  listBeneficiaries()
     {
         $this->global['pageTitle'] = 'e-Healthcare : ListBeneficiaries';
+        $role = $this->session->userdata('role');
+        $userId = $this->session->userdata('userId');
+        if($role == ROLE_HOSPITAL)
+        {
         $schemeName = $this->uri->segment(2);
-        
         //echo $schemeName;
          $hospitalId = $this->user_model->getHospitalId($this->session->userdata('email'));
          $data['listPatient'] = $this->user_model->getPatientDetails($hospitalId, $schemeName);
-         $this->loadViews("applicationDetails", $this->global, $data, NULL);
+     }
+     else if($role == ROLE_STATE_ADMIN || $role == ROLE_DISTRICT_ADMIN)
+     {
+            $schemeId = $this->uri->segment(2);
+            $hospitalId = $this->uri->segment(3);
+
+            $data['listBeneficiaries'] = $this->user_model->getPatientDetailsForNodal($role,$userId,$schemeId,$hospitalId);
+     }
+      $this->loadViews("applicationDetails", $this->global, $data, NULL);
 
     }
 
     function beneficiaries()
     {
             $role = $this->session->userdata('role');
+            $userId = $this->session->userdata('userId');
             $this->global['pageTitle'] = 'e-Healthcare : Beneficiaries';
             if($role == ROLE_HOSPITAL)
             {   
@@ -123,7 +135,7 @@ class User extends BaseController
         }
         else
         {
-            $data['beneficiaryDetailsForNodal'] = $this->user_model->getBeneficiariesForNodal($role);
+            $data['beneficiaryDetailsForNodal'] = $this->user_model->getBeneficiariesForNodal($role,$userId);
             $this->loadViews("beneficiaries", $this->global, $data, NULL);
         }
         

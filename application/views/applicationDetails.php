@@ -21,6 +21,10 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <table class="table no-margin">
+                  <?php
+                  if($role == ROLE_HOSPITAL)
+                  {
+                    ?>
                   <thead>
                   <tr>
                     <th>S.No</th>
@@ -30,7 +34,6 @@
                     
                   </tr>
                   </thead>
-                  <tbody>
                    <tbody>
                    <?php
                     if(!empty($listPatient))
@@ -52,11 +55,49 @@
                     <?php
                         }
                    
+                    ?>                  
+                  </tbody>
+                  <?php
+                }
+                else if($role == ROLE_STATE_ADMIN || $role == ROLE_DISTRICT_ADMIN)
+                {
+                  ?>
+                  <thead>
+                  <tr>
+                    <th>Application No.</th>
+                    <th>Patient Name</th>
+                    <th>Availed For</th>
+                    <th>Scheme Name</th>
+                    <th>Hospital Name</th>                    
+                    <th>Amount Credited</th>
+                  </tr>
+                  </thead>
+                   <tbody>
+                   <?php
+                    if(!empty($listBeneficiaries))
+                    {
+                        foreach($listBeneficiaries as $record)
+                        {
                     ?>
-                  
+                    <tr>
+                      <td><?php echo $record->application_reference ?></td>
+                      <td><?php echo $record->patientName ?></td>
+                      <td><?php echo $record->disease_name ?></td>
+                      <td><?php echo $record->scheme_name ?></td>
+                      <td><?php echo $record->hospital_name ?></td> 
+                      <td><?php echo $record->amount_credited ?></td>                     
+                        <?php
+                      }
+                      ?>
+                    </tr>
+                    <?php
+                        }
+                   
+                    ?>                  
                   </tbody>
-                  
-                  </tbody>
+                  <?php
+                }
+                ?>
                 </table>
               </div>
               <!-- /.table-responsive -->

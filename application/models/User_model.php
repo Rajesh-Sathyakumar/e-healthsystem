@@ -127,11 +127,11 @@ class User_model extends CI_Model
     }
     function getEmpanelmentRequestsListing($hospitalId)
     {
-         $this->db->select('a.empanelment_request_id, a.status, a.status_message, b.scheme_name');
-         $this->db->from('empanelment_request a'); 
+        $this->db->select('a.empanelment_request_id, a.status, a.status_message, b.scheme_name');
+        $this->db->from('empanelment_request a'); 
         $this->db->join('scheme b', 'a.scheme_id=b.scheme_id');
-    // $this->db->join('hospital c', 'c.hospital_id=a.hospital_id', 'left');
-    $this->db->where('a.hospital_id',$hospitalId);
+     // $this->db->join('hospital c', 'c.hospital_id=a.hospital_id', 'left');
+        $this->db->where('a.hospital_id',$hospitalId);
    
         $query = $this->db->get();
         return $query->result();
@@ -370,11 +370,6 @@ class User_model extends CI_Model
          $query = $this->db->get();
          //echo $query->num_rows();
         return $query->result();
-
-
-
-
-
     }
 
 
@@ -409,8 +404,6 @@ class User_model extends CI_Model
 
          $result = $query->result();        
          return $result; 
-
-
     }
 
    
@@ -435,7 +428,6 @@ class User_model extends CI_Model
         $result = $query->row();
         return $result;
     }
-
     function requestProcessing($schemeId, $email, $hospitalId)
     {
             // echo $schemeId;
@@ -446,15 +438,19 @@ class User_model extends CI_Model
         $empanelment['status'] ="pending";
         $empanelment['organisation_id'] = 1;
         
-        $this->db->select('district_id');
+        $this->db->select('hospital.district_id, district_admin.user_id');
         $this->db->from('hospital');
+        $this->db->join('district_admin', 'hospital.district_id=district_admin.district_id','left');
         $this->db->where('hospital_id',$hospitalId);
 
         $query = $this->db->get();
         $result = $query->row();
-        $districtAdmin_id = $result->district_id;
+        //$district_id = $result->district_id;
+        $districtAdmin_id = $result->user_id;
         // echo $districtAdmin_id;
-        // echo $query->num_rows();
+        // echo $district_id;
+        //echo $query->num_rows();
+
         $empanelment['districtAdmin_id'] = $districtAdmin_id;
 
         $this->db->insert('empanelment_request', $empanelment);
@@ -462,6 +458,33 @@ class User_model extends CI_Model
         echo $insert_id;
 
     }
+
+    // function requestProcessing($schemeId, $email, $hospitalId)
+    // {
+    //         // echo $schemeId;
+    //         // echo $email;
+    //         // echo $hospitalId;
+    //     $empanelment['scheme_id'] = $schemeId;
+    //     $empanelment['hospital_id'] = $hospitalId;
+    //     $empanelment['status'] ="pending";
+    //     $empanelment['organisation_id'] = 1;
+        
+    //     $this->db->select('district_id');
+    //     $this->db->from('hospital');
+    //     $this->db->where('hospital_id',$hospitalId);
+
+    //     $query = $this->db->get();
+    //     $result = $query->row();
+    //     $districtAdmin_id = $result->district_id;
+    //     // echo $districtAdmin_id;
+    //     // echo $query->num_rows();
+    //     $empanelment['districtAdmin_id'] = $districtAdmin_id;
+
+    //     $this->db->insert('empanelment_request', $empanelment);
+    //     $insert_id = $this->db->insert_id();
+    //     echo $insert_id;
+
+    // }
 
 
 
@@ -493,11 +516,11 @@ class User_model extends CI_Model
     function approvalForDistrict($id)
     {
 
-        $district_id = $this->user_model->getDistrict($id);
+        // $district_id = $this->user_model->getDistrict($id);
         $this->db->select('er.empanelment_request_id,er.documents,er.status,er.districtAdmin_status,sc.scheme_name');
         $this->db->from('empanelment_request er');
         $this->db->join('scheme sc','er.scheme_id = sc.scheme_id','left');
-        $this->db->where('er.districtAdmin_id',$district_id);
+        $this->db->where('er.districtAdmin_id',$id);
         $this->db->where('er.districtAdmin_status',NULL);
 
         $query = $this->db->get();        
@@ -585,7 +608,7 @@ class User_model extends CI_Model
 
             $query = $this->db->get();
             $result = $query->num_rows();
-    }
+         }
         return $result;
     }
 
@@ -612,18 +635,20 @@ class User_model extends CI_Model
         return $result;    
     }
 
-    function getBeneficiariesForNodal($role)
+    function getBeneficiariesForNodal($role,$userId)
     {
-         $user = $this->session->userdata('name');
+         
+         // echo $district_id;
+         // echo $role;
         if($role == ROLE_STATE_ADMIN)
         {
-            $this->db->select('COUNT(app.application_details_id) as application_count,sch.scheme_name,hosp.hospital_name');
+            $this->db->select('COUNT(app.application_details_id) as application_count,sch.scheme_name,hosp.hospital_name,sch.scheme_id,hosp.hospital_id');
             $this->db->from('application_details app');
             $this->db->join('scheme sch','app.scheme_id = sch.scheme_id','right');
             $this->db->join('hospital hosp','app.hospital_id = hosp.hospital_id','right');
             $this->db->where('app.status','approved');
             // $this->db->where('hosp.state',$user);
-            $this->db->group_by('app.hospital_id');
+            $this->db->group_by('hosp.hospital_id');
             $this->db->group_by('sch.scheme_name');
 
             $query = $this->db->get();
@@ -632,12 +657,13 @@ class User_model extends CI_Model
         }
         else if($role == ROLE_DISTRICT_ADMIN)
         {
-            $this->db->select('COUNT(app.application_details_id) as application_count,sch.scheme_name,hosp.hospital_name');
+            $district_id = $this->getDistrict($userId);
+            $this->db->select('COUNT(app.application_details_id) as application_count,sch.scheme_name,hosp.hospital_name,sch.scheme_id,hosp.hospital_id');
             $this->db->from('application_details app');
             $this->db->join('scheme sch','app.scheme_id = sch.scheme_id','right');
             $this->db->join('hospital hosp','app.hospital_id = hosp.hospital_id','right');
             $this->db->where('app.status','approved');
-            // $this->db->where('hosp.district',$user);
+            $this->db->where('hosp.district_id',$district_id);
             $this->db->group_by('app.hospital_id');
             $this->db->group_by('sch.scheme_name');
 
@@ -669,7 +695,68 @@ class User_model extends CI_Model
         $result = $query->result();
         return $result;
     }
+
+    function getIdByName($table_name,$name)
+    {
+        if($table_name == 'hospital')
+        {
+            $this->db->select('hospital_id');
+            $this->db->from('hospital');
+            $this->db->where('hospital_name',$name);
+
+            $query = $this->db->get();
+            $result = $query->row();
+        }
+        elseif ($table_name == 'scheme') 
+        {
+            $this->db->select('scheme_id');
+            $this->db->from('scheme');
+            $this->db->where('scheme_name', $name);
+
+            $query = $this->db->get();
+            $result = $query->row()->scheme_id;        
+        }  
+        return $result;  
+    }
+
+
+    function getPatientDetailsForNodal($role,$id,$scheme_id,$hospital_id)
+    {
+        if($role == ROLE_DISTRICT_ADMIN)
+        {
+            $district_id = $this->getDistrict($id);
+            $this->db->select('app.application_reference,hosp.hospital_name,sch.scheme_name,app.patientName,dise.disease_name,app.amount_credited');
+            $this->db->from('application_details app');
+            // $this->db->join('hospital hosp','app.hospital_id = '.$hospital_id);
+            $this->db->join('hospital hosp','app.hospital_id = hosp.hospital_id');
+            $this->db->join('scheme sch','app.scheme_id = sch.scheme_id');
+            $this->db->join('disease dise','app.disease_id = dise.disease_id');
+            $this->db->where('app.district_id',$district_id);
+            $this->db->where('hosp.hospital_id',$hospital_id);
+            $this->db->where('sch.scheme_id',$scheme_id);
+
+            $query = $this->db->get();
+            $result = $query->result();        
+        }
+        else if($role == ROLE_STATE_ADMIN)
+        {
+            $this->db->select('app.application_reference,hosp.hospital_name,sch.scheme_name,app.patientName,dise.disease_name,app.amount_credited');
+            $this->db->from('application_details app');
+            // $this->db->join('hospital hosp','app.hospital_id = '.$hospital_id);
+            $this->db->join('hospital hosp','app.hospital_id = hosp.hospital_id');
+            $this->db->join('scheme sch','app.scheme_id = sch.scheme_id');
+            $this->db->join('disease dise','app.disease_id = dise.disease_id');
+            // $this->db->where('app.district_id',$district_id);
+            $this->db->where('hosp.hospital_id',$hospital_id);
+            $this->db->where('sch.scheme_id',$scheme_id);
+
+            $query = $this->db->get();
+            $result = $query->result();       
+        }
+        return $result;
+    }
 }
+
 
 
   

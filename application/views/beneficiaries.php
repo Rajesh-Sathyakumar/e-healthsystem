@@ -189,7 +189,7 @@
                       <td><?php echo $record->scheme_name ?></td>
                       <td><?php echo $record->hospital_name ?></td>
                       <td><?php echo $record->application_count?></td>
-                      <td><a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>" title="Show Beneficiaries" enabled="true">View</a></td>
+                      <td><a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>listBeneficiaries/<?php echo $record->scheme_id ?>/<?php echo $record->hospital_id ?>" title="Show Beneficiaries" enabled="true">View</a></td>
                       
                       <?php
                       }
