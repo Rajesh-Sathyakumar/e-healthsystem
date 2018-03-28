@@ -280,7 +280,7 @@
                     <label for="inputName" class="col-sm-2 control-label">District</label>
 
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="District" value = "<?php echo $profiledata->district; ?>" name="District" placeholder="District" readonly>
+                       <input type="text" class="form-control" id="District" value = "<?php echo $profiledata->district_name; ?>" name="District" placeholder="District" readonly>
                     </div>
                   </div>
                    <div class="form-group">

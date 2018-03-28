@@ -420,8 +420,9 @@ class User_model extends CI_Model
     }
     function profileviewdata($email)
     {
-        $this->db->select('*');
-        $this->db->from('hospital');
+        $this->db->select('a.*, b.district_name');
+        $this->db->from('hospital a');
+        $this->db->join('district b', 'a.district_id = b.district_id','left');
         $this->db->where('hospital_email',$email);
         $query = $this->db->get();
 
@@ -455,7 +456,7 @@ class User_model extends CI_Model
 
         $this->db->insert('empanelment_request', $empanelment);
         $insert_id = $this->db->insert_id();
-        echo $insert_id;
+        
 
     }
 
@@ -684,11 +685,11 @@ class User_model extends CI_Model
         }
         else
         {
-            $district_id = $this->getDistrict($id);
+            //$district_id = $this->getDistrict($id);
             $this->db->select('emp.empanelment_request_id,sch.scheme_name,emp.documents,emp.status,emp.districtAdmin_status');
             $this->db->from('empanelment_request emp');
             $this->db->join('scheme sch','emp.scheme_id = sch.scheme_id');
-            $this->db->where('districtAdmin_id',$district_id);    
+            $this->db->where('districtAdmin_id',$id);    
         }
 
         $query = $this->db->get();
