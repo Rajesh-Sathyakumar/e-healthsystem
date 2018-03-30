@@ -351,7 +351,9 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         else
         {
             $this->load->model('user_model');
+            $this->load->model('District_model');
             $data['roles'] = $this->user_model->getUserRoles();
+            $data['district_all']=$this->District_model->get_all_district();
             $this->global['pageTitle'] = 'e-Healthcare : Add New User';
 
             $this->loadViews("addNew", $this->global, $data, NULL);
@@ -412,13 +414,26 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
                {
                     $createdBy = $this->vendorId;
                 }
-                
                 $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId, 'name'=> $name,
                                     'mobile'=>$mobile, 'createdBy'=>$createdBy, 'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $this->load->model('user_model');
                 $result = $this->user_model->addNewUser($userInfo);
-                
+                if($roleId==2){
+                $org_name = ucwords(strtolower($this->security->xss_clean($this->input->post('organization'))));   
+                $res = array('organisation_name'=>$org_name,'user_id' => $result);
+                $org_result =  $this->user_model->addOrganization($res);
+                }
+                if($roleId==3){
+                $hospital_name = ucwords(strtolower($this->security->xss_clean($this->input->post('hospital'))));  
+                $res = array('hospital_email'=>$email,'hospital_incharge_name'=> $name,'hospital_incharge_mobile'=>$mobile,'hospital_name'=>$hospital_name); 
+                $org_result =  $this->user_model->addHospital($res);
+                }
+                if($roleId==5){
+                $district_id = ucwords(strtolower($this->security->xss_clean($this->input->post('district_id'))));   
+                 $res = array('district_id'=>$district_id,'user_id' => $result);
+                 $district_result =  $this->user_model->addDistrictadmin($res);
+                }
                 if($result > 0)
                 {
                     $this->session->set_flashdata('success', 'New User created successfully');

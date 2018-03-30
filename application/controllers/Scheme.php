@@ -34,7 +34,7 @@ class Scheme extends BaseController
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('type_id','Type Id','required');
-        $data_file= $this->do_upload();
+        $data_file= $this->do_upload($this->input->post('userfile'));
 
         //echo $data_file;
 		
@@ -44,23 +44,24 @@ class Scheme extends BaseController
 				'type_id' => $this->input->post('type_id'),
 				'scheme_name' => $this->input->post('scheme_name'),
 				'maximum_amount' => $this->input->post('maximum_amount'),
-				
 				'creation_date' => date("Y-m-d h:i:sa"),
 				'updation_date' => date("Y-m-d h:i:sa"),
 				'fund_allocated' => $this->input->post('fund_allocated'),
-				'created_by' => $this->global['name'],
-				'updated_by' => $this->global['name'],
-				'file_url' => $this->input->post('userfile'),
-                'disease_id' => $this->input->post('disease_id'),
+				'requiredFile_url1' => $this->input->post('userfile'),
 				'description' => $this->input->post('description'),
             );
             
             $disease = array(
-            'disease type' => $this->input->post('disease type')
+            'disease_id' => $this->input->post('disease_id'),
             );
-            
-
             $scheme_id = $this->Scheme_model->add_scheme($params);
+            //echo $scheme_id;
+            $disease = array(
+            'disease_id' => $this->input->post('disease_id'),
+            'scheme_id'=> $scheme_id,
+            );
+            $disease_id= $this->Scheme_model->add_disease($disease);
+            
             redirect('scheme/index');
 
         }
@@ -79,7 +80,7 @@ class Scheme extends BaseController
      * Editing a scheme
      */
 
-    public function do_upload() { 
+    public function do_upload($userfile) { 
          $config['upload_path']   = './uploads'; 
          $config['allowed_types'] = 'gif|jpg|png|pdf|csv|doc|docx'; 
          $config['max_size']      = 100; 
@@ -87,7 +88,7 @@ class Scheme extends BaseController
          $config['max_height']    = 768;  
          $this->load->library('upload', $config);
          
-         if(!$this->upload->do_upload('userfile')){
+         if(!$this->upload->do_upload($userfile)){
             $error = array('error' => $this->upload->display_errors());
          }
          else
@@ -95,12 +96,7 @@ class Scheme extends BaseController
             $data = array('upload_data' => $this->upload->data());
          }
          //$data= array('upload_data' => $this->upload->data());
-
-         foreach ($error as $key => $value) {
-             echo $value;
-         }
-         
-
+        
       } 
     function edit($scheme_id)
     {   
@@ -117,14 +113,11 @@ class Scheme extends BaseController
             {   
                 $params = array(
 					'type_id' => $this->input->post('type_id'),
-                    'disease_id' => $this->input->post('disease_id'),
 					'scheme_name' => $this->input->post('scheme_name'),
 					'maximum_amount' => $this->input->post('maximum_amount'),
-					'guidelines' => $this->input->post('guidelines'),
 					'updation_date' => date("Y-m-d h:i:sa"),
 					'fund_allocated' => $this->input->post('fund_allocated'),
-					'updated_by' => $this->global['name'],
-					'file_url' => $this->input->post('file_url'),
+					'requiredFile_url1' => $this->input->post('file_url'),
 					'description' => $this->input->post('description'),
                 );
 

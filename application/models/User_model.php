@@ -80,6 +80,33 @@ class User_model extends CI_Model
         
         return $insert_id;
     }
+    function addOrganization($res)
+    {
+        $this->db->trans_start();
+        $this->db->insert('organisation', $res);
+        
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        return $insert_id;
+    }
+       function addHospital($res)
+    {
+        $this->db->trans_start();
+        $this->db->insert('hospital', $res);
+        
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        return $insert_id;
+    }
+    function addDistrictadmin($res)
+    {
+        $this->db->trans_start();
+        $this->db->insert('district_admin', $res);
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        return $insert_id;
+    }
+    
     
     function addNewHospital($hospitalinfo)
     {

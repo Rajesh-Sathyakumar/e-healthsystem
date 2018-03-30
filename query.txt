@@ -1,0 +1,13 @@
+  function get_all_scheme()
+    {
+        // $this->db->order_by('scheme_id', 'desc');
+        
+        // return $this->db->get('scheme')->result_array();
+
+         $this->db->select('scheme.scheme_id, scheme.scheme_name, scheme.description, scheme.maximum_amount, scheme.creation_date,scheme.updation_date,scheme.fund_allocated, scheme.created_by, scheme.');
+        $this->db->from('district_admin');
+        $this->db->join('tbl_users','district_admin.user_id=tbl_users.userId','right');
+        $this->db->join('district','district_admin.district_id=district.district_id','right');
+        $query = $this->db->get();
+        return $query->result_array();
+    }

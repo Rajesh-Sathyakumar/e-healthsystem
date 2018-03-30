@@ -21,7 +21,7 @@
 								} 
 								?>
                 </select>
-                </div>
+                </div> 
                 <div class="col-md-6">
 						<label for="scheme_name" class="control-label">Scheme Name</label>
 						<div class="form-group">
@@ -35,7 +35,7 @@
 								<?php 
 								foreach($all_disease as $disease)
 								{
-									$selected = ($disease['disease_id'] == $scheme['disease_id']) ? ' selected="selected"' : "";
+									$selected = ($disease['disease_id'] == $this->input->post('disease_id')) ? ' selected="selected"' : "";
 
 									echo '<option value="'.$disease['disease_id'].'" '.$selected.'>'.$disease['disease_name'].'</option>';
 								} 
@@ -50,7 +50,6 @@
 							<input type="text" name="maximum_amount" value="<?php echo $this->input->post('maximum_amount'); ?>" class="form-control" id="maximum_amount" />
 						</div>
 					</div>
-					
 					<div class="col-md-6">
 						<label for="fund_allocated" class="control-label">Fund Allocated</label>
 						<div class="form-group">
@@ -59,7 +58,7 @@
 					</div>
 					<div class="col-md-6">
 						<label for="file_url" class="control-label">Forms</label>
-     					    <input type = "file" name = "userfile" size = "20" /> 
+     					    <input type = "file" name = "userfile" size = "20" value="<?php echo $this->input->post('userfile'); ?>"/> 
         					 
 					</div>
 					<div class="col-md-6">
