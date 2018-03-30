@@ -63,7 +63,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="role">Role</label>
-                                        <select class="form-control required" id="role" name="role">
+                                        <select class="form-control required select-field" id="role" name="role">
                                             <option value="0">Select Role</option>
                                             <?php
                                             if(!empty($roles))
@@ -78,7 +78,29 @@
                                             ?>
                                         </select>
                                     </div>
-                                </div>    
+                                </div> 
+                                <div class="col-md-6">
+                                    <div class="2">
+                                    <label for="organization">Organization Name</label>
+                                    <input type="text" class="form-control required" id="organization" value="<?php echo set_value('organization'); ?>" name="organization" maxlength="128" />
+                                    </div>
+                                    <div class="3">
+                                    <label for="hospital">Hospital Name</label>
+                                    <input type="text" class="form-control required" id="hospital" value="<?php echo set_value('hospital'); ?>" name="hospital" maxlength="128" />
+                                    </div>    
+                                    <div class="5">
+                                    <label for="district">District Name</label>
+                                    <select class="form-control required" name="district_id" style="width: 100%">
+                                    <?php 
+                                foreach($district_all as $district)
+                                {
+                                    $selected = ($district['district_id'] == $this->input->post('district_id')) ? ' selected="selected"' : "";
+
+                                    echo '<option value="'.$district['district_id'].'" '.$selected.'>'.$district['district_name'].'</option>';
+                                } 
+                                ?>
+                                    </select>
+                                    </div>
                             </div>
                         </div><!-- /.box-body -->
     
@@ -123,3 +145,20 @@
     
 </div>
 <script src="<?php echo base_url(); ?>assets/js/addUser.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/jQuery-2.1.4.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/conditional-field.js" type="text/javascript"></script>
+  <script>
+$(document).ready(function(){
+
+ new ConditionalField({
+  control: '.select-field',
+  visibility: {
+    '3': '.3',
+    '2': '.2',
+    '5': '.5'
+  }
+});
+
+});
+</script>
+

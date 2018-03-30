@@ -24,13 +24,18 @@ class Scheme_model extends CI_Model
      */
     function get_all_scheme()
     {
-        $this->db->order_by('scheme_id', 'desc');
+        $this->db->order_by('scheme_id', 'asc');
         return $this->db->get('scheme')->result_array();
     }
     function get_all_disease()
     {
-        $this->db->order_by('disease_id', 'desc');
+        $this->db->order_by('disease_id', 'asc');
         return $this->db->get('disease')->result_array();
+    }
+
+    function add_disease($disease){
+        $this->db->insert('disease_coverage',$disease);
+        return $this->db->insert_id();
     }
         
     /*
@@ -55,7 +60,7 @@ class Scheme_model extends CI_Model
      * function to delete scheme
      */
     function delete_scheme($scheme_id)
-    {
+    {   $this->db->delete('disease_coverage',array('scheme_id'=>$scheme_id));
         return $this->db->delete('scheme',array('scheme_id'=>$scheme_id));
     }
 }

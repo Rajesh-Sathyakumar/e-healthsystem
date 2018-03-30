@@ -30,6 +30,7 @@ class District_model extends CI_Model
         $this->db->from('district_admin');
         $this->db->join('tbl_users','district_admin.user_id=tbl_users.userId','right');
         $this->db->join('district','district_admin.district_id=district.district_id','right');
+        $this->db->order_by('tbl_users.name', 'desc');
         $query = $this->db->get();
         return $query->result_array();
     }

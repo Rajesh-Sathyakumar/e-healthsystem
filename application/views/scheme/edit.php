@@ -53,21 +53,16 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<label for="guidelines" class="control-label">Guidelines</label>
-						<div class="form-group">
-							<input type="text" name="guidelines" value="<?php echo ($this->input->post('guidelines') ? $this->input->post('guidelines') : $scheme['guidelines']); ?>" class="form-control" id="guidelines" />
-						</div>
-					</div>
-					<div class="col-md-6">
 						<label for="fund_allocated" class="control-label">Fund Allocated</label>
 						<div class="form-group">
 							<input type="text" name="fund_allocated" value="<?php echo ($this->input->post('fund_allocated') ? $this->input->post('fund_allocated') : $scheme['fund_allocated']); ?>" class="form-control" id="fund_allocated" />
 						</div>
 					</div>
 					<div class="col-md-6">
-						<label for="file_url" class="control-label">File Url</label>
+						<label for="requiredFile_url1" class="control-label">File Url</label>
 						<div class="form-group">
-							<input type="text" name="file_url" value="<?php echo ($this->input->post('file_url') ? $this->input->post('file_url') : $scheme['file_url']); ?>" class="form-control" id="file_url" />
+							<label for="userfile" class="control-label">Forms</label>
+     					    <input type = "file" name = "userfile" size = "20" value="<?php echo $this->input->post('userfile'); ?>"/> 
 						</div>
 					</div>
 					<div class="col-md-6">
