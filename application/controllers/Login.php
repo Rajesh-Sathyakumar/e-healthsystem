@@ -23,9 +23,13 @@ class Login extends CI_Controller
      */
     public function index()
     {
-        $this->isLoggedIn();
+        $this->load->view('index.php');
+       
     }
     
+    public function login_page(){
+        $this->isLoggedIn(); 
+    }
     /**
      * This function used to check the user is logged in or not
      */
