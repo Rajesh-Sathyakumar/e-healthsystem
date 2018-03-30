@@ -237,7 +237,7 @@
               </a>
             </li>
             <li class="treeview">
-              <a href="#" >
+              <a href="<?php echo base_url(); ?>notification" >
                 <i class="fa fa-bell-o"></i>
                 <span>Notification</span>
               </a>

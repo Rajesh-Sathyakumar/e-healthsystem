@@ -769,6 +769,12 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         $this->global['pageTitle'] = 'e-Healthcare : View Timeline';
          $this->loadViews("requestTimeline", $this->global, NULL, NULL);
     }
+
+    function notification()
+    {
+        $this->global['pageTitle'] = 'e-Healthcare : View Timeline';
+        $this->loadViews("notification",$this->global,NULL,NULL);
+    }
 }
 
 ?>
