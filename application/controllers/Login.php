@@ -1,12 +1,5 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-/**
- * Class : Login (LoginController)
- * Login class to control to authenticate user credentials and starts user's session.
- * @author : Kishor Mali
- * @version : 1.1
- * @since : 15 November 2016
- */
 class Login extends CI_Controller
 {
     /**
@@ -21,11 +14,42 @@ class Login extends CI_Controller
     /**
      * Index Page for this controller.
      */
+
+
+
     public function index()
     {
-        $this->isLoggedIn();
+
+        $this->global['pageTitle'] = 'e-Healthcare : Welcome';
+        $this->load->view('index.php');
+       
+    }
+
+    function about()
+    {
+        $this->load->view('about.php');
     }
     
+
+    public function status(){
+        $this->load->view('applicationStatus.php');
+    }
+
+    public function track(){
+
+        $this->global['pageTitle'] = 'e-Healthcare : Your Application Status';
+        $trackingid = $this->input->post('tracking_id');
+
+        // $data['patientApplication'] = $this->user_model->getApplicantDetails($trackingid);
+         $result['result'] = $this->login_model->trackPatient($trackingid);
+
+        $this->load->view('patientApplicationDetails.php',$result);
+        
+    }
+
+    public function login_page(){
+        $this->isLoggedIn(); 
+    }
     /**
      * This function used to check the user is logged in or not
      */

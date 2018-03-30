@@ -33,6 +33,8 @@ class User extends BaseController
         
         $this->loadViews("dashboard", $this->global, $data , NULL);
     }
+
+
     public function do_upload() { 
          $config['upload_path']   = 'assets/uploads/files'; 
          $config['allowed_types'] = 'gif|jpg|png|pdf|csv|doc'; 

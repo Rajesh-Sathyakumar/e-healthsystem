@@ -91,7 +91,8 @@ $route['schemesList'] = "user/schemesList";
 $route['profilesettings'] = "user/profilesettings";
 $route['approve/(:any)/(:any)/(:any)'] = "user/approve";
 $route['showRequestProfile/(:num)'] = "user/showRequestProfile/$1";
-$route['changeStatus/(:num)/(:any)'] = "user/changeStatus";
+$route['changeStatus/(:num)/(:any)'] = 
+$route['status'] = "login/track";"user/changeStatus";
 $route['changeStatusAfterRejection/(:num)'] = "user/changeStatusAfterRejection";
 //$route['addHospitalInfo'] = "user/addHospitalInfo";
 $route['listBeneficiaries/(:any)/(:any)'] = "user/listBeneficiaries/$1/$1";
@@ -100,8 +101,14 @@ $route['empanelrequest'] = "user/empanelrequest";
 $route['requestprocess/(:any)'] = "user/requestprocess/$1";
 $route['proceedRequest/(:any)'] = "user/proceedRequest/$1";
 $route['reports'] = "user/reports";
-$route['viewrequest'] = "user/viewrequest";
+$route['viewrequest/(:any)'] = "user/viewrequest/$1";
 $route['notification'] = "user/notification";
+$route['login_page'] = "login/login_page";
+$route['status'] = "login/status";
+$route['track'] = "login/track";
+$route['healthSchemes'] = "HomePage/healthSchemes";
+$route['about'] = "login/about";
+
 
 
 

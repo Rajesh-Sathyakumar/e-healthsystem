@@ -30,6 +30,21 @@ class Login_model extends CI_Model
         }
     }
 
+    function trackPatient($trackingId)
+    {
+        $this->db->select('app.application_reference,app.status,app.patientName,hos.hospital_name,sch.scheme_name,dis.disease_name,app.amount_credited');
+        $this->db->from('application_details app');
+        $this->db->join('hospital hos','hos.hospital_id = app.hospital_id');
+        $this->db->join('scheme sch','sch.scheme_id = app.scheme_id');
+        $this->db->join('disease dis','dis.disease_id = app.disease_id');
+        $this->db->where('app.application_reference',$trackingId);
+
+        $query = $this->db->get();
+
+        $result = $query->row();
+        return $result;
+    }
+
     /**
      * This function used to check email exists or not
      * @param {string} $email : This is users email id

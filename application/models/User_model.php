@@ -24,6 +24,11 @@ class User_model extends CI_Model
         
         return $query->num_rows();
     }
+
+    function getApplicantDetails()
+    {
+        
+    }
     
     function userListing($searchText = '', $page, $segment)
     {
