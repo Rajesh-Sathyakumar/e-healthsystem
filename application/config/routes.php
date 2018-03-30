@@ -100,7 +100,7 @@ $route['empanelrequest'] = "user/empanelrequest";
 $route['requestprocess/(:any)'] = "user/requestprocess/$1";
 $route['proceedRequest/(:any)'] = "user/proceedRequest/$1";
 $route['reports'] = "user/reports";
-$route['viewrequest'] = "user/viewrequest";
+$route['viewrequest/(:any)'] = "user/viewrequest/$1";
 $route['notification'] = "user/notification";
 
 

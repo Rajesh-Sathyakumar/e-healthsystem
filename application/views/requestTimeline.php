@@ -5,7 +5,8 @@
                   <!-- timeline time label -->
                   <li class="time-label">
                         <span class="bg-red">
-                          10 Feb. 2014
+                          <!-- 10 Feb. 2014 -->
+                          <?php echo $empanelrequest->created_at; ?>
                         </span>
                   </li>
                   <!-- /.timeline-label -->
@@ -14,32 +15,54 @@
                     <i class="fa fa-envelope bg-blue"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+                       <span class="time"><i class="fa fa-clock-o"></i> <?php 
+                       $timestamp = strtotime($empanelrequest->created_at);
 
-                      <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                       echo date("h:i:s",$timestamp); ?>
+
+                      </span>
+
+                      <h3 class="timeline-header"><a href="#">District Admin </a>received your request</h3>
 
                       <div class="timeline-body">
-                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                        weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                        quora plaxo ideeli hulu weebly balihoo...
+                        Your details and profile verfication is on process
                       </div>
-                      <div class="timeline-footer">
+<!--                       <div class="timeline-footer">
                         <a class="btn btn-primary btn-xs">Read more</a>
                         <a class="btn btn-danger btn-xs">Delete</a>
-                      </div>
+                      </div> -->
                     </div>
                   </li>
                   <!-- END timeline item -->
                   <!-- timeline item -->
                   <li>
-                    <i class="fa fa-user bg-aqua"></i>
-
+                  <?php
+                    if($empanelrequest->districtAdmin_status == 'approved')
+                    {
+                      ?>
+                    <i class="glyphicon glyphicon-ok bg-aqua"></i>
+                    <?php
+                  }
+                    elseif($empanelrequest->districtAdmin_status == 'pending')
+                    {
+                  ?>
+                   <i class="glyphicon glyphicon-remove bg-red"></i>
+                   <?php
+                 }
+                   ?>
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+<!--                       <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
 
-                      <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
+ -->
+                <span class="time"><i class="fa fa-clock-o"></i> <?php 
+                       $timestamp = strtotime($empanelrequest->districtAdmin_updatedAt);
+
+                       echo date("h:i:s",$timestamp); ?>
+
+              </span>
+                      <h3 class="timeline-header no-border"><a href="#">Status</a> <?php echo $empanelrequest->districtAdmin_status; ?>
                       </h3>
+
                     </div>
                   </li>
                   <!-- END timeline item -->
@@ -48,49 +71,115 @@
                     <i class="fa fa-comments bg-yellow"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+                      <span class="time"><i class="fa fa-clock-o"></i> <?php 
+                       $timestamp = strtotime($empanelrequest->districtAdmin_updatedAt);
 
-                      <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+                       echo date("h:i:s",$timestamp); ?>
+
+              </span>
+
+                      <h3 class="timeline-header"><a href="#">DistrictAdmin</a> commented for your scheme empanelment request</h3>
 
                       <div class="timeline-body">
-                        Take me to your leader!
+                        <!-- Take me to your leader!
                         Switzerland is small and neutral!
-                        We are more like Germany, ambitious and misunderstood!
+                        We are more like Germany, ambitious and misunderstood! -->
+                        <?php echo $empanelrequest->districtAdmin_comments; ?>
                       </div>
-                      <div class="timeline-footer">
-                        <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-                      </div>
+                     
                     </div>
                   </li>
                   <!-- END timeline item -->
                   <!-- timeline time label -->
                   <li class="time-label">
-                        <span class="bg-green">
-                          3 Jan. 2014
+                        <span class="bg-red">
+                          <!-- 10 Feb. 2014 -->
+                          <?php echo $empanelrequest->created_at; ?>
                         </span>
                   </li>
                   <!-- /.timeline-label -->
                   <!-- timeline item -->
                   <li>
-                    <i class="fa fa-camera bg-purple"></i>
+                    <i class="fa fa-envelope bg-blue"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
+                       <span class="time"><i class="fa fa-clock-o"></i> <?php 
+                       $timestamp = strtotime($empanelrequest->created_at);
 
-                      <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+                       echo date("h:i:s",$timestamp); ?>
+
+                      </span>
+
+                      <h3 class="timeline-header"><a href="#">State Admin </a>received your request</h3>
 
                       <div class="timeline-body">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
+                        Your details and profile verfication is on process
                       </div>
+<!--                       <div class="timeline-footer">
+                        <a class="btn btn-primary btn-xs">Read more</a>
+                        <a class="btn btn-danger btn-xs">Delete</a>
+                      </div> -->
                     </div>
                   </li>
                   <!-- END timeline item -->
+                  <!-- timeline item -->
                   <li>
-                    <i class="fa fa-clock-o bg-gray"></i>
+                    <?php
+                    if($empanelrequest->stateAdmin_status == 'approved')
+                    {
+                      ?>
+                    <i class="glyphicon glyphicon-ok bg-aqua"></i>
+                    <?php
+                  }
+                    elseif($empanelrequest->stateAdmin_status == 'pending')
+                    {
+                  ?>
+                   <i class="glyphicon glyphicon-remove bg-red"></i>
+                   <?php
+                 }
+                   ?>
+
+
+                    <div class="timeline-item">
+<!--                       <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+
+ -->
+                <span class="time"><i class="fa fa-clock-o"></i> <?php 
+                       $timestamp = strtotime($empanelrequest->stateAdmin_updatedAt);
+
+                       echo date("h:i:s",$timestamp); ?>
+
+              </span>
+                      <h3 class="timeline-header no-border"><a href="#">Status</a> <?php echo $empanelrequest->stateAdmin_status; ?>
+                      </h3>
+
+                    </div>
                   </li>
+                  <!-- END timeline item -->
+                  <!-- timeline item -->
+                  <li>
+                    <i class="fa fa-comments bg-yellow"></i>
+
+                    <div class="timeline-item">
+                      <span class="time"><i class="fa fa-clock-o"></i> <?php 
+                       $timestamp = strtotime($empanelrequest->stateAdmin_updatedAt);
+
+                       echo date("h:i:s",$timestamp); ?>
+
+              </span>
+
+                      <h3 class="timeline-header"><a href="#">StateAdmin</a> commented for your scheme empanelment request</h3>
+
+                      <div class="timeline-body">
+                        <!-- Take me to your leader!
+                        Switzerland is small and neutral!
+                        We are more like Germany, ambitious and misunderstood! -->
+                        <?php echo $empanelrequest->stateAdmin_comments; ?>
+                      </div>
+                     
+                    </div>
+                  </li>
+                 
                 </ul>
                   </section>
   </div>

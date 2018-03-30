@@ -42,7 +42,7 @@
                       <td><?php echo $record->scheme_name ?></td>
                       <td><?php echo $record->status ?></td>
                       <td>
-                      <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>viewrequest"  title="Approve Button" enabled="true">view</a></td>
+                      <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>viewrequest/<?php echo  $record->empanelment_request_id; ?>"  title="Approve Button" enabled="true">view</a></td>
                       
                         <?php
                       }

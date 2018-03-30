@@ -49,7 +49,7 @@
                       <td>1</td>
                       <td><?php echo $record->schemeName ?></td>
                       <td><?php echo $record->scheme_count ?></td>
-                      <td><a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>listBeneficiaries/<?php echo $record->schemeName; ?>" title="Login history" enabled="true">View</a></td>
+                      <td><a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>listBeneficiaries/<?php echo $record->schemeName; ?>/1" title="Login history" enabled="true">View</a></td>
                       
                       <?php
                       }

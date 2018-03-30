@@ -456,6 +456,17 @@ class User_model extends CI_Model
         $result = $query->row();
         return $result;
     }
+    function viewrequestdetails($empanelment_request_id)
+    {
+        $this->db->select('*');
+        $this->db->from('empanelment_request');
+        $this->db->where('empanelment_request_id',$empanelment_request_id);
+        $query = $this->db->get();
+
+        $result = $query->row();
+        return $result;
+
+    }
     function requestProcessing($schemeId, $email, $hospitalId)
     {
             // echo $schemeId;
