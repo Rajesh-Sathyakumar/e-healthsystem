@@ -185,6 +185,16 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
          $data['schemeId'] = $schemeId;
           $this->loadViews("profileview", $this->global, $data, NULL);
     }
+    function viewrequest()
+    {
+        $this->global['pageTitle'] = 'e-Healthcare : View Timeline';
+        $empanelment_request_id =  $this->uri->segment(2);
+        //echo $empanelment_request_id;
+        $data['empanelrequest'] = $this->user_model->viewrequestdetails($empanelment_request_id);
+
+         $this->loadViews("requestTimeline", $this->global, $data, NULL);
+    }
+
 
     function profilesettings()
     {
@@ -781,11 +791,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     // }
 
 
-    function viewrequest()
-    {
-        $this->global['pageTitle'] = 'e-Healthcare : View Timeline';
-         $this->loadViews("requestTimeline", $this->global, NULL, NULL);
-    }
+    
 
     function notification()
     {

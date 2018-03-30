@@ -104,11 +104,14 @@ $route['reports'] = "user/reports";
 $route['viewrequest/(:any)'] = "user/viewrequest/$1";
 $route['notification'] = "user/notification";
 $route['login_page'] = "login/login_page";
+
 $route['status'] = "login/status";
 $route['track'] = "login/track";
 $route['healthSchemes'] = "HomePage/healthSchemes";
 $route['about'] = "login/about";
 
+
+$route['resetPassword'] = "login/resetPassword";
 
 
 

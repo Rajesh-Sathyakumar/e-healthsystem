@@ -20,6 +20,7 @@ class Login extends CI_Controller
     public function index()
     {
 
+
         $this->global['pageTitle'] = 'e-Healthcare : Welcome';
         $this->load->view('index.php');
        
@@ -46,6 +47,12 @@ class Login extends CI_Controller
         $this->load->view('patientApplicationDetails.php',$result);
         
     }
+
+
+        $this->load->view('index.php');
+       
+    }
+    
 
     public function login_page(){
         $this->isLoggedIn(); 
@@ -199,10 +206,67 @@ public function addNewHospitalUser()
             redirect('/dashboard');
         }
     }
+
+
+    public function SendEmail($EmailTo, $Message, $ReturnData, $Subject, $EmailBcc) {
+        try {
+            $mail = $this->emailConfig();
+            $mail->setFrom('yuvaammu3@gmail.com', 'E-HealthSystem');
+            $mail->addAddress($EmailTo);     // Add a recipient
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = $Subject;
+            $mail->Body = $Message;
+            if (!$mail->Send()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (phpmailerException $e) {
+            echo $e->errorMessage(); //Pretty error messages from PHPMailer
+        }
+    }
+
+    protected function emailConfig() {
+        $mail = new \PHPMailer\PHPMailer\PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'tls://smtp.gmail.com:587';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = "yuvaammu3@gmail.com";                 // SMTP username
+        $mail->Password = "9003992784";
+        return $mail;
+    }
+
+
+
+
     
     /**
      * This function used to generate reset password request link
      */
+    function resetPassword()
+    {
+        $email = $this->input->post('email');     
+        $this->load->model('user_model'); 
+         $findemail = $this->user_model->ForgotPassword($email); 
+         // echo $findemail['email]; 
+         if($findemail){
+          $mail_message = $this->user_model->sendpassword($findemail); 
+          $Subject = "ForgotPassword";
+          $this->SendEmail(trim($email), $mail_message, "N", $Subject, "");       
+           }else{
+          $this->session->set_flashdata('msg',' Email not found!');
+          redirect(base_url().'user/Login','refresh');
+      }
+    }
+
+
+
+
+
+
+
+
+
     function resetPasswordUser()
     {
         $status = '';
