@@ -798,8 +798,20 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
 
     function notification()
     {
+
         $this->global['pageTitle'] = 'e-Healthcare : View Timeline';
+         $role = $this->session->userdata('role');
+        $userId = $this->session->userdata('userId');
+        if($role == ROLE_STATE_ADMIN)
+        {
         $this->loadViews("notification",$this->global,NULL,NULL);
+    }
+    else
+    {
+
+        $data['notification'] = $this->user_model->getNotification($userId);
+      $this->loadViews('notification',$this->global,$data,NULL);
+ }
     }
 
 
@@ -813,6 +825,22 @@ function analytics()
     $analyticdata['schemesInAYear'] = $this->user_model->analyticdata("schemesInAYear");
     // $this->loadViews("temp",$this->global,$analyticdata,NULL);
     $this->loadViews('analyticGraphs',$this->global,$analyticdata,NULL);
+}
+
+function sendNotification()
+{
+     $this->global['pageTitle'] = 'e-Healthcare : Notification'; 
+
+     $email = $this->input->post('fname');
+     $message = $this->input->post('comments');
+     $role = $this->session->userdata('role');
+     $userId = $this->session->userdata('userId');
+
+     if($role == ROLE_STATE_ADMIN)
+     {
+        $data = $this->user_model->sendNotification($email,$message);
+ }
+
 }
 }
 

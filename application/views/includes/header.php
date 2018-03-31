@@ -246,6 +246,7 @@
               <a href="<?php echo base_url(); ?>notification" >
                 <i class="fa fa-bell-o"></i>
                 <span>Notification</span>
+                <span class="label label-primary pull-right">12</span>
               </a>
             </li>
             <?php

@@ -99,7 +99,7 @@
     <div class="col-sm-2 sidenav">
       <ul class="nav nav-pills nav-stacked">
 
-        <li class="active"><a href="<?php echo base_url(); ?>/healthSchemes">Health Schemes</a></li>
+        <li class="active"><a href="<?php echo base_url(); ?>healthSchemes">Health Schemes</a></li>
         <li class="active"><a href="#">Health Programmes</a></li>
         <li class="active"><a href="<?php echo site_url('status'); ?>">Track Application Status</a></li>  </ul>   
 

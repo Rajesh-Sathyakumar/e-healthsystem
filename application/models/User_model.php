@@ -874,6 +874,58 @@
             }
             return $result;
         }
+
+        function getId($email)
+        {
+            $this->db->select('userId');
+            $this->db->from('tbl_users');
+            $this->db->where('email',$email);
+
+            $query = $this->db->get();
+            $result = $query->row();
+
+            return $result->userId;
+        }
+
+        function sendNotification($email,$message)
+        {
+            $senderId = $this->session->userdata('userId');
+
+            $receiverId = $this->getId($email);
+
+            $notification['from_user'] = $senderId;
+            $notification['to_user'] = $receiverId;
+            $notification['message'] = $message;
+
+            $this->db->insert('notification', $notification);
+        }
+
+        function getNotification($userId)
+        {
+
+            // $this->db->where($userId);
+
+            $request_row = $this->db->get_where('notification', array('to_user' => $userId))->row();
+            $change = 1;
+
+            $data = array(
+                   'read_status' => $change
+                );    
+            $this->db->where('from_user', $userId);
+            $this->db->update('notification', $data); 
+
+
+            $this->db->select('user.name,not.message');
+            $this->db->from('notification not');
+            $this->db->where('not.to_user',$userId);
+            $this->db->join('tbl_users user','user.userId = not.from_user');
+            
+            $query = $this->db->get();
+            $result = $query->row();
+            //echo $result->message;
+             return $result;
+
+        }
     }
 
 
