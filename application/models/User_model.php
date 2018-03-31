@@ -1,69 +1,6 @@
 
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-class User_model extends CI_Model
-{
-    /**
-     * This function is used to get the user listing count
-     * @param string $searchText : This is optional search text
-     * @return number $count : This is row count
-     */
-    function userListingCount($searchText = '')
-    {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role');
-        $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
-        if(!empty($searchText)) {
-            $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
-                            OR  BaseTbl.name  LIKE '%".$searchText."%'
-                            OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
-            $this->db->where($likeCriteria);
-        }
-        $this->db->where('BaseTbl.isDeleted', 0);
-        $this->db->where('BaseTbl.roleId !=', 1);
-        $query = $this->db->get();
-        
-        return $query->num_rows();
-    }
-
-    function getApplicantDetails()
-    {
-        
-    }
-    
-    function userListing($searchText = '', $page, $segment)
-    {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role');
-        $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
-        if(!empty($searchText)) {
-            $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
-                            OR  BaseTbl.name  LIKE '%".$searchText."%'
-                            OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
-            $this->db->where($likeCriteria);
-        }
-        $this->db->where('BaseTbl.isDeleted', 0);
-        $this->db->where('BaseTbl.roleId !=', 1);
-        $this->db->limit($page, $segment);
-        $query = $this->db->get();
-        
-        $result = $query->result();        
-        return $result;
-    }
-    
-    function getUserRoles()
-    {
-        $this->db->select('roleId, role');
-        $this->db->from('tbl_roles');
-        $this->db->where('roleId !=', 1);
-        $query = $this->db->get();
-        
-        return $query->result();
-    }
-
-    <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
-
-
     class User_model extends CI_Model
     {
         /**
@@ -500,7 +437,48 @@ class User_model extends CI_Model
         }
 
 
+        function analyticdata($name)
+        {
+            if($name == "schemesForDiseases")
+            {
+            $query =  $this->db->select('disease.disease_name, COUNT(disease_coverage.scheme_id) as scheme_count')
+                          ->from('disease_coverage')
+                          ->join('disease', 'disease_coverage.disease_id=disease.disease_id','left')
+                          ->group_by('disease_coverage.scheme_id')
+                          ->get();
 
+                          return $query->result();
+            }
+            else if($name == "beneficiariesForScheme")
+            {
+                $query = $this->db->select('sch.scheme_name,COUNT(app.application_details_id) as beneficiaries')
+                                  ->from('application_details app')
+                                  ->join('scheme sch','sch.scheme_id = app.scheme_id')
+                                  ->group_by('sch.scheme_id')
+                                  ->get();
+
+                return $query->result();
+            }
+            else if($name == "hospitalsInAScheme")
+            {
+                $query = $this->db->select('sch.scheme_name,COUNT(emp.empanelment_request_id) as empHospitals')
+                                  ->from('empanelment_request emp')
+                                  ->join('scheme sch','sch.scheme_id = emp.scheme_id')
+                                  ->group_by('sch.scheme_id')
+                                  ->get();
+
+                 return $query->result();
+            }
+            else if($name == "schemesInAYear")
+            {
+                $query = $this->db->select('COUNT(sch.scheme_id) as schemeCount,');
+            }
+            else
+            {
+                return NULL;
+            }
+
+        }
 
 
         function schemesListing($hospitalId)

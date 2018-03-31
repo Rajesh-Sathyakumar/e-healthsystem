@@ -109,9 +109,9 @@ $route['status'] = "login/status";
 $route['track'] = "login/track";
 $route['healthSchemes'] = "HomePage/healthSchemes";
 $route['about'] = "login/about";
-
-
 $route['resetPassword'] = "login/resetPassword";
+$route['analytics'] = "user/analytics";
+
 
 
 

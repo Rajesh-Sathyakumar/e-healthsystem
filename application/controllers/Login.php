@@ -48,10 +48,8 @@ class Login extends CI_Controller
         
     }
 
-
-        $this->load->view('index.php');
        
-    }
+    // }
     
 
     public function login_page(){

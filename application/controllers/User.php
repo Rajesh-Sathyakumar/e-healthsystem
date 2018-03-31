@@ -38,6 +38,7 @@ class User extends BaseController
     public function do_upload() { 
          $config['upload_path']   = 'assets/uploads/files'; 
          $config['allowed_types'] = 'gif|jpg|png|pdf|csv|doc'; 
+
          $config['max_size']      = 100; 
          $config['max_width']     = 1024; 
          $config['max_height']    = 768;  
@@ -798,6 +799,18 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
         $this->global['pageTitle'] = 'e-Healthcare : View Timeline';
         $this->loadViews("notification",$this->global,NULL,NULL);
     }
+
+
+
+function analytics()
+{
+    $this->global['pageTitle'] = 'e-Healthcare : Analytics';
+    $analyticdata['schemesForDiseases'] = $this->user_model->analyticdata("schemesForDiseases");
+    $analyticdata['beneficiariesForScheme'] = $this->user_model->analyticdata("beneficiariesForScheme");
+    $analyticdata['hospitalsInAScheme'] = $this->user_model->analyticdata("hospitalsInAScheme");
+    $analyticdata['schemesInAYear'] = $this->user_model->analyticdata("schemesInAYear");
+    // $this->loadViews("temp",$this->global,$analyticdata,NULL);
+    $this->loadViews('analyticGraphs',$this->global,$analyticdata,NULL);
+}
 }
 
-?>

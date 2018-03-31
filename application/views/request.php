@@ -49,9 +49,8 @@
                       ?>
                     </tr>
                     <?php
-                        }
-                   
-                    ?>
+                  }
+                  ?>
                 </tbody>
                   </tbody>
                 </table>

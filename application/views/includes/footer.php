@@ -23,6 +23,7 @@
     <script src="<?php echo base_url()?>js/ajaxfileupload.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/js/moment.min.js"  type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/js/select2.min.js"  type="text/javascript"></script>
+    
     <script type="text/javascript">
         var windowURL = window.location.href;
         pageURL = windowURL.substring(0, windowURL.lastIndexOf('/'));
