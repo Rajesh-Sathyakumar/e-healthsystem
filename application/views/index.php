@@ -88,6 +88,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
         <li><a href="<?php echo site_url('login_page'); ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="<?php echo $loginURL ?>"><span class="glyphicon glyphicon-log-in"></span> Google Login</a></li>
       </ul>
     </div>
   </div>

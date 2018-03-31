@@ -15,7 +15,8 @@ class User extends BaseController
         $this->load->database();
         $this->load->helper('url');
         $this->load->library('grocery_CRUD');
-        $this->isLoggedIn();      
+        $this->isLoggedIn();    
+        $this->lang->load('message', $this->session->userdata('site_lang'));  
     }
     
     /**
@@ -690,6 +691,7 @@ $this->loadViews("template_crud_user", $this->global, $output, NULL);
     function showRequestProfile()
     {
         $this->global['pageTitle'] = 'e-Healthcare : Request Details';
+        
 
         $empanelment_request_id = $this->uri->segment(2);
 

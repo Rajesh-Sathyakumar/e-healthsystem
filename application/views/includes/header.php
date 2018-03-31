@@ -251,6 +251,32 @@
             <?php
           }
           ?>
+           <li>
+                <?php if (!$this->session->userdata('site_lang') == 'english'): ?>
+                <a href="#">
+                    <?php else: ?>
+                    <a href="<?= base_url("LanguageSwitcher/switchLang/english") ?>">
+                        <?php endif; ?>
+                        <i class="fa fa-language"></i> <span>English</span>
+                        <span class="pull-right-container"></span>
+                        <?php if ($this->session->userdata('site_lang') == 'english'): ?>
+                            <i class="fa fa-check pull-right" style="color: green"></i>
+                        <?php endif; ?>
+                    </a>
+            </li>
+            <li>
+                <?php if ($this->session->userdata('site_lang') == 'hindi'): ?>
+                <a href="#">
+                    <?php else: ?>
+                    <a href="<?= base_url("LanguageSwitcher/switchLang/hindi") ?>">
+                        <?php endif; ?>
+                        <i class="fa fa-language"></i> <span> हिंदी - (Hindi) </span>
+                        <span class="pull-right-container"></span>
+                        <?php if ($this->session->userdata('site_lang') == 'hindi'): ?>
+                            <i class="fa fa-check pull-right" style="color: green"></i>
+                        <?php endif; ?>
+                    </a>
+            </li>
           </ul>
         </section>
         <!-- /.sidebar -->
